@@ -1,0 +1,109 @@
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div class="logo">
+          <ion-img src="../../assets/img/logo-ferroca.jpeg"></ion-img>
+        </div>  
+      </ion-col>  
+    </ion-row> 
+  </ion-grid>
+  
+  <ng-container>
+    <form>
+      <ng-container>
+        <ion-row class="ion-justify-content-center">
+          <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
+            <div >
+              <ion-item>
+                <ion-label position="floating">Usuario</ion-label>
+                <ion-input  type="text" maxlength="12" placeholder="Ingrese el usuario" (click)="keyboardStatus()">
+                </ion-input>
+              </ion-item>
+            <!--  <div class="errors">
+                <ion-text class="error ion-padding">
+                  El Usuario ingresado no es válido
+                </ion-text>
+              </div>-->
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
+            <div>
+              <ion-item>
+                <ion-label position="floating">Clave</ion-label>
+                <ion-input [type]="passwordTypeInput" id="input-password" placeholder="Ingresa tu clave" maxlength="30"  (click)="keyboardStatus()">
+                </ion-input> 
+               <!-- <ion-button  fill="clear" slot="end" class="btn-eye" (click)="togglePasswordMode()">
+                  <ion-icon [name]="(passwordTypeInput === 'text') ? 'eye-off-outline':'eye-outline'" slot="end">
+                  </ion-icon>
+                </ion-button>-->
+              </ion-item>    
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-justify-content-center">
+          <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
+              <ion-button type="submit" expand="block">Iniciar sesión
+                <!-- <ion-spinner name="crescent"  class="spinner-aling-end"></ion-spinner>-->
+              </ion-button>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+    </form>
+  </ng-container>
+
+  <!--<ng-container>
+    <form>
+      <ng-container>
+        <ion-row class="ion-justify-content-center" [ngStyle]="{'margin-bottom': showRetrievePass ? '0.625rem' : '0'}">
+          <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
+            <div *ngIf="!userRemember">
+              <ion-item cInput #cInputUsername="cInput">
+                <ion-label position="floating">Usuario</ion-label>
+                <ion-input formControlName="username" type="text" maxlength="12" placeholder="Usuario" (click)="keyboardStatus()">
+                </ion-input>
+              </ion-item>
+              <div class="errors" *ngIf="form.username.errors">
+                <ion-text class="error ion-padding"
+                  *ngIf="!form.username.errors?.required && cInputUsername.showError">
+                  El Usuario ingresado no es válido
+                </ion-text>
+              </div>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center" [ngStyle]="{'margin-bottom': showRetrievePass ? '1.875rem' : '0'}">
+          <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
+            <div>
+              <ion-item  cInput #cInputPassword="cInput">
+                <ion-label position="floating">Clave</ion-label>
+                <ion-input  
+                [type]="passwordTypeInput" formControlName="password" id="input-password"
+                            placeholder="Ingresa tu clave" maxlength="30"  (click)="keyboardStatus()">
+                </ion-input> 
+                <ion-button  fill="clear" slot="end" class="btn-eye" (click)="togglePasswordMode()">
+                  <ion-icon [ngStyle]="{'color': changeColorEyeOutLine? '#0078C8' : '#757575'}"
+                            [name]="(passwordTypeInput === 'text') ? 'eye-off-outline':'eye-outline'" slot="end">
+                  </ion-icon>
+                </ion-button>
+              </ion-item>    
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-justify-content-center">
+          <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
+              <ion-button appBtnDisabled [value]="loginForm.valid && !loading" type="submit" expand="block">Iniciar
+                sesión
+                <ion-spinner name="crescent" *ngIf="loading" class="spinner-aling-end"></ion-spinner>
+              </ion-button>
+          </ion-col>
+        </ion-row>
+      </ng-container>
+    </form>
+  </ng-container>-->
+
+</ion-content>

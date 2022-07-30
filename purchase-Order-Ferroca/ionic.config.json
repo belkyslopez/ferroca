@@ -1,0 +1,7 @@
+{
+  "name": "purchase-Order-Ferroca",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
