@@ -9,6 +9,18 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'product-registration',
+    loadChildren: () => import('./product-registration/product-registration.module').then( m => m.ProductRegistrationPageModule)
+  },
+  {
+    path: 'user-register',
+    loadChildren: () => import('./user-register/user-register.module').then( m => m.UserRegisterPageModule)
+  },
+  {
+    path: 'inventory-record',
+    loadChildren: () => import('./inventory-record/inventory-record.module').then( m => m.InventoryRecordPageModule)
   }
 ];
 @NgModule({

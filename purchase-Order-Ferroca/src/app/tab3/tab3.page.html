@@ -1,17 +1,31 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
+      <ion-buttons slot="start">
+        <ion-button appBackBtn class="backBtn" color="primary">
+          <ion-icon name="chevron-back-outline"></ion-icon>
+          Volver
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="primary">
+        <ion-button (click)="cancel()" color="primary">
+          <ion-icon name="apps-outline"></ion-icon>   
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar>
+      <ion-title>Listado de Ordenes</ion-title>
     </ion-toolbar>
   </ion-header>
+</ion-header>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+<ion-content>
+
+  <ion-datetime></ion-datetime>
+
+  <ion-datetime [monthShortNames]="monthShortNames" placeholder="prueba" displayFormat="DD/MM/YYYY"
+      pickerFormat="DD MMM YYYY" [pickerOptions]="pickerOptions" min="{{ min | date: 'yyyy-MM-dd' }}"
+      max="{{ max | date: 'yyyy-MM-dd' }}" appInactive value="{{ selectedDate | date: 'yyyy-MM-dd' }}" class="param">
+    </ion-datetime>
+
 </ion-content>
