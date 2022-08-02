@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { AuthenticateService } from '../core/services/authenticate.service';
+
 
 @Component({
   selector: 'app-login',
@@ -6,68 +9,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
- // private unsubscribe$: Subject<boolean> = new Subject();
- // loginForm: FormGroup;
 
-  constructor(
-    
-  ) { }
+loginUser= {
+  email: 'belkiscarolina1@hotmail.com',
+  password: '123456'
+}
+
+  constructor( private autService: AuthenticateService) { }
 
   ngOnInit() {
-   // this.prepareForm();
-  }
-/*
-  get form() {
-    return this.loginForm.controls;
   }
 
-  prepareForm(): void {
-    this.loginForm = this.formBuilder.group({
-      username: ['', { validators: [Validators.required, rutIsValid], updateOn: 'blur' }],
-      password: ['', [Validators.required,Validators.minLength(4), Validators.maxLength(32)]],
-      userRemember: [ true ]
-    });
+  login(fLogin: NgForm){
+  if(fLogin.invalid) { return;}
+    console.log(fLogin.valid);
+    console.log(this.loginUser);
+    this.autService.login(this.loginUser.email, this.loginUser.password);
   }
 
-  
-
-  clearLoginForm() {
-    this.loginForm.reset();
-    !this.userRemember ? this.loginForm.controls.username.setValue('') : this.loginForm.controls.username.setValue(this.userRemember.rut);
-    this.loginForm.controls['password'].setValue('');
-  }
-
-  togglePasswordMode() {
-    this.passwordTypeInput = this.passwordTypeInput === 'text' ? 'password' : 'text';
-  }
-
-  login() {            
-    if (this.loginForm.valid) {      
-      const rutClean = this.username.value.replace(/^0+|[^0-9kK]+/g, '').toUpperCase();
-      this.user$ = this.authenticationService.login(rutClean, this.password.value);
-      this.user$
-        .pipe(takeUntil(this.unsubscribe$))
-        .subscribe(data => {
-          if (data.errorCodigo === 0) {
-            this.getAfiliateInformation();
-            this.menu.enable(true, 'custom');
-          } else {
-            this.clearLoginForm();
-            this.loading = false;
-            if (data['errorGlosa'] === 'Usuario o clave invalido') {
-              this.alertService.presentAlertPassword(data['errorGlosa'], 'Por favor inténtalo nuevamente.');
-            } 
-          }
-        },
-          error => {
-            this.loading = false;
-          }
-        );
-    }
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next(true);
-    this.unsubscribe$.complete();
-  }*/
 }
