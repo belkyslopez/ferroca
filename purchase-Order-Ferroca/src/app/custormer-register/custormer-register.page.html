@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button appBackBtn class="backBtn" color="primary">
+        <ion-icon name="chevron-back-outline"></ion-icon>
+        Volver
+      </ion-button>
+    </ion-buttons>
+    <div>
+      <ion-title> Registro de Clientes</ion-title>
+    </div> 
+    <ion-buttons slot="primary">
+      <ion-button (click)="cancel()" color="primary">
+        <ion-icon name="apps-outline"></ion-icon>   
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ng-container>
+    <form (ngSubmit)="register( fRegister )" #fRegister="ngForm">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label>Nombre </ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-input 
+                name="nombre" type="text" 
+                [(ngModel)]="registerCliente.nombre"
+                placeholder="Ingrese el nombre"
+                required >
+            </ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-label>Correo </ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-input 
+                name="correo" type="email" 
+                [(ngModel)]="registerCliente.correo"
+                placeholder="Ingrese el correo"
+                required >
+            </ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-label>Rut </ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-input 
+                name="rut" type="number" 
+                [(ngModel)]="registerCliente.rut"
+                placeholder="Ingrese el rut"
+                required >
+            </ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-label>Dirección </ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-input 
+                name="direccion" type="text" 
+                [(ngModel)]="registerCliente.direccion"
+                placeholder="Ingrese la direccion"
+                required >
+            </ion-input>
+          </ion-col>
+        </ion-row>   
+        <ion-row>
+          <ion-col>
+            <ion-label>Telefono </ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-input 
+                name="telefono" type="number" 
+                [(ngModel)]="registerCliente.telefono"
+                placeholder="Ingrese el telefono"
+                required >
+            </ion-input>
+          </ion-col>
+        </ion-row>
+
+        <ion-row class="ion-justify-content-center">
+          <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
+              <ion-button 
+               (click)="register" type="submit" expand="block">Registrar
+              </ion-button>
+              <!--[disable]=" correo.length < 5 || clave.length < 5" -->
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </ng-container>
+</ion-content>
+

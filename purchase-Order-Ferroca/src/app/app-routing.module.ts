@@ -26,6 +26,10 @@ const routes: Routes = [
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
+  },
+  {
+    path: 'custormer-register',
+    loadChildren: () => import('./custormer-register/custormer-register.module').then( m => m.CustormerRegisterPageModule)
   }
 ];
 @NgModule({

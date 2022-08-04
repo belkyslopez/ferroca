@@ -12,7 +12,7 @@
 export interface Cliente {
     nombre?: string;
     correo?: string;
-    dirección?: string;
+    direccion?: string;
     img?: string[];
     telefono: number;
     rut: number;

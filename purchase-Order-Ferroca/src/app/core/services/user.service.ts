@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Usuario } from '../interfaces/interfaces';
+import { Cliente } from '../interfaces/interfaces';
 import { URL_SERVICIOS } from '../config/url.services';
 
 @Injectable({
@@ -33,5 +34,22 @@ export class UserService {
 
   getUser(){
     return {...this.usuario };
+  }
+  registerCliente( cliente: Cliente){
+    return new Promise( resolve =>{
+      this.http.post(`${URL_SERVICIOS}/register-cliente`, cliente)
+      .subscribe( resp =>{
+        console.log("resp register cliente", resp);
+        if (resp) {
+          console.log("ok register cliente")
+          // this.saveToken(resp['ok']);
+           resolve(true);
+        }else{
+           this.token = null;
+           //this.storage.clear();
+           resolve(false);
+        }
+      });
+    });
   }
 }
