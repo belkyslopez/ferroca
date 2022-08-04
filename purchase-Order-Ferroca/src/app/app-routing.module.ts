@@ -21,6 +21,11 @@ const routes: Routes = [
   {
     path: 'inventory-record',
     loadChildren: () => import('./inventory-record/inventory-record.module').then( m => m.InventoryRecordPageModule)
+  },
+ {
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full'
   }
 ];
 @NgModule({

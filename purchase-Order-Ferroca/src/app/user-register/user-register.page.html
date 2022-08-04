@@ -6,73 +6,122 @@
         Volver
       </ion-button>
     </ion-buttons>
+    <div>
+      <ion-title> Registro de Usuarios</ion-title>
+    </div> 
     <ion-buttons slot="primary">
       <ion-button (click)="cancel()" color="primary">
         <ion-icon name="apps-outline"></ion-icon>   
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-toolbar>
-    <ion-title>Registro de Usuarios</ion-title>
-  </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-label>Nombre </ion-label>
-      </ion-col>
-      <ion-col>
-        <ion-input placeholder="prueba"> </ion-input>
-      </ion-col>
-    </ion-row>
+  <ng-container>
+    <form (ngSubmit)="register( fRegister )" #fRegister="ngForm">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-label>Nombre </ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-input 
+                name="nombre" type="text" 
+                [(ngModel)]="registerUser.nombre"
+                placeholder="Ingrese el nombre"
+                required >
+            </ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-label>Apellido </ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-input 
+                name="apellido" type="text" 
+                [(ngModel)]="registerUser.apellido"
+                placeholder="Ingrese el apellido"
+                required >
+            </ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-label>Correo </ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-input 
+                name="correo" type="email" 
+                [(ngModel)]="registerUser.correo"
+                placeholder="Ingrese el correo"
+                required >
+            </ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-label>Clave </ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-input 
+                name="Clave" type="password" 
+                [(ngModel)]="registerUser.clave"
+                placeholder="Ingrese la clave"
+                required >
+            </ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-label>Rut </ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-input 
+                name="rut" type="number" 
+                [(ngModel)]="registerUser.rut"
+                placeholder="Ingrese el rut"
+                required >
+            </ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-label>Dirección </ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-input 
+                name="direccion" type="text" 
+                [(ngModel)]="registerUser.direccion"
+                placeholder="Ingrese la direccion"
+                required >
+            </ion-input>
+          </ion-col>
+        </ion-row>   
+        <ion-row>
+          <ion-col>
+            <ion-label>Telefono </ion-label>
+          </ion-col>
+          <ion-col>
+            <ion-input 
+                name="telefono" type="number" 
+                [(ngModel)]="registerUser.telefono"
+                placeholder="Ingrese el telefono"
+                required >
+            </ion-input>
+          </ion-col>
+        </ion-row>
 
-    <ion-row>
-      <ion-col>
-        <ion-label>Apellido </ion-label>
-      </ion-col>
-      <ion-col>
-        <ion-input placeholder="prueba"> </ion-input>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-        <ion-label>Rut </ion-label>
-      </ion-col>
-      <ion-col>
-        <ion-input placeholder="prueba"> </ion-input>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-        <ion-label>Dirección </ion-label>
-      </ion-col>
-      <ion-col>
-        <ion-input placeholder="prueba"> </ion-input>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col>
-        <ion-label>Perfil </ion-label>   
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col> 
-        <ion-list>
-          <ion-item>
-            <ion-select placeholder="Select user">
-              <ion-select-option value="seller">Vendedor</ion-select-option>
-              <ion-select-option value="client">Cliente</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-list>  
-      </ion-col>    
-    </ion-row>
-  </ion-grid>
-  <ion-input></ion-input>
-
+        <ion-row class="ion-justify-content-center">
+          <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
+              <ion-button 
+               (click)="register" type="submit" expand="block">Registrar
+              </ion-button>
+              <!--[disable]=" correo.length < 5 || clave.length < 5" -->
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </form>
+  </ng-container>
 </ion-content>
