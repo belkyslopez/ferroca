@@ -13,13 +13,13 @@ import { UiService } from '../core/services/ui.service';
 export class UserRegisterPage implements OnInit {
 
   registerUser: Usuario = {
-    correo: 'test',
-    clave: '123456',
-    nombre: 'Test',
-    apellido: 'test 2',
-    direccion: 'emilio vaisse 760',
-    telefono: 123456778,
-    rut: 265432228
+    email: 'test',
+    password: '123456',
+    name: 'Test',
+    surname: 'test 2',
+    //direccion: 'emilio vaisse 760',
+   // telefono: 123456778,
+   // rut: 265432228
   };
 
   constructor( private userService: UserService,

@@ -30,6 +30,10 @@ const routes: Routes = [
   {
     path: 'custormer-register',
     loadChildren: () => import('./custormer-register/custormer-register.module').then( m => m.CustormerRegisterPageModule)
+  },
+  {
+    path: 'order-status',
+    loadChildren: () => import('./order-status/order-status.module').then( m => m.OrderStatusPageModule)
   }
 ];
 @NgModule({

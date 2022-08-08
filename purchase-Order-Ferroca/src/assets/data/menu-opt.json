@@ -1,0 +1,43 @@
+[
+    {
+        "icon": "person-outline",
+        "name": "Registro Usuario ",
+        "redirectTo": "/user-register"
+    },
+    {
+        "icon": "people-outline",
+        "name": "Registro Cliente ",
+        "redirectTo": "/customer-register"
+    },
+    {
+        "icon": "build-outline",
+        "name": "Registro Producto ",
+        "redirectTo": "/product-registration"
+    },
+    {
+        "icon": "copy-outline",
+        "name": "Registro de Stock ",
+        "redirectTo": ""
+    },
+    {
+        "icon": "create-outline",
+        "name": "Registro de Orden de compra",
+        "redirectTo": "tabs3"
+    },
+    {
+        "icon": "book-outline",
+        "name": "Catalogo de Productos",
+        "redirectTo": "tabs2"
+    },
+    {
+        "icon": "stats-chart-outline",
+        "name": " Estado de ordenes ",
+        "redirectTo": "/order-status"
+    },
+    {
+        "icon": "list-outline",
+        "name": " Lista de ordenes  ",
+        "redirectTo": "/tabs1"
+    }
+
+]

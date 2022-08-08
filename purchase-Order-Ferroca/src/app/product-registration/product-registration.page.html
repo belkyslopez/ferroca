@@ -6,14 +6,12 @@
         Volver
       </ion-button>
     </ion-buttons>
-    <ion-buttons slot="primary">
-      <ion-button (click)="cancel()" color="primary">
-        <ion-icon name="apps-outline"></ion-icon>   
-      </ion-button>
+    <div>
+      <ion-title> Registro de Productos </ion-title>
+    </div> 
+    <ion-buttons slot="end">
+      <ion-menu-button menu="first"></ion-menu-button>
     </ion-buttons>
-  </ion-toolbar>
-  <ion-toolbar>
-    <ion-title>Registro de Productos</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -28,7 +26,7 @@
             <ion-col>
               <ion-input 
                   name="nombre" type="text" 
-                  [(ngModel)]="registerProducto.nombre"
+                  [(ngModel)]="registerProducto.name"
                   placeholder="Ingrese el nombre"
                   required >
               </ion-input>
@@ -41,13 +39,13 @@
             <ion-col>
               <ion-input 
                   name="descripcion" type="text" 
-                  [(ngModel)]="registerProducto.descripcion"
+                  [(ngModel)]="registerProducto.description"
                   placeholder="Ingrese la descripcion del producto"
                   required >
               </ion-input>
             </ion-col>
           </ion-row>
-          <ion-row>
+          <!--<ion-row>
             <ion-col>
               <ion-label>Cantidad </ion-label>
             </ion-col>
@@ -59,7 +57,7 @@
                   required >
               </ion-input>
             </ion-col>
-          </ion-row>
+          </ion-row>-->
           <ion-row>
             <ion-col>
               <ion-label>Precio </ion-label>
@@ -67,12 +65,41 @@
             <ion-col>
               <ion-input 
                   name="precio" type="number" 
-                  [(ngModel)]="registerProducto.precio"
+                  [(ngModel)]="registerProducto.price"
                   placeholder="Ingrese el precio"
                   required >
               </ion-input>
             </ion-col>
           </ion-row>  
+
+        <ion-card>
+          <ion-label>Imagen del producto </ion-label>
+          <ion-row>
+            <ion-col  size="6" >
+                <ion-button 
+                 (click)="camara()" type="submit" expand="full" shape="round" >
+                 <ion-icon slot="start" name="camera"></ion-icon>
+                 Camara
+                </ion-button>
+            </ion-col>
+            <ion-col size="6">
+              <ion-button 
+               (click)="galeria()" type="submit" expand="full" shape="round">
+               <ion-icon slot="start" name="images"></ion-icon>
+               Galeria
+              </ion-button>
+             </ion-col>
+          </ion-row>
+        </ion-card>  
+
+          <ion-row>
+            <ion-col  size="3"  *ngFor="let image oftempImages ">
+              <ion-card>
+                <img [src]="image">
+              </ion-card>  
+            </ion-col>
+          </ion-row>    
+          
           <ion-row class="ion-justify-content-center">
             <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
                 <ion-button 

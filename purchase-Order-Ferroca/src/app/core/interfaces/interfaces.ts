@@ -1,12 +1,12 @@
  export interface Usuario {
-    nombre?: string;
-    apellido?: string; 
-    correo?: string;
-    clave?: string; 
-    direccion?: string;
+  name?: string;
+  surname?: string; 
+  email?: string;
+  password?: string; 
+   /* direccion?: string;
     img?: string[];
     telefono: number;
-    rut: number;
+    rut: number;*/
   }
 
 export interface Cliente {
@@ -19,11 +19,11 @@ export interface Cliente {
   }
 
 export interface Producto {
-    nombre?: string;
-    descripcion ?: string;
+  name?: string;
+  description ?: string;
     img ?: string[];
-    cantidad : number;
-    precio : number;
+   // cantidad : number;
+    price : number;
   }
 
 export interface OrdenCompra {
@@ -46,3 +46,9 @@ export interface Catalogo {
 export interface inventario {
     producto?: Producto[];
   }
+
+export interface Componente{
+  icon : string;
+  name : string;
+  redirecTo: string; 
+}

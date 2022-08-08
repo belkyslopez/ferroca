@@ -6,6 +6,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage-angular';
+import { Camera } from '@awesome-cordova-plugins/camera/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -13,11 +15,12 @@ import { IonicStorageModule } from '@ionic/storage-angular';
     IonicModule.forRoot(),
     HttpClientModule,
     AppRoutingModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
   ],
-  providers: [{ 
-    provide: RouteReuseStrategy,
-    useClass: IonicRouteStrategy }],
+  providers: [
+    Camera,
+    {  provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
