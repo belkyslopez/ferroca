@@ -9,39 +9,37 @@
     <div>
       <ion-title> Registro de Clientes</ion-title>
     </div> 
-    <ion-buttons slot="primary">
-      <ion-button (click)="cancel()" color="primary">
-        <ion-icon name="apps-outline"></ion-icon>   
-      </ion-button>
+    <ion-buttons slot="end">
+      <ion-menu-button menu="first"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ng-container>
-    <form (ngSubmit)="register( fRegister )" #fRegister="ngForm">
+    <form (ngSubmit)="registerClient( fRegisterC )" #fRegisterC="ngForm">
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-label>Nombre </ion-label>
+            <ion-label>Razon Social </ion-label>
           </ion-col>
           <ion-col>
             <ion-input 
                 name="nombre" type="text" 
-                [(ngModel)]="registerCliente.nombre"
+                [(ngModel)]="registerCliente.rs"
                 placeholder="Ingrese el nombre"
                 required >
             </ion-input>
           </ion-col>
         </ion-row>
-        <ion-row>
+       <ion-row>
           <ion-col>
             <ion-label>Correo </ion-label>
           </ion-col>
           <ion-col>
             <ion-input 
                 name="correo" type="email" 
-                [(ngModel)]="registerCliente.correo"
+                [(ngModel)]="registerCliente.email"
                 placeholder="Ingrese el correo"
                 required >
             </ion-input>
@@ -67,7 +65,7 @@
           <ion-col>
             <ion-input 
                 name="direccion" type="text" 
-                [(ngModel)]="registerCliente.direccion"
+                [(ngModel)]="registerCliente.address"
                 placeholder="Ingrese la direccion"
                 required >
             </ion-input>
@@ -80,7 +78,7 @@
           <ion-col>
             <ion-input 
                 name="telefono" type="number" 
-                [(ngModel)]="registerCliente.telefono"
+                [(ngModel)]="registerCliente.phone"
                 placeholder="Ingrese el telefono"
                 required >
             </ion-input>
@@ -89,8 +87,38 @@
 
         <ion-row class="ion-justify-content-center">
           <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
+              <ion-button type="submit" expand="block">Registrar Cliente</ion-button>
+              <!--[disable]=" correo.length < 5 || clave.length < 5" -->
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
               <ion-button 
-               (click)="register" type="submit" expand="block">Registrar
+               (click)="getClient(id)"  expand="block">getClient
+              </ion-button>
+              <!--[disable]=" correo.length < 5 || clave.length < 5" -->
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
+              <ion-button 
+               (click)="getAllClient()"  expand="block">getAllClient
+              </ion-button>
+              <!--[disable]=" correo.length < 5 || clave.length < 5" -->
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
+              <ion-button 
+               (click)="updateClient(id)"  expand="block">updateClient
+              </ion-button>
+              <!--[disable]=" correo.length < 5 || clave.length < 5" -->
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
+              <ion-button 
+               (click)="deleteClient(id)"  expand="block">deleteClient
               </ion-button>
               <!--[disable]=" correo.length < 5 || clave.length < 5" -->
           </ion-col>

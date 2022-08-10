@@ -1,18 +1,13 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button appBackBtn class="backBtn" color="primary">
-        <ion-icon name="chevron-back-outline"></ion-icon>
-        Volver
-      </ion-button>
+      <ion-back-button text="Volver"></ion-back-button>
     </ion-buttons>
     <div>
       <ion-title> Registro de Usuarios</ion-title>
     </div> 
-    <ion-buttons slot="primary">
-      <ion-button (click)="cancel()" color="primary">
-        <ion-icon name="apps-outline"></ion-icon>   
-      </ion-button>
+    <ion-buttons slot="end">
+      <ion-menu-button menu="first"></ion-menu-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -73,7 +68,7 @@
             </ion-input>
           </ion-col>
         </ion-row>
-        <!--<ion-row>
+        <ion-row>
           <ion-col>
             <ion-label>Rut </ion-label>
           </ion-col>
@@ -93,7 +88,7 @@
           <ion-col>
             <ion-input 
                 name="direccion" type="text" 
-                [(ngModel)]="registerUser.direccion"
+                [(ngModel)]="registerUser.address"
                 placeholder="Ingrese la direccion"
                 required >
             </ion-input>
@@ -106,17 +101,39 @@
           <ion-col>
             <ion-input 
                 name="telefono" type="number" 
-                [(ngModel)]="registerUser.telefono"
+                [(ngModel)]="registerUser.phone"
                 placeholder="Ingrese el telefono"
                 required >
             </ion-input>
           </ion-col>
-        </ion-row>-->
+        </ion-row>
 
         <ion-row class="ion-justify-content-center">
           <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
+              <ion-button  type="submit" expand="block">Registrar </ion-button>
+              <!--[disable]=" correo.length < 5 || clave.length < 5" -->
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
               <ion-button 
-               (click)="register" type="submit" expand="block">Registrar
+               (click)="getUser(id)" expand="block">Get user
+              </ion-button>
+              <!--[disable]=" correo.length < 5 || clave.length < 5" -->
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
+              <ion-button 
+               (click)="getAllUser()" expand="block">getAllUser
+              </ion-button>
+              <!--[disable]=" correo.length < 5 || clave.length < 5" -->
+          </ion-col>
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
+              <ion-button 
+               (click)="updateUser(id)" expand="block">updateUser
               </ion-button>
               <!--[disable]=" correo.length < 5 || clave.length < 5" -->
           </ion-col>

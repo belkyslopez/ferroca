@@ -38,31 +38,6 @@ export class AuthenticateService {
     });
   }
 
-  
-  async validToken(): Promise<boolean>{
-    await this.loadToken();
-    if ( !this.token ){
-      this.navCtrl.navigateRoot('/login')
-      return Promise.resolve(false);
-    }
-    return new Promise<boolean>( resolve =>{
-      const headers = new HttpHeaders({
-        'Authorization': this.token
-      });
-      this.http.post(`${URL_SERVICIOS}/register`, { headers })
-      .subscribe( resp =>{
-        if (resp) {
-         // this.user = resp['usuario'];
-         console.log('usuario' , resp );
-           resolve(true);
-        }else{
-          this.navCtrl.navigateRoot('/login');
-           resolve(false);
-        }
-      });
-    });
-  }
-
   async saveToken (token: string){
     this.token = token;
     await this.storage.set('token', token);

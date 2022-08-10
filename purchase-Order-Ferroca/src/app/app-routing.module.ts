@@ -28,7 +28,7 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'custormer-register',
+    path: 'customer-register',
     loadChildren: () => import('./custormer-register/custormer-register.module').then( m => m.CustormerRegisterPageModule)
   },
   {

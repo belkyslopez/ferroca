@@ -17,7 +17,7 @@
 
 <ion-content>
     <ng-container>
-      <form (ngSubmit)="register( fRegister )" #fRegister="ngForm">
+      <form (ngSubmit)="registerProduct( fRegisterP )" #fRegister="ngForm">
         <ion-grid>
           <ion-row>
             <ion-col>
@@ -99,16 +99,47 @@
               </ion-card>  
             </ion-col>
           </ion-row>    
-          
+
+          <ion-row class="ion-justify-content-center">
+            <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
+                <ion-button  type="submit" expand="block">Registrar Producto</ion-button>
+                <!--[disable]=" correo.length < 5 || clave.length < 5" -->
+            </ion-col>
+          </ion-row>
           <ion-row class="ion-justify-content-center">
             <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
                 <ion-button 
-                 (click)="register" type="submit" expand="block">Registrar Producto
+                 (click)="getProduct(id)"  expand="block">getProduct
+                </ion-button>
+                <!--[disable]=" correo.length < 5 || clave.length < 5" -->
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-justify-content-center">
+            <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
+                <ion-button 
+                 (click)="getAllProduct()"  expand="block">getAllProduct
+                </ion-button>
+                <!--[disable]=" correo.length < 5 || clave.length < 5" -->
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-justify-content-center">
+            <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
+                <ion-button 
+                 (click)="updateProduct(id)"  expand="block">updateProduct
+                </ion-button>
+                <!--[disable]=" correo.length < 5 || clave.length < 5" -->
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-justify-content-center">
+            <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
+                <ion-button 
+                 (click)="deleteProduct(id)"  expand="block">deleteProduct
                 </ion-button>
                 <!--[disable]=" correo.length < 5 || clave.length < 5" -->
             </ion-col>
           </ion-row>
         </ion-grid>
       </form>
+   
     </ng-container>
   </ion-content>

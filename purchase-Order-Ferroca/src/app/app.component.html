@@ -8,38 +8,38 @@
     </ion-header>
     <ion-content>
       <ion-list>
-        <ion-item>
+        <ion-item [routerLink]="['/user-register']">
           <ion-icon name="person-outline"></ion-icon>
            Registro Usuario 
           </ion-item>
-        <ion-item> 
+        <ion-item [routerLink]="['/customer-register']"> 
           <ion-icon name="people-outline"></ion-icon>
           Registro Cliente 
         </ion-item>
-        <ion-item> 
+        <ion-item [routerLink]="['/product-registration']"> 
           <ion-icon name="build-outline"></ion-icon>
           Registro Producto 
         </ion-item>
-        <ion-item> 
+        <ion-item [routerLink]="['/inventory-record']"> 
           <ion-icon name="copy-outline"></ion-icon>
           Registro de Stock 
         </ion-item>
-        <ion-item>
+        <!--<ion-item [routerLink]="['/tabs/tabs3']">
           <ion-icon name="create-outline"></ion-icon>
           Registro de Orden de compra
          </ion-item>
-        <ion-item> 
+        <ion-item [routerLink]="['/tabs2']"> 
           <ion-icon name="book-outline"></ion-icon>
           Catalogo de Productos
-         </ion-item>
-        <ion-item>
+         </ion-item>-->
+        <ion-item [routerLink]="['/order-status']">
           <ion-icon name="stats-chart-outline"></ion-icon>
            Estado de ordenes 
           </ion-item>
-        <ion-item> 
+       <!--<ion-item [routerLink]="['/tabs1']"> 
           <ion-icon name="list-outline"></ion-icon>
           Lista de ordenes 
-        </ion-item>
+        </ion-item>-->
       </ion-list>
     </ion-content>
   </ion-menu>

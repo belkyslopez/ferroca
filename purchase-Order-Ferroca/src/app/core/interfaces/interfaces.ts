@@ -3,27 +3,25 @@
   surname?: string; 
   email?: string;
   password?: string; 
-   /* direccion?: string;
-    img?: string[];
-    telefono: number;
-    rut: number;*/
+  address?: string;
+  phone: number;
+  rut: number;
   }
 
 export interface Cliente {
-    nombre?: string;
-    correo?: string;
-    direccion?: string;
-    img?: string[];
-    telefono: number;
+    email?: string;
+    address?: string;
+    rs?: string;
+    phone: number;
     rut: number;
   }
 
 export interface Producto {
   name?: string;
   description ?: string;
-    img ?: string[];
-   // cantidad : number;
-    price : number;
+  price : number;
+  // img ?: string[];
+  // cantidad : number;
   }
 
 export interface OrdenCompra {
