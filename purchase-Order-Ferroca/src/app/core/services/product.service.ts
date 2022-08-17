@@ -11,6 +11,7 @@ export class ProductService {
     
   token: string = null;
   producto: any;
+  allProducts: any;
 
   constructor( private http: HttpClient,
     private autService: AuthenticateService) { }
@@ -64,6 +65,8 @@ export class ProductService {
       return new Promise( resolve =>{
         this.http.get(`${URL_SERVICIOS}/product`, { headers })
         .subscribe( resp =>{
+          this.allProducts = resp['products'];
+          console.log("allProducts ", this.allProducts);
           console.log("resp getAllProduct", resp);
           if (resp) {
             console.log("ok getAllProduct")

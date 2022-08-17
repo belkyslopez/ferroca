@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Volver"></ion-back-button>
+    </ion-buttons>
+    <div>
+      <ion-title> Actualizar productos</ion-title>
+    </div> 
+    <ion-buttons slot="end">
+      <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="updaterProduct( fupdaterP )" #fupdaterP="ngForm">
+    <ion-item>
+      <ion-label position="stacked">Nombre Producto</ion-label>
+      <ion-input type="text" placeholder="Ingrese el nombre" name="nombre" [(ngModel)]="registerProducto.name" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Descripción </ion-label>
+      <ion-input type="text" placeholder="Ingrese la descripcion" name="descripcion" [(ngModel)]="registerProducto.description" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Precio</ion-label>
+      <ion-input type="number" placeholder="Ingrese el correo" name="precio" [(ngModel)]="registerProducto.price" required></ion-input>
+    </ion-item>  
+    <ion-button  type="submit" expand="block">Modificar</ion-button>
+    <ion-button  type="submit" expand="block">Eliminar</ion-button> 
+  </form>         
+  <ion-row>
+    <ion-col  size="3"  *ngFor="let image oftempImages ">
+      <ion-card>
+        <img [src]="image">
+      </ion-card>  
+    </ion-col>
+  </ion-row>  
+  <ion-card>
+    <ion-label>Imagen del producto </ion-label>
+    <ion-row>
+      <ion-col  size="6" >
+          <ion-button 
+           (click)="camara()" type="submit" expand="full" shape="round" >
+           <ion-icon slot="start" name="camera"></ion-icon>
+           Camara
+          </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button 
+         (click)="galeria()" type="submit" expand="full" shape="round">
+         <ion-icon slot="start" name="images"></ion-icon>
+         Galeria
+        </ion-button>
+       </ion-col>
+    </ion-row>
+  </ion-card> 
+
+</ion-content>

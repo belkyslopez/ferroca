@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Cliente } from '../core/interfaces/interfaces';
 import { UserService } from '../core/services/user.service';
 import { NavController } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
 import { UiService } from '../core/services/ui.service';
+import { ModalController } from '@ionic/angular';
+import { IonModal } from '@ionic/angular';
+import { OverlayEventDetail } from '@ionic/core/components';
 
 @Component({
   selector: 'app-custormer-register',
@@ -11,6 +14,8 @@ import { UiService } from '../core/services/ui.service';
   styleUrls: ['./custormer-register.page.scss'],
 })
 export class CustormerRegisterPage implements OnInit {
+
+  @ViewChild(IonModal) modal: IonModal;
 
   registerCliente: Cliente = {
     email: 'test',
@@ -22,11 +27,15 @@ export class CustormerRegisterPage implements OnInit {
 
   id = '62f1665f1384dd9539828da7';
 
+  customers: any;
+
   constructor( private userService: UserService,
                private navCtrlr: NavController,
-               private uiService: UiService) { }
+               private uiService: UiService,
+               private modalCtrl: ModalController) { }
 
   ngOnInit() {
+    this.getAllClient();
   }
 
   async registerClient(fRegisterC: NgForm){
@@ -53,29 +62,18 @@ export class CustormerRegisterPage implements OnInit {
   async getAllClient(){
     const valido = await this.userService.getAllClient();
     if(valido){
+      this.customers = this.userService.allClient;
      // this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
     }else{
       this.uiService.presentAlert('No se encuentran registros');
     }
   }
 
-  async updateClient(id){
-    const valido = await this.userService.updateClient(this.id);
-    if(valido){
-     // this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
-    }else{
-      this.uiService.presentAlert('No se modifico el cliente');
-    }
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
   }
 
-  
-  async deleteClient(id){
-    const valido = await this.userService.deleteClient(this.id);
-    if(valido){
-     // this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
-    }else{
-      this.uiService.presentAlert('No se elimino el cliente');
-    }
+  goToUpdate(){
+    this.navCtrlr.navigateRoot('/customer-update', { animated: true })
   }
-
 }

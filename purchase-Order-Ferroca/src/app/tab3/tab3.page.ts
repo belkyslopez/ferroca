@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
@@ -7,6 +9,13 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
-  constructor() {}
+  constructor(private navCtrlr: NavController,
+              private modalCtrl: ModalController) {}
+
+  
+  cancel() {
+    this.modalCtrl.dismiss(null, 'cancel');
+    this.navCtrlr.navigateRoot('/user-register', { animated: true });
+  }
 
 }

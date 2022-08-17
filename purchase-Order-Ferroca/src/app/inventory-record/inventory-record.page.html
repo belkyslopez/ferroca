@@ -1,10 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button appBackBtn class="backBtn" color="primary">
-        <ion-icon name="chevron-back-outline"></ion-icon>
-        Volver
-      </ion-button>
+      <ion-back-button text="Volver"></ion-back-button>
     </ion-buttons>
     <div>
       <ion-title> Registro de stock </ion-title>
@@ -15,43 +12,37 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content  class="ion-padding">
+  <form (ngSubmit)="register( fRegister )" #fRegister="ngForm">
+    <ion-list>
+      <ion-item>
+        <ion-select placeholder="Seleccione el producto">
+          <ion-select-option value="apples">Tornillo 3/4</ion-select-option>
+          <ion-select-option value="oranges">Martillo</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
+    <ion-item>
+      <ion-label position="stacked">Cantidad</ion-label>
+      <!-- [(ngModel)]="registerUser.name"-->
+      <ion-input type="number" placeholder="Ingrese la cantidad" name="cantidad"  required></ion-input>
+    </ion-item>
+  </form>
 
-
-  <ion-searchbar [showCancelButton]="'focus'" [cancelButtonText]="'Cancelar'" inputmode="text" [disabled]="loading"
+  <!--<ion-searchbar [showCancelButton]="'focus'" [cancelButtonText]="'Cancelar'" inputmode="text" [disabled]="loading"
        placeholder="Buscar Producto">
-  </ion-searchbar>
+  </ion-searchbar>-->
 
-  Funcionabilidad de tomar o subir foto
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>3/4 de 100pcs</ion-card-subtitle>
-      <ion-card-title>Abrasadera</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      Keep close to Nature's heart... and break clear away, once in awhile,
-      and climb a mountain or spend a week in the woods. Wash your spirit clean.
-    </ion-card-content>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-label> Cantidad </ion-label>
-          <ion-input placeholder="200"></ion-input>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
-  
   <ion-grid>
     <ion-row>
-      <ion-col  size-md="4" size-lg="6" size-xs="4">
+      <ion-col>
           <ion-button type="submit" expand="block">Guardar
             <!-- <ion-spinner name="crescent"  class="spinner-aling-end"></ion-spinner>-->
           </ion-button>
       </ion-col>
     </ion-row>
     <ion-row >
-      <ion-col  size-md="4" size-lg="6" size-xs="4">
+      <ion-col>
           <ion-button type="submit" expand="block">Cancelar
             <!-- <ion-spinner name="crescent"  class="spinner-aling-end"></ion-spinner>-->
           </ion-button>

@@ -34,6 +34,18 @@ const routes: Routes = [
   {
     path: 'order-status',
     loadChildren: () => import('./order-status/order-status.module').then( m => m.OrderStatusPageModule)
+  },
+  {
+    path: 'user-update/:id',
+    loadChildren: () => import('./user-update/user-update.module').then( m => m.UserUpdatePageModule)
+  },
+  {
+    path: 'customer-update',
+    loadChildren: () => import('./customer-update/customer-update.module').then( m => m.CustomerUpdatePageModule)
+  },
+  {
+    path: 'product-update',
+    loadChildren: () => import('./product-update/product-update.module').then( m => m.ProductUpdatePageModule)
   }
 ];
 @NgModule({

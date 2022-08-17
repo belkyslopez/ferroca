@@ -12,7 +12,116 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content  class="ion-padding">
+  <ion-button id="modal-user" expand="block">Registrar</ion-button>
+ <!-- <ion-card>
+    <ion-list>
+      <ion-item lines="none">
+        <ion-row>
+          <ion-col>
+            <ion-label>belkys</ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            <ion-label>lopez</ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            <ion-label>12.111.234-5</ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            <ion-label>b@gmail.com</ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            <ion-label>puente alto</ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            <ion-label>+56 987655434</ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+  </ion-card>-->
+  <ion-card  *ngFor="let user of users; let i = index"  (click)="goToUpdate(user)">
+    <ion-list>
+      <ion-item>
+        <ion-row>
+          <ion-col>
+            <ion-label>{{user.name}}</ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+  <ion-modal trigger="modal-user">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title>Registro de usuarios</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content  class="ion-padding">
+        <form (ngSubmit)="register( fRegister )" #fRegister="ngForm">
+          <ion-item>
+            <ion-label position="stacked">Nombre</ion-label>
+            <ion-input type="text" placeholder="Ingrese el nombre" name="nombre" [(ngModel)]="registerUser.name" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Apellido</ion-label>
+            <ion-input type="text" placeholder="Ingrese el apellido" name="nombre" [(ngModel)]="registerUser.surname" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Correo</ion-label>
+            <ion-input type="email" placeholder="Ingrese el correo" name="correo" [(ngModel)]="registerUser.email" required></ion-input>
+          </ion-item>  
+          <ion-item>
+            <ion-label position="stacked">Clave</ion-label>
+            <ion-input type="password" placeholder="Ingrese la clave" name="clave" [(ngModel)]="registerUser.password" required></ion-input>
+          </ion-item>    
+          <ion-item>
+            <ion-label position="stacked">Rut</ion-label>
+            <ion-input type="number" placeholder="Ingrese el rut" name="rut" [(ngModel)]="registerUser.rut" required></ion-input>
+          </ion-item>   
+          <ion-item>
+            <ion-label position="stacked">Dirección</ion-label>
+            <ion-input type="text" placeholder="Ingrese la direccion" name="rut" [(ngModel)]="registerUser.address" required></ion-input>
+          </ion-item>    
+          <ion-item>
+            <ion-label position="stacked">Teléfono</ion-label>
+            <ion-input type="number" placeholder="Ingrese el telefono" name="telefono" [(ngModel)]="registerUser.phone" required></ion-input>
+          </ion-item>   
+          <ion-button  type="submit" expand="block">Registrar</ion-button>
+      </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+</ion-content>
+
+
+<!-- <ion-content>
   <ng-container>
     <form (ngSubmit)="register( fRegister )" #fRegister="ngForm">
       <ion-grid>
@@ -107,11 +216,9 @@
             </ion-input>
           </ion-col>
         </ion-row>
-
         <ion-row class="ion-justify-content-center">
           <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
               <ion-button  type="submit" expand="block">Registrar </ion-button>
-              <!--[disable]=" correo.length < 5 || clave.length < 5" -->
           </ion-col>
         </ion-row>
         <ion-row class="ion-justify-content-center">
@@ -119,7 +226,6 @@
               <ion-button 
                (click)="getUser(id)" expand="block">Get user
               </ion-button>
-              <!--[disable]=" correo.length < 5 || clave.length < 5" -->
           </ion-col>
         </ion-row>
         <ion-row class="ion-justify-content-center">
@@ -127,7 +233,6 @@
               <ion-button 
                (click)="getAllUser()" expand="block">getAllUser
               </ion-button>
-              <!--[disable]=" correo.length < 5 || clave.length < 5" -->
           </ion-col>
         </ion-row>
         <ion-row class="ion-justify-content-center">
@@ -135,10 +240,9 @@
               <ion-button 
                (click)="updateUser(id)" expand="block">updateUser
               </ion-button>
-              <!--[disable]=" correo.length < 5 || clave.length < 5" -->
           </ion-col>
         </ion-row>
       </ion-grid>
     </form>
   </ng-container>
-</ion-content>
+</ion-content>-->

@@ -12,7 +12,10 @@ export class UserService {
   
   token: string = null;
   usuario: any;
-  cliente: any
+  cliente: any;
+  allUsers:any;
+  allClient:any;
+  user:any;
 
   constructor( private http: HttpClient,
     private navCtrl: NavController,
@@ -47,6 +50,7 @@ export class UserService {
     return new Promise( resolve =>{
       this.http.get(`${URL_SERVICIOS}/user/:`+ this.usuario.user._id, { headers })
       .subscribe( resp =>{
+        this.user = resp['user'];
         console.log("this.usuario._id", this.usuario.user._id );
         console.log("resp get user", resp);
         if (resp) {
@@ -67,6 +71,8 @@ export class UserService {
       return new Promise( resolve =>{
         this.http.get(`${URL_SERVICIOS}/user`, { headers })
         .subscribe( resp =>{
+          this.allUsers = resp['users'];
+          console.log("allUsers ", this.allUsers);
           console.log("resp getAllUser", resp);
           if (resp) {
             console.log("ok getAllUser")
@@ -136,7 +142,6 @@ export class UserService {
       });
     });
   }
-
   
   async getClient( id ){
     await this.autService.loadToken();
@@ -166,6 +171,8 @@ export class UserService {
       return new Promise( resolve =>{
         this.http.get(`${URL_SERVICIOS}/customer`, { headers })
         .subscribe( resp =>{
+          this.allClient = resp['customers'];
+          console.log("allClient ", this.allClient);
           console.log("resp getAllClient", resp);
           if (resp) {
             console.log("ok getAllClient")

@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, OnInit , ViewChild} from '@angular/core';
 import { Producto , Componente} from '../core/interfaces/interfaces';
 import { ProductService } from '../core/services/product.service';
 import { MenuController, NavController } from '@ionic/angular';
@@ -8,6 +7,9 @@ import { UiService } from '../core/services/ui.service';
 import { Camera , CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { ModalController } from '@ionic/angular';
+import { IonModal } from '@ionic/angular';
+import { OverlayEventDetail } from '@ionic/core/components';
 
 declare var window: any;
 
@@ -17,6 +19,8 @@ declare var window: any;
   styleUrls: ['./product-registration.page.scss'],
 })
 export class ProductRegistrationPage implements OnInit {
+
+  @ViewChild(IonModal) modal: IonModal;
 
   registerProducto: Producto = {
     name: 'Tornillo',
@@ -31,15 +35,18 @@ export class ProductRegistrationPage implements OnInit {
   tempImages: string[] =[];
 
   componentes: Observable<Component[]>;
+  products:any;
 
   constructor(private productService: ProductService,
     private navCtrlr: NavController,
     private uiService: UiService,
     private camera: Camera,
     private menuCtrl: MenuController,
-    private http: HttpClient) { }
+    private http: HttpClient,
+    private modalCtrl: ModalController) { }
 
   ngOnInit() {
+    this.getAllProduct();
    // this.componentes = this.getMenuOpt();
   }
 
@@ -96,28 +103,19 @@ export class ProductRegistrationPage implements OnInit {
   async getAllProduct(){
     const valido = await this.productService.getAllProduct();
     if(valido){
+      this.products = this.productService.allProducts;
       //this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
     }else{
       this.uiService.presentAlert('No se encuentran productos');
     }
   }
 
-  async updateProduct(id){
-    const valido = await this.productService.updateProduct(this.id);
-    if(valido){
-      //this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
-    }else{
-      this.uiService.presentAlert('No se modifico el producto');
-    }
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
   }
 
-  async deleteProduct(id){
-    const valido = await this.productService.deleteProduct(this.id);
-    if(valido){
-     // this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
-    }else{
-      this.uiService.presentAlert('No se elimino el producto');
-    }
+  goToUpdate(){
+    this.navCtrlr.navigateRoot('/product-update', { animated: true })
   }
 
 }
