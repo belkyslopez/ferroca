@@ -22,20 +22,12 @@ export class ProductRegistrationPage implements OnInit {
 
   @ViewChild(IonModal) modal: IonModal;
 
-  registerProducto: Producto = {
-    name: 'Tornillo',
-    description: 'test 22222',
-    price: 1500,
-   // cantidad: 400,
-   // img: []
-  };
-
-  id = '62f1665f1384dd9539828da7';
+  registerProducto:any = {};
+  products: any;
+  product: any;
 
   tempImages: string[] =[];
-
   componentes: Observable<Component[]>;
-  products:any;
 
   constructor(private productService: ProductService,
     private navCtrlr: NavController,
@@ -46,14 +38,15 @@ export class ProductRegistrationPage implements OnInit {
     private modalCtrl: ModalController) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter(){
     this.getAllProduct();
-   // this.componentes = this.getMenuOpt();
   }
 
   async registerProduct(fRegisterP: NgForm){
     if(fRegisterP.invalid) { return;}
       console.log(fRegisterP.valid);
-      console.log(this.registerProducto);
       const valido = await this.productService.registerProduct(this.registerProducto);
       if(valido){
        // this.navCtrlr.navigateRoot('/tabs2', { animated: true });
@@ -91,14 +84,14 @@ export class ProductRegistrationPage implements OnInit {
     return this.http.get('/assets/data/menu-opt.json')
   }
 
-  async getProduct( id ){
-    const valido = await this.productService.getProduct(this.id);
+ /* async getProduct(){
+    const valido = await this.productService.getProduct(this.product._id);
     if(valido){
       //this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
     }else{
       this.uiService.presentAlert('registro de producto');
     }
-  }
+  }*/
 
   async getAllProduct(){
     const valido = await this.productService.getAllProduct();
@@ -114,8 +107,9 @@ export class ProductRegistrationPage implements OnInit {
     this.modal.dismiss(null, 'cancel');
   }
 
-  goToUpdate(){
-    this.navCtrlr.navigateRoot('/product-update', { animated: true })
+  goToUpdate(product: Producto){
+    this.navCtrlr.navigateRoot('/product-update',  { state: product });
+    console.log("user goToUpdate ===>  {state: user}", product);
   }
 
 }

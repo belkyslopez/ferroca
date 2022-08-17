@@ -14,15 +14,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ProductUpdatePage implements OnInit {
 
-  registerProducto: Producto = {
-    name: 'Tornillo',
-    description: 'test 22222',
-    price: 1500,
-   // cantidad: 400,
-   // img: []
-  };
-
-  id = '62f1665f1384dd9539828da7';
+  product: any;
 
   constructor(
       private productService: ProductService,
@@ -34,10 +26,14 @@ export class ProductUpdatePage implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log("carga exitosa 1");
+    this.product = (history.state);
+    console.log("ngOnInit user", this.product._id );
+    console.log("page update ", this.product);
   }
 
-  async updateProduct(id){
-    const valido = await this.productService.updateProduct(this.id);
+  async updateProduct(){
+    const valido = await this.productService.updateProduct(this.product);
     if(valido){
       //this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
     }else{
@@ -45,8 +41,8 @@ export class ProductUpdatePage implements OnInit {
     }
   }
 
-  async deleteProduct(id){
-    const valido = await this.productService.deleteProduct(this.id);
+  async deleteProduct(){
+    const valido = await this.productService.deleteProduct(this.product._id);
     if(valido){
      // this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
     }else{

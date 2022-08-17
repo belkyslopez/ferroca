@@ -6,9 +6,7 @@
     <div>
       <ion-title> Registro de Usuarios</ion-title>
     </div> 
-    <ion-buttons slot="end">
-      <ion-menu-button menu="first"></ion-menu-button>
-    </ion-buttons>
+
   </ion-toolbar>
 </ion-header>
 
@@ -71,6 +69,7 @@
       </ion-item>
     </ion-list>
   </ion-card>
+  
   <ion-modal trigger="modal-user">
     <ng-template>
       <ion-header>
@@ -81,37 +80,36 @@
           <ion-title>Registro de usuarios</ion-title>
         </ion-toolbar>
       </ion-header>
-
       <ion-content  class="ion-padding">
         <form (ngSubmit)="register( fRegister )" #fRegister="ngForm">
           <ion-item>
             <ion-label position="stacked">Nombre</ion-label>
-            <ion-input type="text" placeholder="Ingrese el nombre" name="nombre" [(ngModel)]="registerUser.name" required></ion-input>
+            <ion-input type="text" placeholder="Ingrese el nombre" name="name" [(ngModel)]="registerUser.name" required></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="stacked">Apellido</ion-label>
-            <ion-input type="text" placeholder="Ingrese el apellido" name="nombre" [(ngModel)]="registerUser.surname" required></ion-input>
+            <ion-input type="text" placeholder="Ingrese el apellido" name="surname" [(ngModel)]="registerUser.surname" required></ion-input>
           </ion-item>
           <ion-item>
             <ion-label position="stacked">Correo</ion-label>
-            <ion-input type="email" placeholder="Ingrese el correo" name="correo" [(ngModel)]="registerUser.email" required></ion-input>
+            <ion-input type="email" placeholder="Ingrese el correo" name="email" [(ngModel)]="registerUser.email" required></ion-input>
           </ion-item>  
           <ion-item>
             <ion-label position="stacked">Clave</ion-label>
-            <ion-input type="password" placeholder="Ingrese la clave" name="clave" [(ngModel)]="registerUser.password" required></ion-input>
+            <ion-input type="password" placeholder="Ingrese la clave" name="password" [(ngModel)]="registerUser.password" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Dirección</ion-label>
+            <ion-input type="text" placeholder="Ingrese la direccion" name="address" [(ngModel)]="registerUser.address" required></ion-input>
+          </ion-item>    
+          <ion-item>
+            <ion-label position="stacked">Teléfono</ion-label>
+            <ion-input type="number" placeholder="Ingrese el telefono" name="phone" [(ngModel)]="registerUser.phone" required></ion-input>
           </ion-item>    
           <ion-item>
             <ion-label position="stacked">Rut</ion-label>
             <ion-input type="number" placeholder="Ingrese el rut" name="rut" [(ngModel)]="registerUser.rut" required></ion-input>
-          </ion-item>   
-          <ion-item>
-            <ion-label position="stacked">Dirección</ion-label>
-            <ion-input type="text" placeholder="Ingrese la direccion" name="rut" [(ngModel)]="registerUser.address" required></ion-input>
           </ion-item>    
-          <ion-item>
-            <ion-label position="stacked">Teléfono</ion-label>
-            <ion-input type="number" placeholder="Ingrese el telefono" name="telefono" [(ngModel)]="registerUser.phone" required></ion-input>
-          </ion-item>   
           <ion-button  type="submit" expand="block">Registrar</ion-button>
       </form>
       </ion-content>

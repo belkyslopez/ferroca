@@ -7,6 +7,7 @@ import { UiService } from '../core/services/ui.service';
 import { ModalController } from '@ionic/angular';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
+import { Usuario } from '../core/interfaces/interfaces';
 
 @Component({
   selector: 'app-custormer-register',
@@ -17,17 +18,9 @@ export class CustormerRegisterPage implements OnInit {
 
   @ViewChild(IonModal) modal: IonModal;
 
-  registerCliente: Cliente = {
-    email: 'test',
-    address: '123456',
-    rs: 'Test',
-    phone: 987654321,
-    rut: 234567778
-  };
-
-  id = '62f1665f1384dd9539828da7';
-
+  registerCliente: any = {};
   customers: any;
+  customer: any;
 
   constructor( private userService: UserService,
                private navCtrlr: NavController,
@@ -35,28 +28,21 @@ export class CustormerRegisterPage implements OnInit {
                private modalCtrl: ModalController) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter(){
     this.getAllClient();
   }
 
   async registerClient(fRegisterC: NgForm){
     if(fRegisterC.invalid) { return;}
       console.log(fRegisterC.valid);
-      console.log(this.registerCliente);
       const valido = await this.userService.registerCliente(this.registerCliente);
       if(valido){
        // this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
       }else{
         this.uiService.presentAlert('complete el formulario');
       }
-  }
-
-  async getClient( id ){
-    const valido = await this.userService.getUser(this.id);
-    if(valido){
-     //this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
-    }else{
-      this.uiService.presentAlert('cliente no registrado');
-    }
   }
 
   async getAllClient(){
@@ -73,7 +59,8 @@ export class CustormerRegisterPage implements OnInit {
     this.modal.dismiss(null, 'cancel');
   }
 
-  goToUpdate(){
-    this.navCtrlr.navigateRoot('/customer-update', { animated: true })
-  }
+  goToUpdate(customer: Cliente){
+    this.navCtrlr.navigateRoot('/customer-update', { state: customer });
+    console.log("user goToUpdate ===>  {state: customer}", customer);
+   }
 }

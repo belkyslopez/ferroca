@@ -6,9 +6,6 @@
     <div>
       <ion-title> Registro de Clientes</ion-title>
     </div> 
-    <ion-buttons slot="end">
-      <ion-menu-button menu="first"></ion-menu-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -84,26 +81,26 @@
       </ion-header>
 
       <ion-content class="ion-padding">
-        <form (ngSubmit)="registerClient( fRegisterC )" #fRegisterC="ngForm">     
+        <form (ngSubmit)="registerClient( fRegisterC )" #fRegisterC="ngForm">   
+          <ion-item>
+            <ion-label position="stacked">Correo</ion-label>
+            <ion-input type="email" placeholder="Ingrese el correo" name="email" [(ngModel)]="registerCliente.email" required></ion-input>
+          </ion-item> 
+          <ion-item>
+            <ion-label position="stacked">Dirección</ion-label>
+            <ion-input type="text" placeholder="Ingrese la direccion" name="address" [(ngModel)]="registerCliente.address" required></ion-input>
+          </ion-item>   
           <ion-item>
             <ion-label position="stacked">Razon Social</ion-label>
             <ion-input type="text" placeholder="Ingrese el nombre de la empresa" name="rs" [(ngModel)]="registerCliente.rs" required></ion-input>
           </ion-item>
           <ion-item>
+            <ion-label position="stacked">Teléfono</ion-label>
+            <ion-input type="number" placeholder="Ingrese el telefono" name="phone" [(ngModel)]="registerCliente.phone" required></ion-input>
+          </ion-item>
+          <ion-item>
             <ion-label position="stacked">Rut</ion-label>
             <ion-input type="number" placeholder="Ingrese el rut" name="rut" [(ngModel)]="registerCliente.rut" required></ion-input>
-          </ion-item>  
-          <ion-item>
-            <ion-label position="stacked">Correo</ion-label>
-            <ion-input type="email" placeholder="Ingrese el correo" name="correo" [(ngModel)]="registerCliente.email" required></ion-input>
-          </ion-item>    
-          <ion-item>
-            <ion-label position="stacked">Dirección</ion-label>
-            <ion-input type="text" placeholder="Ingrese la direccion" name="rut" [(ngModel)]="registerCliente.address" required></ion-input>
-          </ion-item>    
-          <ion-item>
-            <ion-label position="stacked">Teléfono</ion-label>
-            <ion-input type="number" placeholder="Ingrese el telefono" name="telefono" [(ngModel)]="registerCliente.phone" required></ion-input>
           </ion-item>  
           <ion-button  type="submit" expand="block">Registrar</ion-button> 
        </form> 

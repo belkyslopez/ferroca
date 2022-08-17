@@ -3,6 +3,7 @@ import { Cliente } from '../core/interfaces/interfaces';
 import { UserService } from '../core/services/user.service';
 import { NavController } from '@ionic/angular';
 import { UiService } from '../core/services/ui.service';
+import { Usuario } from '../core/interfaces/interfaces';
 
 @Component({
   selector: 'app-customer-update',
@@ -11,26 +12,31 @@ import { UiService } from '../core/services/ui.service';
 })
 export class CustomerUpdatePage implements OnInit {
 
-  registerCliente: Cliente = {
-    email: 'test',
-    address: '123456',
-    rs: 'Test',
-    phone: 987654321,
-    rut: 234567778
-  };
-
-  id = '62f1665f1384dd9539828da7';
+  customer: any;
 
   constructor(private userService: UserService,
               private navCtrlr: NavController,
-              private uiService: UiService) { }
+              private uiService: UiService) { 
+                console.log('aqui user-update');
+              }
 
   ngOnInit() {
+    this.customer = (history.state);
+    console.log("ngOnInit customer", this.customer._id );
+    console.log("page customer update ", this.customer);
   }
 
-  
-  async updateClient(id){
-    const valido = await this.userService.updateClient(this.id);
+  async getClient(){
+    const valido = await this.userService.getUser(this.customer._id);
+    if(valido){
+     //this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
+    }else{
+      this.uiService.presentAlert('cliente no registrado');
+    }
+  }
+
+  async updateClient(){
+    const valido = await this.userService.updateClient(this.customer);
     if(valido){
      // this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
     }else{
@@ -39,8 +45,8 @@ export class CustomerUpdatePage implements OnInit {
   }
 
   
-  async deleteClient(id){
-    const valido = await this.userService.deleteClient(this.id);
+  async deleteClient(){
+    const valido = await this.userService.deleteClient(this.customer._id);
     if(valido){
      // this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
     }else{

@@ -15,19 +15,7 @@ import { OverlayEventDetail } from '@ionic/core/components';
 })
 export class UserRegisterPage implements OnInit {
 
- /* registerUser: Usuario = {
-    email: 'test',
-    password: '123456',
-    name: 'Test',
-    surname: 'test 2',
-    address: 'emilio vaisse 760',
-    phone: 123456778,
-    rut : 265432228
-  };*/
-
-  id = '62e81e2606f71fd3e6fefe21';
-
-  registerUser: any;
+  registerUser: any = {};
   users: any;
   user: any;
 
@@ -37,7 +25,7 @@ export class UserRegisterPage implements OnInit {
                private modalCtrl: ModalController) { }
 
   ngOnInit() {
-   // this.getAllUser();
+
   }
 
   ionViewWillEnter(){
@@ -46,8 +34,7 @@ export class UserRegisterPage implements OnInit {
 
   async register(fRegister: NgForm){
     if(fRegister.invalid) { return;}
-      console.log(fRegister.valid);
-      //console.log(this.registerUser);   
+      console.log(fRegister.valid);  
       const valido = await this.userService.register (this.registerUser);
       if(valido){
 
@@ -56,21 +43,19 @@ export class UserRegisterPage implements OnInit {
       }
     }
 
-    async getUser( id ){
-      const valido = await this.userService.getUser(this.id);
+   /* async getUser(){
+      const valido = await this.userService.getUser(this.user._id);
       if(valido){
        // this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
       }else{
         this.uiService.presentAlert('Usuario no registrado');
       }
-    }
+    }*/
 
     async getAllUser(){
       const valido = await this.userService.getAllUser();
       if(valido){
         this.users = this.userService.allUsers;
-      //  console.log(" users", this. users.name);
-       // this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
       }else{
         this.uiService.presentAlert('No se encuentran registros');
       }
@@ -82,9 +67,7 @@ export class UserRegisterPage implements OnInit {
     }
 
     goToUpdate(user: Usuario){
-     // console.log("user goToUpdate ===>", user._id);
-     // this.navCtrlr.navigateRoot('/user-update/'+ user + user._id);
-     this.navCtrlr.navigateRoot('/user-update', {state: user});
+     this.navCtrlr.navigateRoot('/user-update', { state: user });
      console.log("user goToUpdate ===>  {state: user}", user);
     }
 }

@@ -14,38 +14,38 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UserUpdatePage implements OnInit {
 
-  id: string;
-
   user: any;
 
   constructor(private userService: UserService,
               private navCtrlr: NavController,
               private uiService: UiService,
               private modalCtrl: ModalController,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute) {
+               }
 
   ngOnInit() {
-    this.id = this.activatedRoute.snapshot.params.id;
     console.log("carga exitosa 1");
-    console.log("ngOnInit user", this.user );
-   // this.cargar();
     this.user = (history.state);
+    console.log("ngOnInit user", this.user._id );
     console.log("page update ", this.user);
   }
+  
+  ionViewWillEnter(){
+  }
 
-  async cargar(){
+ /* async cargar(){
     console.log("Id de usuario: "+this.id);
-    const valido = await this.userService.getUser(this.id);
+    const valido = await this.userService.getUser(this.user_id );
     if(valido){
       this.user = this.userService.user;
      // this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
     }else{
       this.uiService.presentAlert('Usuario no registrado');
     }
-  }
+  }*/
 
-  async updateUser(id){
-    const valido = await this.userService.updateUser(1);
+  async updateUser(){
+    const valido = await this.userService.updateUser(this.user);
     if(valido){
      // this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
     }else{
@@ -53,8 +53,8 @@ export class UserUpdatePage implements OnInit {
     }
   }
 
-  async deleteUser(id){
-    const valido = await this.userService.deleteUser(1);
+  async deleteUser(){
+    const valido = await this.userService.deleteUser(this.user._id);
     if(valido){
       //this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
     }else{

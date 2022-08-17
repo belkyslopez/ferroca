@@ -36,7 +36,7 @@ const routes: Routes = [
     loadChildren: () => import('./order-status/order-status.module').then( m => m.OrderStatusPageModule)
   },
   {
-    path: 'user-update/:id',
+    path: 'user-update',
     loadChildren: () => import('./user-update/user-update.module').then( m => m.UserUpdatePageModule)
   },
   {

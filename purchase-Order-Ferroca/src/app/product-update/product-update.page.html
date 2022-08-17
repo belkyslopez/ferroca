@@ -6,9 +6,6 @@
     <div>
       <ion-title> Actualizar productos</ion-title>
     </div> 
-    <ion-buttons slot="end">
-      <ion-menu-button menu="first"></ion-menu-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -27,7 +24,7 @@
       <ion-input type="number" placeholder="Ingrese el correo" name="precio" [(ngModel)]="registerProducto.price" required></ion-input>
     </ion-item>  
     <ion-button  type="submit" expand="block">Modificar</ion-button>
-    <ion-button  type="submit" expand="block">Eliminar</ion-button> 
+    <ion-button  type="button" expand="block" (click)="deleteProduct()">Eliminar</ion-button>
   </form>         
   <ion-row>
     <ion-col  size="3"  *ngFor="let image oftempImages ">

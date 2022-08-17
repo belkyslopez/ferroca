@@ -5,6 +5,7 @@ import { URL_SERVICIOS } from '../config/url.services';
 import { NavController } from '@ionic/angular';
 import { AuthenticateService } from './authenticate.service';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -42,13 +43,14 @@ export class UserService {
     });
   }
 
+
   async getUser( id ){
     await this.autService.loadToken();
     const headers = new HttpHeaders({
       'Authorization': this.autService.token
     });
     return new Promise( resolve =>{
-      this.http.get(`${URL_SERVICIOS}/user/:`+ this.usuario.user._id, { headers })
+      this.http.get(`${URL_SERVICIOS}/user/`+ id, { headers })
       .subscribe( resp =>{
         this.user = resp['user'];
         console.log("this.usuario._id", this.usuario.user._id );
@@ -84,13 +86,13 @@ export class UserService {
       });
   }
 
-  async updateUser(id){
+  async updateUser(user){
     await this.autService.loadToken();
     const headers = new HttpHeaders({
       'Authorization': this.autService.token
     });
     return new Promise( resolve =>{
-      this.http.put(`${URL_SERVICIOS}/update-user/:`+ this.usuario._id, { headers })
+      this.http.put(`${URL_SERVICIOS}/update-user/`+ user._id, {...user, _id: undefined, password: undefined }, { headers },)
       .subscribe( resp =>{
         console.log("resp updateUser", resp);
         if (resp) {
@@ -109,7 +111,7 @@ export class UserService {
       'Authorization': this.autService.token
     });
     return new Promise( resolve =>{
-      this.http.delete(`${URL_SERVICIOS}/user/:`+ this.usuario._id, { headers })
+      this.http.delete(`${URL_SERVICIOS}/user/`+ id, { headers })
       .subscribe( resp =>{
         console.log("resp deleteUser", resp);
         if (resp) {
@@ -149,7 +151,7 @@ export class UserService {
       'Authorization': this.autService.token
     });
     return new Promise( resolve =>{
-      this.http.get(`${URL_SERVICIOS}/customer/:`+ this.cliente.user._id, { headers })
+      this.http.get(`${URL_SERVICIOS}/customer/`+ id, { headers })
       .subscribe( resp =>{
         console.log("this.cliente._id", this.cliente.user._id );
         console.log("resp getClient", resp);
@@ -184,13 +186,13 @@ export class UserService {
       });
   }
 
-  async updateClient(id){
+  async updateClient(client){
     await this.autService.loadToken();
     const headers = new HttpHeaders({
       'Authorization': this.autService.token
     });
     return new Promise( resolve =>{
-      this.http.put(`${URL_SERVICIOS}/customer/:`+ this.cliente._id, { headers })
+      this.http.put(`${URL_SERVICIOS}/customer/`+ client._id, {...client, _id: undefined}, { headers })
       .subscribe( resp =>{
         console.log("resp updateUser", resp);
         if (resp) {
@@ -209,7 +211,7 @@ export class UserService {
       'Authorization': this.autService.token
     });
     return new Promise( resolve =>{
-      this.http.delete(`${URL_SERVICIOS}/customer/:`+ this.cliente._id, { headers })
+      this.http.delete(`${URL_SERVICIOS}/customer/`+ id, { headers })
       .subscribe( resp =>{
         console.log("resp deleteClient", resp);
         if (resp) {
