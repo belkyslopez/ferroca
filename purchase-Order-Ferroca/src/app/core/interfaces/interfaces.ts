@@ -20,7 +20,7 @@ export interface Cliente {
 export interface Producto {
   name?: string;
   description ?: string;
-  price : number;
+  price? : number;
   // cantidad : number;
   }
 

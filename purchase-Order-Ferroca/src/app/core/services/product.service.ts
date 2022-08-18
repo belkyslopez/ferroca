@@ -37,7 +37,7 @@ export class ProductService {
   }
 
   
-  async getProduct( id ){
+  async getProduct(){
     await this.autService.loadToken();
     const headers = new HttpHeaders({
       'Authorization': this.autService.token
@@ -78,7 +78,7 @@ export class ProductService {
       });
   }
 
-  async updateProduct(id){ // falta API ojo !
+  async updateProduct(){ // falta API ojo !
     await this.autService.loadToken();
     const headers = new HttpHeaders({
       'Authorization': this.autService.token

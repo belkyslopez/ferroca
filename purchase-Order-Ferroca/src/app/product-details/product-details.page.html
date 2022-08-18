@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Volver"></ion-back-button>
+    </ion-buttons>
+    <div>
+      <ion-title> Producto nombre </ion-title>
+    </div>  
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-button 
+    (click)="getProduct()"  expand="block">updateProduct
+ </ion-button>
+
+  <!--
+  <ion-item [routerLink]="['/product-details']"> 
+    <ion-icon name="book-outline"></ion-icon>
+    Producto
+   </ion-item>-->
+
+    {{product}}
+
+</ion-content>
