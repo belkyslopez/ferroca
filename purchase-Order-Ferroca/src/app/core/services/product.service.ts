@@ -37,16 +37,14 @@ export class ProductService {
   }
 
   
-  async getProduct(){
+  async getProduct( id: string ){
     await this.autService.loadToken();
     const headers = new HttpHeaders({
       'Authorization': this.autService.token
     });
     return new Promise( resolve =>{
-      this.http.get(`${URL_SERVICIOS}/product/`+ this.producto._id, { headers })
+      this.http.get(`${URL_SERVICIOS}/product/`+ id, { headers })
       .subscribe( resp =>{
-        console.log("this.usuario._id", this.producto._id );
-        console.log("resp getProduct", resp);
         if (resp) {
           console.log("ok getProduct")
            resolve(true);
@@ -78,7 +76,7 @@ export class ProductService {
       });
   }
 
-  async updateProduct(){ // falta API ojo !
+  async updateProduct(id){ // falta API ojo !
     await this.autService.loadToken();
     const headers = new HttpHeaders({
       'Authorization': this.autService.token

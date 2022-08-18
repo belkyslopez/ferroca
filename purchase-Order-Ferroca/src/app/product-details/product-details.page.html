@@ -1,26 +1,65 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button text="Volver"></ion-back-button>
-    </ion-buttons>
-    <div>
-      <ion-title> Producto nombre </ion-title>
-    </div>  
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
 
-  <ion-button 
-    (click)="getProduct()"  expand="block">updateProduct
- </ion-button>
+  <ion-card>
+    <ion-img src="https://picsum.photos/400/400?random=1"></ion-img>
+  </ion-card>
 
-  <!--
-  <ion-item [routerLink]="['/product-details']"> 
-    <ion-icon name="book-outline"></ion-icon>
-    Producto
-   </ion-item>-->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title style="font-size: 18px;">
+        <b style="text-transform: capitalize">
+          {{ product.name ? product.name :'wc 18 cm doble descarga aiento slow close atenas klipen'}}</b>
 
-    {{product}}
+      </ion-card-title>
+
+      <ion-card-subtitle style="font-size: 10px; margin-top: 2px;">
+        <ion-label>
+          Código de producto: {{ product._id ? product._id : '8745487521657'}}
+        </ion-label>
+      </ion-card-subtitle>
+      <ion-card-subtitle style="font-size: 10px;">
+
+          Stock: {{ product.stock ? product.stock : '0' }}
+
+      </ion-card-subtitle>
+
+      <ion-card-title style="font-size: 18px;">
+        <b>$ {{ product.price ? product.price : '99.000'}}</b>
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-card-header>
+        <p style="font-size: 12px; text-transform: capitalize; text-transform: justify-self;">
+          {{ product.description ? product.description : 'Dale el vamos a ese arreglo o ampliación con la seguridad que
+          te otorga la plancha de yeso-cartón con borde rebajado, de la marca Volcanita, un elemento liviano y fácil de
+          instalar. Con 10 mm de espesor y medidas de 120x240 cm, esta plancha ha sido diseñada especialmente para
+          usarse en la construcción de tabiques divisorios, cielos y revestimientos de muros.'}}
+        </p>
+      </ion-card-header>
+    </ion-card-content>
+
+  </ion-card>
 
 </ion-content>
+
+
+<ion-footer no-border>
+  <ion-toolbar>
+
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-label>Agregar</ion-label>
+        <ion-icon slot="end" name="add-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="start">
+      <ion-button (click)="regresar()">
+        <ion-icon slot="start" name="arrow-back-sharp"></ion-icon>
+        <ion-label>Regresar</ion-label>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-footer>
