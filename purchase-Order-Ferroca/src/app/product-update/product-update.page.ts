@@ -35,7 +35,7 @@ export class ProductUpdatePage implements OnInit {
   async updateProduct(){
     const valido = await this.productService.updateProduct(this.product);
     if(valido){
-      //this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
+      this.goToReturn();
     }else{
       this.uiService.presentAlert('No se modifico el producto');
     }
@@ -48,6 +48,10 @@ export class ProductUpdatePage implements OnInit {
     }else{
       this.uiService.presentAlert('No se elimino el producto');
     }
+  }
+
+  goToReturn(){
+    this.navCtrlr.navigateRoot('/product-registration');
   }
 
 }

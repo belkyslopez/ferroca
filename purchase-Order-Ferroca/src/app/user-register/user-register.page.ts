@@ -18,11 +18,14 @@ export class UserRegisterPage implements OnInit {
   registerUser: any = {};
   users: any;
   user: any;
+  handlerMessage = '';
+  roleMessage = '';
 
   constructor( private userService: UserService,
                private navCtrlr: NavController,
                private uiService: UiService,
-               private modalCtrl: ModalController) { }
+               private modalCtrl: ModalController,
+              ) { }
 
   ngOnInit() {
 
@@ -37,7 +40,7 @@ export class UserRegisterPage implements OnInit {
       console.log(fRegister.valid);  
       const valido = await this.userService.register (this.registerUser);
       if(valido){
-
+     //  this.presentAlert();
       }else{
         this.uiService.presentAlert('Usuario y contraseña incorrecto');
       }
