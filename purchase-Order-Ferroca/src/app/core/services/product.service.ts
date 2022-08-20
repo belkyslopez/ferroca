@@ -101,7 +101,7 @@ export class ProductService {
       'Authorization': this.autService.token
     });
     return new Promise( resolve =>{
-      this.http.delete(`${URL_SERVICIOS}/product/`+ this.producto._id, { headers })
+      this.http.delete(`${URL_SERVICIOS}/product/`+ id, { headers })
       .subscribe( resp =>{
         console.log("resp deleteProduct", resp);
         if (resp) {

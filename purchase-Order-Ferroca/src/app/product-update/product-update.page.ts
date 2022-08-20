@@ -1,11 +1,11 @@
-import { Component, OnInit , ViewChild} from '@angular/core';
-import { Producto , Componente} from '../core/interfaces/interfaces';
+import { Component, OnInit} from '@angular/core';
 import { ProductService } from '../core/services/product.service';
 import { MenuController, NavController } from '@ionic/angular';
-import { NgForm } from '@angular/forms';
 import { UiService } from '../core/services/ui.service';
 import { Camera , CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { HttpClient } from '@angular/common/http';
+import { ModalController } from '@ionic/angular';
+import { AlertService } from '../core/services/alert.service';
 
 @Component({
   selector: 'app-product-update',
@@ -23,6 +23,8 @@ export class ProductUpdatePage implements OnInit {
       private camera: Camera,
       private menuCtrl: MenuController,
       private http: HttpClient,
+      private modalCtrl: ModalController,
+      private alertService: AlertService
   ) { }
 
   ngOnInit() {
@@ -35,7 +37,9 @@ export class ProductUpdatePage implements OnInit {
   async updateProduct(){
     const valido = await this.productService.updateProduct(this.product);
     if(valido){
-      this.goToReturn();
+     // this.goToReturn();
+      this.alertService.presentAlertRegistro('Se modificó con exitoso!','', '','ok','');
+      this.cancel();
     }else{
       this.uiService.presentAlert('No se modifico el producto');
     }
@@ -44,7 +48,8 @@ export class ProductUpdatePage implements OnInit {
   async deleteProduct(){
     const valido = await this.productService.deleteProduct(this.product._id);
     if(valido){
-     // this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
+      this.alertService.presentAlertRegistro('Se eliminó con exitoso!','', '','ok','');
+      this.cancel();
     }else{
       this.uiService.presentAlert('No se elimino el producto');
     }
@@ -52,6 +57,11 @@ export class ProductUpdatePage implements OnInit {
 
   goToReturn(){
     this.navCtrlr.navigateRoot('/product-registration');
+  }
+
+  cancel() {
+    this.modalCtrl.dismiss(null, 'cancel');
+    this.navCtrlr.navigateRoot('/product-registration', { animated: true });
   }
 
 }

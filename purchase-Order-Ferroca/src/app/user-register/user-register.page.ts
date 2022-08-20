@@ -5,8 +5,7 @@ import { NavController } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
 import { UiService } from '../core/services/ui.service';
 import { ModalController } from '@ionic/angular';
-import { IonModal } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core/components';
+import { AlertService } from '../core/services/alert.service';
 
 @Component({
   selector: 'app-user-register',
@@ -20,15 +19,17 @@ export class UserRegisterPage implements OnInit {
   user: any;
   handlerMessage = '';
   roleMessage = '';
+  IDUser: any;
 
   constructor( private userService: UserService,
                private navCtrlr: NavController,
                private uiService: UiService,
                private modalCtrl: ModalController,
+               private alertService: AlertService,
               ) { }
 
   ngOnInit() {
-
+    //this.loadID();
   }
 
   ionViewWillEnter(){
@@ -40,7 +41,8 @@ export class UserRegisterPage implements OnInit {
       console.log(fRegister.valid);  
       const valido = await this.userService.register (this.registerUser);
       if(valido){
-     //  this.presentAlert();
+       this.alertService.presentAlertRegistro('Registro exitoso!','', '','ok','');
+       this.modalCtrl.dismiss(null, 'cancel');
       }else{
         this.uiService.presentAlert('Usuario y contraseña incorrecto');
       }
@@ -73,4 +75,16 @@ export class UserRegisterPage implements OnInit {
      this.navCtrlr.navigateRoot('/user-update', { state: user });
      console.log("user goToUpdate ===>  {state: user}", user);
     }
+
+   /* loadID(){
+     this.IDUser = this.storage.get('resp').then( data=>{
+      this.IDUser = data;
+      console.log("loadID ===>>>>", this.IDUser._id );
+     });
+    }
+      
+  goToID(user: Usuario){
+    this.navCtrlr.navigateRoot('/user-update', { state: user });
+    console.log("user goToUpdate ===>  {state: user}", user);
+   }*/
 }

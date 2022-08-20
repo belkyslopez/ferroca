@@ -1,5 +1,5 @@
 import { Component, OnInit , ViewChild} from '@angular/core';
-import { Producto , Componente} from '../core/interfaces/interfaces';
+import { Producto } from '../core/interfaces/interfaces';
 import { ProductService } from '../core/services/product.service';
 import { MenuController, NavController } from '@ionic/angular';
 import { NgForm } from '@angular/forms';
@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ModalController } from '@ionic/angular';
 import { IonModal } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core/components';
+import { AlertService } from '../core/services/alert.service';
 
 declare var window: any;
 
@@ -35,7 +35,8 @@ export class ProductRegistrationPage implements OnInit {
     private camera: Camera,
     private menuCtrl: MenuController,
     private http: HttpClient,
-    private modalCtrl: ModalController) { }
+    private modalCtrl: ModalController,
+    private alertService: AlertService,) { }
 
   ngOnInit() {
   }
@@ -49,7 +50,8 @@ export class ProductRegistrationPage implements OnInit {
       console.log(fRegisterP.valid);
       const valido = await this.productService.registerProduct(this.registerProducto);
       if(valido){
-       // this.navCtrlr.navigateRoot('/tabs2', { animated: true });
+        this.alertService.presentAlertRegistro('Registro exitoso!','', '','ok','');
+        this.modalCtrl.dismiss(null, 'cancel');
       }else{
         this.uiService.presentAlert('Ingrese todo los campos');
       }
@@ -97,7 +99,7 @@ export class ProductRegistrationPage implements OnInit {
     const valido = await this.productService.getAllProduct();
     if(valido){
       this.products = this.productService.allProducts;
-      //this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
+     //
     }else{
       this.uiService.presentAlert('No se encuentran productos');
     }

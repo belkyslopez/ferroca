@@ -29,7 +29,7 @@ export class AuthenticateService {
         if (resp) {
           console.log("ok login")
          await this.saveToken( resp['token'] );
-         this.save(resp);
+         this.saveUser(resp);
          console.log(" this.save(resp)", resp)
           resolve(true);
         }else{
@@ -45,8 +45,9 @@ export class AuthenticateService {
     await this.storage.set('token', token);
   }
 
-  async save(resp){
+  async saveUser(resp){
     await this.storage.set('resp', resp);
+    console.log("saveUser ====>>>>", resp._id);
   }
 
   async loadToken(){
