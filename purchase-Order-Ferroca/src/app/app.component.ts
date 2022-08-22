@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { MenuController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
+import { AuthenticateService } from './core/services/authenticate.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +10,10 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(private menu: MenuController) {}
+  constructor(private menu: MenuController,
+              private storage: Storage,
+              private navCtrl: NavController,
+              private autService: AuthenticateService ) {}
 
   openFirst() {
     this.menu.enable(true, 'first');
@@ -22,4 +28,17 @@ export class AppComponent {
     this.menu.enable(true, 'custom');
     this.menu.open('custom');
   }
+
+  closeMenu(){
+    this.menu.close();
+  }
+
+  
+  logout(){
+    this.closeMenu();
+    this.storage.clear();
+    this.autService.logout();
+    this.navCtrl.navigateRoot('/login', { replaceUrl: true});
+  }
+
 }

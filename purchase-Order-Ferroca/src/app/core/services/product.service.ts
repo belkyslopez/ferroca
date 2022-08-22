@@ -85,13 +85,13 @@ export class ProductService {
       });
   }
 
-  async updateProduct(id){ // falta API ojo !
+  async updateProduct(producto){
     await this.autService.loadToken();
     const headers = new HttpHeaders({
       'Authorization': this.autService.token
     });
     return new Promise( resolve =>{
-      this.http.put(`${URL_SERVICIOS}/product/`+ this.producto._id, { headers })
+      this.http.put(`${URL_SERVICIOS}/product/`+ producto._id, {...producto, _id: undefined},  { headers })
       .subscribe( resp =>{
         console.log("resp updateProduct", resp);
         if (resp) {
@@ -110,7 +110,7 @@ export class ProductService {
       'Authorization': this.autService.token
     });
     return new Promise( resolve =>{
-      this.http.delete(`${URL_SERVICIOS}/product/`+ this.producto._id, { headers })
+      this.http.delete(`${URL_SERVICIOS}/product/`+ id, { headers })
       .subscribe( resp =>{
         console.log("resp deleteProduct", resp);
         if (resp) {

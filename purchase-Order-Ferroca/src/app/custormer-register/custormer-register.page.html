@@ -58,7 +58,7 @@
     </ion-list>
   </ion-card>-->
 
-  <ion-card  *ngFor="let customer of customers; let i = index"  (click)="goToUpdate()">
+  <ion-card  *ngFor="let customer of customers; let i = index"  (click)="goToUpdate(customer)">
     <ion-list>
       <ion-item>
         <ion-row>

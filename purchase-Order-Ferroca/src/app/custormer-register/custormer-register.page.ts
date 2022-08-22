@@ -6,8 +6,8 @@ import { NgForm } from '@angular/forms';
 import { UiService } from '../core/services/ui.service';
 import { ModalController } from '@ionic/angular';
 import { IonModal } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core/components';
-import { Usuario } from '../core/interfaces/interfaces';
+import { AlertService } from '../core/services/alert.service';
+
 
 @Component({
   selector: 'app-custormer-register',
@@ -25,7 +25,8 @@ export class CustormerRegisterPage implements OnInit {
   constructor( private userService: UserService,
                private navCtrlr: NavController,
                private uiService: UiService,
-               private modalCtrl: ModalController) { }
+               private modalCtrl: ModalController,
+               private alertService: AlertService) { }
 
   ngOnInit() {
   }
@@ -39,7 +40,8 @@ export class CustormerRegisterPage implements OnInit {
       console.log(fRegisterC.valid);
       const valido = await this.userService.registerCliente(this.registerCliente);
       if(valido){
-       // this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
+        this.alertService.presentAlertRegistro('Registro exitoso!','', '','ok','');
+        this.modalCtrl.dismiss(null, 'cancel');
       }else{
         this.uiService.presentAlert('complete el formulario');
       }
