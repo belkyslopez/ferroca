@@ -3,28 +3,33 @@
     <ion-header>
       <ion-toolbar color="primary">
         <ion-icon name="cog-outline"></ion-icon>
-        <ion-title slot="start">blopez@hotmail.com</ion-title>
+        <ion-title slot="start">{{userName ? userName : 'blopez@gmail.com'}}</ion-title>
       </ion-toolbar>
     </ion-header>
+
     <ion-content>
       <ion-list>
-        <ion-item [routerLink]="['/user-register']">
-          <ion-icon name="person-outline"></ion-icon>
-           Lista de Usuario 
+        <ion-menu-toggle>
+          <ion-item [routerLink]="['/user-register']">
+            <ion-icon name="person-outline" slot="start"></ion-icon>
+            Lista de Usuario
           </ion-item>
-        <ion-item [routerLink]="['/customer-register']"> 
-          <ion-icon name="people-outline"></ion-icon>
-          Lista de Cliente 
-        </ion-item>
-        <ion-item [routerLink]="['/product-registration']"> 
-          <ion-icon name="build-outline"></ion-icon>
-          Lista de Producto 
-        </ion-item>
-        <ion-item [routerLink]="['/inventory-record']"> 
-          <ion-icon name="copy-outline"></ion-icon>
-          Registro de Stock 
-        </ion-item>
-        <!--<ion-item [routerLink]="['/tabs/tabs3']">
+
+          <ion-item [routerLink]="['/customer-register']">
+            <ion-icon name="people-outline" slot="start"></ion-icon>
+            Lista de Cliente
+          </ion-item>
+
+          <ion-item [routerLink]="['/product-registration']">
+            <ion-icon name="build-outline" slot="start"></ion-icon>
+            Lista de Producto
+          </ion-item>
+
+          <ion-item [routerLink]="['/inventory-record']">
+            <ion-icon name="copy-outline" slot="start"></ion-icon>
+            Registro de Stock
+          </ion-item>
+          <!--<ion-item [routerLink]="['/tabs/tabs3']">
           <ion-icon name="create-outline"></ion-icon>
           Registro de Orden de compra
          </ion-item>
@@ -32,16 +37,21 @@
           <ion-icon name="book-outline"></ion-icon>
           Catalogo de Productos
          </ion-item>-->
-        <ion-item [routerLink]="['/order-status']">
-          <ion-icon name="stats-chart-outline"></ion-icon>
-           Estado de ordenes 
+
+          <ion-item [routerLink]="['/order-status']">
+            <ion-icon name="stats-chart-outline" slot="start"></ion-icon>
+            Estado de ordenes
           </ion-item>
-        <ion-item [routerLink]="['/login']"> 
-          <ion-icon name="log-out-outline"></ion-icon>
-          Cerrar sesión
-        </ion-item>
+
+          <ion-item [routerLink]="['/login']">
+            <ion-icon name="log-out-outline" slot="start"></ion-icon>
+            Cerrar sesión
+          </ion-item>
+
+        </ion-menu-toggle>
       </ion-list>
     </ion-content>
+
   </ion-menu>
   <ion-router-outlet id="main"></ion-router-outlet>
 </ion-app>

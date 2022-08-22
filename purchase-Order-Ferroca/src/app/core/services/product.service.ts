@@ -3,6 +3,7 @@ import { HttpClient,  HttpHeaders  } from '@angular/common/http';
 import { Producto } from '../interfaces/interfaces';
 import { URL_SERVICIOS } from '../config/url.services';
 import { AuthenticateService } from './authenticate.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,8 @@ export class ProductService {
   allProducts: any;
 
   constructor( private http: HttpClient,
-    private autService: AuthenticateService) { }
+    private autService: AuthenticateService
+    ) { }
 
   async registerProduct( producto: Producto){
     await this.autService.loadToken();
@@ -53,6 +55,13 @@ export class ProductService {
         }
       });
     });
+  }
+
+  detailsProduct(id: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2MmRmNGY2ZTZhMzVlNjEyMTFjNjRmM2YiLCJuYW1lIjoiTHVpcyIsInN1cm5hbWUiOiJCYXNjdcOxw6FuIiwiZW1haWwiOiJhbGdvQGVqZW1wbG8uY29tIiwicm9sZSI6IlJPTEVfVVNFUiIsImltYWdlIjoibnVsbCIsImlhdCI6MTY1ODgwNDQ4MH0.RMsNbkRukUs9wijNTgxkFOUWky1IhLOsS0lunFh-GRs'
+    });
+    return this.http.get<any>(`${URL_SERVICIOS}/product`+`/${id}`, { headers });
   }
 
   async getAllProduct(){

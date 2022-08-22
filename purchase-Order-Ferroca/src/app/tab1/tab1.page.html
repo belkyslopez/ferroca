@@ -2,7 +2,7 @@
   <ion-toolbar>
     <div>
       <ion-title> Listado de ordenes </ion-title>
-    </div> 
+    </div>
     <ion-buttons slot="end">
       <ion-menu-button menu="first"></ion-menu-button>
     </ion-buttons>
@@ -10,90 +10,24 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
+  <!--
   <ion-datetime-button datetime="datetime"></ion-datetime-button>
   <ion-modal [keepContentsMounted]="true">
     <ng-template>
       <ion-datetime id="datetime"></ion-datetime>
     </ng-template>
   </ion-modal>
+-->
 
 
-<ion-list>
-  <ion-item>
-    <ion-row>
-      <ion-col>
-        <ion-label>N°:  1</ion-label>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-label>Estado:  Ingresada</ion-label>
-      </ion-col>
-      <ion-col>
-        <ion-label>01/09/2022</ion-label>
-      </ion-col>
-    </ion-row>
-  </ion-item>
-  <ion-item>
-    <ion-row>
-      <ion-col>
-        <ion-label>N°:  2</ion-label>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-label>Estado:  Embalaje</ion-label>
-      </ion-col>
-      <ion-col>
-        <ion-label>01/08/2022</ion-label>
-      </ion-col>
-    </ion-row>
-  </ion-item>
-  <ion-item>
-    <ion-row>
-      <ion-col>
-        <ion-label>N°:  3</ion-label>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-label>Estado:  Despacho</ion-label>
-      </ion-col>
-      <ion-col>
-        <ion-label>01/07/2022</ion-label>
-      </ion-col>
-    </ion-row>
-  </ion-item>
-  <ion-item>
-    <ion-row>
-      <ion-col>
-        <ion-label>N°:  4</ion-label>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-label>Estado:  Entregado</ion-label>
-      </ion-col>
-      <ion-col>
-        <ion-label>01/06/2022</ion-label>
-      </ion-col>
-    </ion-row>
-  </ion-item>
-  <ion-item>
-    <ion-row>
-      <ion-col>
-        <ion-label>N°:  5</ion-label>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col>
-        <ion-label>Estado:  Pagado y cerrado</ion-label>
-      </ion-col>
-      <ion-col>
-        <ion-label>01/09/2022</ion-label>
-      </ion-col>
-    </ion-row>
-  </ion-item>
-</ion-list>
+  <ion-list *ngFor="let order of orders; let i = index">
+    <ion-item>
+      <ion-label>
+        <h3><b>N° {{i + 1}}</b> </h3>
+        <h4>Dirección: {{order.address}}</h4>
+        <p> Total: {{order.total}} | {{ order.user.name }} {{ order.user.surname }} | Estado: Ingresado</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
 </ion-content>

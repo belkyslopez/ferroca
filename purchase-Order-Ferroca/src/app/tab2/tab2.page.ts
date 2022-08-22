@@ -31,6 +31,7 @@ export class Tab2Page {
     }
   }
 
+  //sin uso
   getProduct(product: Producto){
     this.navCtrlr.navigateRoot('/product-details', { state: product });
    }

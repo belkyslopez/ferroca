@@ -17,6 +17,16 @@ export interface Cliente {
     rut: number;
   }
 
+export interface Token {
+  sub?: string;
+  name?: string;
+  surname?: string;
+  email: number;
+  rolName: number;
+  image: string;
+  iat:string;
+}
+
 export interface Producto {
   name?: string;
   description ?: string;
