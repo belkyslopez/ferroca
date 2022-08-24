@@ -14,23 +14,18 @@ export class Tab1Page {
     private orderService: OrderService
   ) {}
 
-  ngOnInit() {
-    this.cargar();
-  }
-
   ionViewWillEnter(){
     this.cargar();
   }
 
-  cargar(): void {
-    this.orderService.getAll().subscribe(
-      data => {
-        this.orders = data['orders'];
-      },
-      err => {
-        console.log(err);
-      }
-    );
+  async cargar(){
+    const valido = await this.orderService.getAllOrders();
+    if(valido){
+      this.orders = this.orderService.allOrders;
+      console.log("Success get all orders");
+    }else{
+      console.log("Eror")
+    }
   }
 
 }

@@ -17,90 +17,116 @@ export class ProductDetailsPage implements OnInit {
 
   id: string;
   product: Producto;
-  order: any;
+  orderActive: any;
   orders: any;
   tokenDecode: Token;
   userId: string;
   producto: Producto;
+
+  orderItems: any[];
+
+  //test
+  vegetables: any[];
 
   constructor(
     private navCtrlr: NavController,
     private storage: Storage,
     private orderService: OrderService,
     private productService: ProductService,
-    private authenticateService: AuthenticateService,
     private activatedRoute: ActivatedRoute,
-  ) { }
+  ) {}
 
   ngOnInit() {
     //this.product = (history.state);
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
+    this.getCountItemsToOrderActive();
     //this.getUserId();
     //this.getOrderUser();
-    //this.add();
-    setTimeout(()=>this.getDetailsProduct(), 800);
+    setTimeout(() => this.getDetailsProduct(), 800);
   }
 
-  async getUserId(){
+  getDetailsProduct(): void {
+    const id = this.activatedRoute.snapshot.params.id;
+    this.productService.detailsProduct(id).subscribe(
+      data => {
+        this.product = data['product'];
+        console.log("product: ", this.product);
+      },
+      err => {
+        console.log("Error");
+        this.navCtrlr.navigateRoot('/tabs/tab3');
+      }
+    );
+  }
+
+  async add(productId: string) {
+    console.log("####################INICIO ADD#########################");
+    //get user id
     let result: string = await this.storage.get('token');
     this.tokenDecode = jwt_decode(result);
     this.userId = this.tokenDecode.sub;
     console.log("GetUserId: ", this.userId);
 
-  }
+    //get order by user
+    const valido = await this.orderService.getOrderByUser(this.userId);
+    if (valido) {
+      this.orders = await this.orderService.allOrders;
 
-  getDetailsProduct(): void{
-    const id = this.activatedRoute.snapshot.params.id;
-    this.productService.detailsProduct(id).subscribe(
-      data=>{
-        this.product = data['product'];
-        console.log("product: ", this.product);
-      }, 
-      err => {
-        console.log("Error");
-        this.navCtrlr.navigateRoot('/tabs/tab3');
+      //get order active
+      for (let order of this.orders) {
+        if (order.total == 0) {
+          this.orderActive = order;
+          console.log("Order:", this.orderActive);
+          break
+        }
       }
-      );
+    } else {
+      this.navCtrlr.navigateRoot('/tabs/tab3');
+    }
+    
+    console.log("order id: ", this.orderActive._id);
+    console.log("product id: ", productId);
+    
+    //const guardar = await this.orderService.addProduct(this.orderActive._id, productId);
+    const guardar = true;
+    if (guardar) {
+      console.log("si");
+    }else{
+      console.log("no");
+    }
+
   }
 
-  async getOrderUser() {
+  async getCountItemsToOrderActive() {
     //get user id
-    var string  = this.getUserId();
-    console.log("string: ", string);
-    /*
     let result: string = await this.storage.get('token');
     this.tokenDecode = jwt_decode(result);
     this.userId = this.tokenDecode.sub;
-    console.log("getOrderUser User ID: ", this.userId);
-    */
+    console.log("GetUserId: ", this.userId);
 
     //get order by user
     const valido = await this.orderService.getOrderByUser(this.userId);
     if (valido) {
-      this.orders = this.orderService.allOrders;
-      console.log("getOrderUser get all orders of user", this.orders)
-    } else {
-      this.navCtrlr.navigateRoot('/tabs/tab3');
-    }
+      this.orders = await this.orderService.allOrders;
 
-    //filter order
-    //
-
-  }
-
-  async add() {
-    this.getOrderUser();
-
-    //const valido = await this.orderService.getOrderByUser(id);
-    //const valido = false;
-    if (true) {
+      //get order active
+      for (let order of this.orders) {
+        if (order.total == 0) {
+          this.orderActive = order;
+          console.log("Order:", this.orderActive);
+          break
+        }
+      }
+      //get data to item  
+      this.orderItems = this.orderActive.orderItems;
 
     } else {
       this.navCtrlr.navigateRoot('/tabs/tab3');
     }
   }
+
 
   regresar() {
     this.navCtrlr.navigateRoot('/tabs/tab2');

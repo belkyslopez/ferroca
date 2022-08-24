@@ -19,11 +19,12 @@
 <app-explore-container name="Tab 2 page"></app-explore-container>
 -->
 
-  <ion-searchbar onIonInput={this.handleSearch}></ion-searchbar>
+
 
   <ion-grid fixed>
     <ion-row>
-      <ion-col *ngFor="let product of products; let i = index" size="6" routerLink="/product-details/{{product._id}}">
+      <ion-searchbar placeholder="Buscar..." [(ngModel)]="filterTerm" animated="true"></ion-searchbar>
+      <ion-col *ngFor="let product of products | filter:filterTerm; let i = index" size="6" routerLink="/product-details/{{product._id}}">
         <ion-card>
           <img src="https://picsum.photos/200/200?random={{i}}">
           <ion-card-header>

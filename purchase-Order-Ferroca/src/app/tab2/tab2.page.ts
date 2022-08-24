@@ -10,7 +10,8 @@ import { ProductService } from '../core/services/product.service';
 })
 export class Tab2Page {
 
-  products: any;
+  products: [];
+  searchTerm: string;
   
   constructor(
     private productService: ProductService,

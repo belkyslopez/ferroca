@@ -56,19 +56,15 @@
     <ion-tab-bar>
       <ion-tab-button (click)="regresar()">
         <ion-icon name="arrow-back-circle-outline"></ion-icon>
-        <!-- <ion-icon name="globe"></ion-icon> -->
-        <!-- <ion-badge color="tertiary">44</ion-badge> -->
       </ion-tab-button>
 
       <ion-tab-button (click)="add(product._id)">
-        <!-- <ion-icon name="people"></ion-icon> -->
         <ion-icon name="add-circle-outline"></ion-icon>
-        <!-- <ion-badge color="success">1</ion-badge> -->
       </ion-tab-button>
       
       <ion-tab-button>
         <ion-icon name="list-circle-outline"></ion-icon>
-        <ion-badge color="danger">2</ion-badge>
+        <ion-badge color="danger">{{ orderItems?.length ? orderItems?.length : 0 }}</ion-badge>
       </ion-tab-button>
     </ion-tab-bar>
 
