@@ -32,7 +32,6 @@ export class AppComponent {
   closeMenu(){
     this.menu.close();
   }
-
   
   logout(){
     this.closeMenu();

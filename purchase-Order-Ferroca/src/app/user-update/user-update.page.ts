@@ -31,17 +31,6 @@ export class UserUpdatePage implements OnInit {
   ionViewWillEnter(){
   }
 
- /* async cargar(){
-    console.log("Id de usuario: "+this.id);
-    const valido = await this.userService.getUser(this.user_id );
-    if(valido){
-      this.user = this.userService.user;
-     // this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
-    }else{
-      this.uiService.presentAlert('Usuario no registrado');
-    }
-  }*/
-
   async updateUser(){
     const valido = await this.userService.updateUser(this.user);
     if(valido){
@@ -63,8 +52,7 @@ export class UserUpdatePage implements OnInit {
   }
   
   cancel() {
-    this.modalCtrl.dismiss(null, 'cancel');
-    this.navCtrlr.navigateRoot('/user-register', { animated: true });
+    this.navCtrlr.navigateBack('/user-register', { animated: true });
   }
 
 }

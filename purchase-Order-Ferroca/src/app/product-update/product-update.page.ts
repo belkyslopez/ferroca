@@ -60,8 +60,7 @@ export class ProductUpdatePage implements OnInit {
   }
 
   cancel() {
-    this.modalCtrl.dismiss(null, 'cancel');
-    this.navCtrlr.navigateRoot('/product-registration', { animated: true });
+    this.navCtrlr.navigateBack('/product-registration', { animated: true });
   }
 
 }

@@ -6,6 +6,7 @@ import { NgForm } from '@angular/forms';
 import { UiService } from '../core/services/ui.service';
 import { ModalController } from '@ionic/angular';
 import { AlertService } from '../core/services/alert.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-user-register',
@@ -20,42 +21,39 @@ export class UserRegisterPage implements OnInit {
   handlerMessage = '';
   roleMessage = '';
   IDUser: any;
+  registerForm: FormGroup;
+  loading: false;
 
   constructor( private userService: UserService,
                private navCtrlr: NavController,
                private uiService: UiService,
                private modalCtrl: ModalController,
                private alertService: AlertService,
-              ) { }
+               public formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    //this.loadID();
+   this.prepareForm();
   }
 
   ionViewWillEnter(){
     this.getAllUser();
   }
 
-  async register(fRegister: NgForm){
-    if(fRegister.invalid) { return;}
-      console.log(fRegister.valid);  
-      const valido = await this.userService.register (this.registerUser);
-      if(valido){
-       this.alertService.presentAlertRegistro('Registro exitoso!','', '','ok','');
-       this.modalCtrl.dismiss(null, 'cancel');
-      }else{
-        this.uiService.presentAlert('Usuario y contraseña incorrecto');
+    async register(){
+      if(this.registerForm.invalid) {
+         return;
       }
-    }
-
-   /* async getUser(){
-      const valido = await this.userService.getUser(this.user._id);
-      if(valido){
-       // this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
-      }else{
-        this.uiService.presentAlert('Usuario no registrado');
+        console.log(this.registerForm.valid);  
+        const valido = await this.userService.register (this.registerUser);
+        if(valido){
+         this.alertService.presentAlertRegistro('Registro exitoso!','', '','ok','');
+         this.getAllUser();
+         this.clearLoginForm();
+         this.cancel();
+        }else{
+          this.uiService.presentAlert('Usuario y contraseña incorrecto');
+        }
       }
-    }*/
 
     async getAllUser(){
       const valido = await this.userService.getAllUser();
@@ -68,23 +66,46 @@ export class UserRegisterPage implements OnInit {
 
     cancel() {
       this.modalCtrl.dismiss(null, 'cancel');
-      this.navCtrlr.navigateRoot('/user-register', { animated: true });
     }
 
     goToUpdate(user: Usuario){
-     this.navCtrlr.navigateRoot('/user-update', { state: user });
+     this.navCtrlr.navigateForward('/user-update', { state: user });
      console.log("user goToUpdate ===>  {state: user}", user);
     }
 
-   /* loadID(){
-     this.IDUser = this.storage.get('resp').then( data=>{
-      this.IDUser = data;
-      console.log("loadID ===>>>>", this.IDUser._id );
-     });
+    get form() { return this.registerForm.controls; }
+    get errorControl() { return this.registerForm.controls; }
+    get name() { return this.registerForm.get('name'); }
+    get surname() { return this.registerForm.get('surname'); }
+    get email() { return this.registerForm.get('email'); }
+    get password() { return this.registerForm.get('password'); }
+    get address() { return this.registerForm.get('address'); }
+    get phone() { return this.registerForm.get('phone'); }
+    get rut() { return this.registerForm.get('rut'); }
+  
+    prepareForm(): void {
+      console.log(" prepareForm ====>>> ");
+      this.registerForm = this.formBuilder.group({
+        name: ['', { validators: [Validators.required], updateOn: 'blur' }],
+        surname: ['', { validators: [Validators.required], updateOn: 'blur' }],
+        email: ['', { validators: [Validators.required], updateOn: 'blur' }],
+        password: ['', [Validators.required,Validators.minLength(4), Validators.maxLength(32)]],
+        address: ['', { validators: [Validators.required], updateOn: 'blur' }],
+        phone: ['', { validators: [Validators.required], updateOn: 'blur' }],
+        rut: ['', { validators: [Validators.required], updateOn: 'blur' }],
+        //registerForm: [ true ]
+      });
     }
-      
-  goToID(user: Usuario){
-    this.navCtrlr.navigateRoot('/user-update', { state: user });
-    console.log("user goToUpdate ===>  {state: user}", user);
-   }*/
+  
+    clearLoginForm() {
+      console.log("clearLoginForm");
+      this.registerForm.reset();
+      this.registerForm.controls['name'].setValue('');
+      this.registerForm.controls['surname'].setValue('');
+      this.registerForm.controls['email'].setValue('');
+      this.registerForm.controls['password'].setValue('');
+      this.registerForm.controls['address'].setValue('');
+      this.registerForm.controls['phone'].setValue('');
+      this.registerForm.controls['rut'].setValue('');
+    }
 }

@@ -58,8 +58,7 @@ export class CustomerUpdatePage implements OnInit {
   }
 
   cancel() {
-    this.modalCtrl.dismiss(null, 'cancel');
-    this.navCtrlr.navigateRoot('/customer-register', { animated: true });
+    this.navCtrlr.navigateBack('/customer-register', { animated: true });
   }
 
 }

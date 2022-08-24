@@ -7,6 +7,7 @@ import { UiService } from '../core/services/ui.service';
 import { ModalController } from '@ionic/angular';
 import { IonModal } from '@ionic/angular';
 import { AlertService } from '../core/services/alert.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -21,27 +22,34 @@ export class CustormerRegisterPage implements OnInit {
   registerCliente: any = {};
   customers: any;
   customer: any;
+  clienteForm: FormGroup;
 
   constructor( private userService: UserService,
                private navCtrlr: NavController,
                private uiService: UiService,
                private modalCtrl: ModalController,
-               private alertService: AlertService) { }
+               private alertService: AlertService,
+               public formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.prepareForm();
   }
 
   ionViewWillEnter(){
     this.getAllClient();
   }
 
-  async registerClient(fRegisterC: NgForm){
-    if(fRegisterC.invalid) { return;}
-      console.log(fRegisterC.valid);
+  async registerClient(){
+    if(this.clienteForm.invalid) {
+       return;
+      }
+      console.log(this.clienteForm.valid);
       const valido = await this.userService.registerCliente(this.registerCliente);
       if(valido){
         this.alertService.presentAlertRegistro('Registro exitoso!','', '','ok','');
-        this.modalCtrl.dismiss(null, 'cancel');
+        this.getAllClient();
+        this.clearLoginForm();
+        this.cancel();
       }else{
         this.uiService.presentAlert('complete el formulario');
       }
@@ -51,7 +59,6 @@ export class CustormerRegisterPage implements OnInit {
     const valido = await this.userService.getAllClient();
     if(valido){
       this.customers = this.userService.allClient;
-     // this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
     }else{
       this.uiService.presentAlert('No se encuentran registros');
     }
@@ -62,7 +69,37 @@ export class CustormerRegisterPage implements OnInit {
   }
 
   goToUpdate(customer: Cliente){
-    this.navCtrlr.navigateRoot('/customer-update', { state: customer });
+    this.navCtrlr.navigateForward('/customer-update', { state: customer });
     console.log("user goToUpdate ===>  {state: customer}", customer);
    }
+
+   get form() { return this.clienteForm.controls; }  
+   get errorControl() { return this.clienteForm.controls; }
+   get email() { return this.clienteForm.get('email'); }
+   get address() { return this.clienteForm.get('address'); }
+   get rs() { return this.clienteForm.get('rs'); }
+   get phone() { return this.clienteForm.get('phone'); }
+   get rut() { return this.clienteForm.get('rut'); }
+ 
+   prepareForm(): void {
+     console.log(" prepareForm ====>>> ");
+     this.clienteForm = this.formBuilder.group({
+       email: ['', { validators: [Validators.required], updateOn: 'blur' }],
+       address: ['', { validators: [Validators.required], updateOn: 'blur' }],
+       rs: ['', { validators: [Validators.required], updateOn: 'blur' }],
+       phone: ['', { validators: [Validators.required], updateOn: 'blur' }],
+       rut: ['', { validators: [Validators.required], updateOn: 'blur' }],
+       //registerForm: [ true ]
+     });
+   }
+
+   clearLoginForm() {
+    console.log("clearLoginForm");
+    this.clienteForm.reset();
+    this.clienteForm.controls['email'].setValue('');
+    this.clienteForm.controls['address'].setValue('');
+    this.clienteForm.controls['rs'].setValue('');
+    this.clienteForm.controls['phone'].setValue('');
+    this.clienteForm.controls['rut'].setValue('');
+  }
 }

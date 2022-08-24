@@ -10,6 +10,9 @@ import { Observable } from 'rxjs';
 import { ModalController } from '@ionic/angular';
 import { IonModal } from '@ionic/angular';
 import { AlertService } from '../core/services/alert.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+
 
 declare var window: any;
 
@@ -25,9 +28,9 @@ export class ProductRegistrationPage implements OnInit {
   registerProducto:any = {};
   products: any;
   product: any;
-
   tempImages: string[] =[];
   componentes: Observable<Component[]>;
+  productForm: FormGroup;
 
   constructor(private productService: ProductService,
     private navCtrlr: NavController,
@@ -36,22 +39,28 @@ export class ProductRegistrationPage implements OnInit {
     private menuCtrl: MenuController,
     private http: HttpClient,
     private modalCtrl: ModalController,
-    private alertService: AlertService,) { }
+    private alertService: AlertService,
+    public formBuilder: FormBuilder) { }
 
   ngOnInit() {
+    this.prepareForm();
   }
 
   ionViewWillEnter(){
     this.getAllProduct();
   }
 
-  async registerProduct(fRegisterP: NgForm){
-    if(fRegisterP.invalid) { return;}
-      console.log(fRegisterP.valid);
+  async registerProduct(){
+    if(this.productForm.invalid) { 
+      return;
+    }
+      console.log(this.productForm.valid);
       const valido = await this.productService.registerProduct(this.registerProducto);
       if(valido){
         this.alertService.presentAlertRegistro('Registro exitoso!','', '','ok','');
-        this.modalCtrl.dismiss(null, 'cancel');
+        this.getAllProduct();
+        this.clearLoginForm();
+        this.cancel();
       }else{
         this.uiService.presentAlert('Ingrese todo los campos');
       }
@@ -99,7 +108,6 @@ export class ProductRegistrationPage implements OnInit {
     const valido = await this.productService.getAllProduct();
     if(valido){
       this.products = this.productService.allProducts;
-     //
     }else{
       this.uiService.presentAlert('No se encuentran productos');
     }
@@ -110,8 +118,32 @@ export class ProductRegistrationPage implements OnInit {
   }
 
   goToUpdate(product: Producto){
-    this.navCtrlr.navigateRoot('/product-update',  { state: product });
+    this.navCtrlr.navigateForward('/product-update',  { state: product });
     console.log("user goToUpdate ===>  {state: user}", product);
   }
+
+  get form() { return this.productForm.controls; }  
+  get errorControl() { return this.productForm.controls; }
+  get nombre() { return this.productForm.get('nombre'); }
+  get descripcion() { return this.productForm.get('descripcion'); }
+  get precio() { return this.productForm.get('precio'); }
+
+  prepareForm(): void {
+    console.log(" prepareForm ====>>> ");
+    this.productForm = this.formBuilder.group({
+      nombre: ['', { validators: [Validators.required], updateOn: 'blur' }],
+      descripcion: ['', { validators: [Validators.required], updateOn: 'blur' }],
+      precio: ['', { validators: [Validators.required], updateOn: 'blur' }],
+      //registerForm: [ true ]
+    });
+  }
+
+  clearLoginForm() {
+   console.log("clearLoginForm");
+   this.productForm.reset();
+   this.productForm.controls['nombre'].setValue('');
+   this.productForm.controls['descripcion'].setValue('');
+   this.productForm.controls['precio'].setValue('');
+ }
 
 }
