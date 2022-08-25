@@ -114,7 +114,7 @@ export class ProductDetailsPage implements OnInit {
 
       //get order active
       for (let order of this.orders) {
-        if (!order.active) {
+        if (order.active) {
           this.orderActive = order;
           console.log("Order:", this.orderActive);
           break

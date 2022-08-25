@@ -22,7 +22,7 @@
 
   <ion-list *ngFor="let order of orders; let i = index" style="padding: 0px ;">
     <ion-item>
-      <ion-label [routerLink]="(!order.active ? '/order-details/' + order._id : null)">
+      <ion-label [routerLink]="(order.active ? '/order-details/' + order._id : null)">
         <!-- <h4>
           <b>N° {{i + 1}}</b>
         </h4>
