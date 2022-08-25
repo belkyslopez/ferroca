@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { Camera } from '@awesome-cordova-plugins/camera/ngx';
+import { FormBuilder } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,9 +18,11 @@ import { Camera } from '@awesome-cordova-plugins/camera/ngx';
     HttpClientModule,
     AppRoutingModule,
     IonicStorageModule.forRoot(),
+    ReactiveFormsModule
   ],
   providers: [
     Camera,
+    FormBuilder,
     {  provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent],

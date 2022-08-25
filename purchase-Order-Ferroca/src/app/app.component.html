@@ -10,32 +10,33 @@
     <ion-content>
       <ion-list>
         <ion-menu-toggle>
-          <ion-item [routerLink]="['/user-register']">
+          <ion-item [routerLink]="['/user-register']" lines="none">
             <ion-icon name="person-outline" slot="start"></ion-icon>
             Lista de Usuario
           </ion-item>
-
-        <ion-item [routerLink]="['/customer-register']"> 
-          <ion-icon name="people-outline"></ion-icon>
-          Lista de Cliente 
-        </ion-item>
-        <ion-item [routerLink]="['/product-registration']"> 
-          <ion-icon name="build-outline"></ion-icon>
-          Lista de Producto 
-        </ion-item>
-        <ion-item [routerLink]="['/inventory-record']"> 
-          <ion-icon name="copy-outline"></ion-icon>
-          Registro de Stock 
-        </ion-item>
-        <ion-item [routerLink]="['/order-status']">
-          <ion-icon name="stats-chart-outline"></ion-icon>
-           Estado de ordenes 
+          <ion-item [routerLink]="['/customer-register']" lines="none"> 
+            <ion-icon name="people-outline" slot="start"></ion-icon>
+            Lista de Cliente 
           </ion-item>
-
+          <ion-item [routerLink]="['/product-registration']" lines="none"> 
+            <ion-icon name="build-outline" slot="start"></ion-icon>
+            Lista de Producto 
+          </ion-item>
+          <ion-item [routerLink]="['/inventory-record']" lines="none"> 
+            <ion-icon name="copy-outline" slot="start"></ion-icon>
+            Registro de Stock 
+          </ion-item>
+          <ion-item [routerLink]="['/order-status']" lines="none">
+            <ion-icon name="stats-chart-outline" slot="start"></ion-icon>
+            Estado de ordenes 
+          </ion-item>
+          <ion-item [routerLink]="['/login']" lines="none">
+            <ion-icon name="exit-outline" slot="start"></ion-icon>
+            Cerrar Sesion
+          </ion-item>
         </ion-menu-toggle>
       </ion-list>
     </ion-content>
-
   </ion-menu>
   <ion-router-outlet id="main"></ion-router-outlet>
 </ion-app>
