@@ -59,11 +59,11 @@
       </ion-tab-button>
 
       <ion-tab-button (click)="add(product._id)">
-        <ion-icon name="add-circle-outline"></ion-icon>
+        <ion-icon name="add-circle-sharp"></ion-icon>
       </ion-tab-button>
       
-      <ion-tab-button>
-        <ion-icon name="list-circle-outline"></ion-icon>
+      <ion-tab-button (click)="goToOrder(orderActive._id)">
+        <ion-icon name="bag-handle-outline"></ion-icon>
         <ion-badge color="danger">{{ orderItems?.length ? orderItems?.length : 0 }}</ion-badge>
       </ion-tab-button>
     </ion-tab-bar>

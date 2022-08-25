@@ -20,12 +20,45 @@
 -->
 
 
-  <ion-list *ngFor="let order of orders; let i = index">
+  <ion-list *ngFor="let order of orders; let i = index" style="padding: 0px ;">
     <ion-item>
-      <ion-label>
-        <h3><b>N° {{i + 1}}</b> </h3>
-        <h4>Dirección: {{order.address}}</h4>
-        <p> Total: {{order.total}} | {{ order.user.name }} {{ order.user.surname }} | Estado: Ingresado</p>
+      <ion-label [routerLink]="(!order.active ? '/order-details/' + order._id : null)">
+        <!-- <h4>
+          <b>N° {{i + 1}}</b>
+        </h4>
+
+        <h5 *ngIf="order.user; else templateName">
+          {{ order.user.name }} {{ order.user.surname }}
+        </h5>
+
+        <ng-template #templateName>
+          -
+        </ng-template>
+
+        <h5>
+          Dirección: {{order.address}}
+        </h5>
+        <p>
+          Total: {{order.total}} | Paso: {{order.step ? order.step : '-'}} | Creado: {{order.createdAt ? order.createdAt : '-'}}
+        </p> -->
+        <ion-row>
+          <ion-col style="text-align: left;">
+            <b>Order N° {{i + 1}}</b>
+          </ion-col>
+          <ion-col style="text-align: right; color: dimgray;">
+            {{order.createdAt | date: 'dd/MM/yyyy, h:mm a'}}
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col style="text-align: left;">
+            <b style="color: rgb(0, 156, 0);">Ingresado</b>
+          </ion-col>
+          <ion-col style="text-align: right;">
+            <b>$ {{order.total | number : '1.0-1'}}</b>
+          </ion-col>
+        </ion-row>
+
       </ion-label>
     </ion-item>
   </ion-list>

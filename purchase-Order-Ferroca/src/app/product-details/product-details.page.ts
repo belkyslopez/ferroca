@@ -34,17 +34,13 @@ export class ProductDetailsPage implements OnInit {
     private orderService: OrderService,
     private productService: ProductService,
     private activatedRoute: ActivatedRoute,
-  ) {}
+  ) { }
 
-  ngOnInit() {
-    //this.product = (history.state);
-  }
+  ngOnInit() { }
 
   ionViewWillEnter() {
-    this.getCountItemsToOrderActive();
-    //this.getUserId();
-    //this.getOrderUser();
     setTimeout(() => this.getDetailsProduct(), 800);
+    this.getCountItemsToOrderActive();
   }
 
   getDetailsProduct(): void {
@@ -63,12 +59,10 @@ export class ProductDetailsPage implements OnInit {
 
   async add(productId: string) {
     console.log("####################INICIO ADD#########################");
+    
     //get user id
-    let result: string = await this.storage.get('token');
-    this.tokenDecode = jwt_decode(result);
-    this.userId = this.tokenDecode.sub;
-    console.log("GetUserId: ", this.userId);
-
+    console.log("user id:", this.userId);
+    
     //get order by user
     const valido = await this.orderService.getOrderByUser(this.userId);
     if (valido) {
@@ -76,28 +70,35 @@ export class ProductDetailsPage implements OnInit {
 
       //get order active
       for (let order of this.orders) {
-        if (order.total == 0) {
+        if (!order.active) {
           this.orderActive = order;
-          console.log("Order:", this.orderActive);
           break
         }
       }
     } else {
       this.navCtrlr.navigateRoot('/tabs/tab3');
     }
-    
-    console.log("order id: ", this.orderActive._id);
-    console.log("product id: ", productId);
-    
-    //const guardar = await this.orderService.addProduct(this.orderActive._id, productId);
-    const guardar = true;
+
+    //create request 
+    const productOrder = {
+      'orderId': this.orderActive._id,
+      'productId': productId,
+      'quantity': 1
+    }
+
+    console.log("product Order:", productOrder);
+
+    //save product
+    const guardar = await this.orderService.addProduct(productOrder);
+
     if (guardar) {
-      console.log("si");
-    }else{
-      console.log("no");
+      this.getCountItemsToOrderActive();
+    } else {
+      console.log("ERROR");
     }
 
   }
+  
 
   async getCountItemsToOrderActive() {
     //get user id
@@ -113,7 +114,7 @@ export class ProductDetailsPage implements OnInit {
 
       //get order active
       for (let order of this.orders) {
-        if (order.total == 0) {
+        if (!order.active) {
           this.orderActive = order;
           console.log("Order:", this.orderActive);
           break
@@ -127,9 +128,13 @@ export class ProductDetailsPage implements OnInit {
     }
   }
 
+  goToOrder(id: string){
+    this.navCtrlr.navigateRoot('/order-details/'+id);
+  }
 
   regresar() {
-    this.navCtrlr.navigateRoot('/tabs/tab2');
+    //this.navCtrlr.navigateRoot('/tabs/tab2');
+    this.navCtrlr.back();
   }
 
 }
