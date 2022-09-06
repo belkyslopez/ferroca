@@ -11,8 +11,10 @@ import { ModalController } from '@ionic/angular';
 import { IonModal } from '@ionic/angular';
 import { AlertService } from '../core/services/alert.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
-
+import { File, FileEntry } from '@awesome-cordova-plugins/file/ngx';
+import { PhotoLibrary } from "@awesome-cordova-plugins/photo-library/ngx";
+//import { fileURLToPath } from 'url';
+//import { Foto } from '../core/interfaces/foto.interface';
 
 declare var window: any;
 
@@ -31,6 +33,10 @@ export class ProductRegistrationPage implements OnInit {
   tempImages: string[] =[];
   componentes: Observable<Component[]>;
   productForm: FormGroup;
+  imageData: any;
+  nameFile: any;
+  formData;
+  foto: [];
 
   constructor(private productService: ProductService,
     private navCtrlr: NavController,
@@ -40,7 +46,9 @@ export class ProductRegistrationPage implements OnInit {
     private http: HttpClient,
     private modalCtrl: ModalController,
     private alertService: AlertService,
-    public formBuilder: FormBuilder) { }
+    public formBuilder: FormBuilder,
+    private file: File,
+    private photoLibrary: PhotoLibrary) { }
 
   ngOnInit() {
     this.prepareForm();
@@ -60,6 +68,7 @@ export class ProductRegistrationPage implements OnInit {
         this.alertService.presentAlertRegistro('Registro exitoso!','', '','ok','');
         this.getAllProduct();
         this.clearLoginForm();
+        this.addImg();
         this.cancel();
       }else{
         this.uiService.presentAlert('Ingrese todo los campos');
@@ -69,22 +78,41 @@ export class ProductRegistrationPage implements OnInit {
   camara(){
     const options: CameraOptions = {
       quality: 60,
-      destinationType: this.camera.DestinationType.FILE_URI,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       correctOrientation: true,
       sourceType: this.camera.PictureSourceType.CAMERA
     };
-    this.camera.getPicture(options).then((imageData) => {
-     // imageData is either a base64 encoded string or a file URI
-     // If it's base64 (DATA_URL):
-     //let base64Image = 'data:image/jpeg;base64,' + imageData;
-     const img = window.Ionic.WebView.convertFileSrc(imageData);
-     console.log(img);
-     this.tempImages.push(img);
-    }, (err) => {
-     // Handle error
+    this.camera.getPicture(options).then(async (imageData) => {
+     const base64 = await fetch(`data:image/jpeg;base64,${imageData}`);
+     const blob = await base64.blob();
+     this.formData = new FormData();
+     this.formData.append('image', blob, 'temp.jpg');
+     console.log('formData2', this.formData.getAll('image'));
+    /*this.foto.unshift(({
+      filepath: "foto_",
+      webviewPath: fotoCapturada.webpath
+    }));*/
+   //  const img = window.Ionic.WebView.convertFileSrc(imageData);
+    // console.log(img);
+     //this.tempImages.push(img);
     });
+  }
+
+  getGalery(){
+    const options: CameraOptions = {
+      quality: 100,
+      targetHeight: 300,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      saveToPhotoAlbum: true,
+      allowEdit: true,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+    }
+
   }
 
   viewMenu(){
@@ -103,6 +131,27 @@ export class ProductRegistrationPage implements OnInit {
       this.uiService.presentAlert('registro de producto');
     }
   }*/
+
+  async addImg(){
+    console.log('producto', this.productService.producto);
+    const valido = await this.productService.addImg(this.formData, this.productService.producto._id);
+    if(valido){
+      this.alertService.presentAlertRegistro('Se agregó la imagen con exitoso!','', '','ok','');
+      this.cancel();
+    }else{
+      this.uiService.presentAlert('No se guardó la imagen');
+    }
+  }
+
+  async getImg(){
+    const valido = await this.productService.getImg(this.nameFile);
+    if(valido){
+      //this.alertService.presentAlertRegistro('Se agregó la imagen con exitoso!','', '','ok','');
+      this.cancel();
+    }else{
+      this.uiService.presentAlert('No se cargó la imagen correctamente');
+    }
+  }
 
   async getAllProduct(){
     const valido = await this.productService.getAllProduct();

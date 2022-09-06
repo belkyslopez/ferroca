@@ -53,7 +53,7 @@
               <ion-button  type="submit" expand="block" [disabled]="!fRegisterP.valid">Registrar</ion-button> 
             </div>
           </ion-list> 
-        </form>   
+
         <div class="ion-text-center">
           <ion-label position="floating">
               <ion-text color="danger">*</ion-text> campos obligatorios
@@ -61,31 +61,33 @@
         </div> 
 
         <ion-row>
-          <ion-col  size="3"  *ngFor="let image oftempImages ">
+          <ion-col  size="3"  *ngFor="let img of tempImages ">
             <ion-card>
-              <img [src]="image">
+              <img width="80" height="80" [src]="image">
             </ion-card>  
           </ion-col>
         </ion-row>  
         <ion-card>
+
           <ion-label>Imagen del producto </ion-label>
           <ion-row>
             <ion-col  size="6" >
                 <ion-button 
-                 (click)="camara()" type="submit" expand="full" shape="round" >
+                 (click)="camara()" expand="full" shape="round" >
                  <ion-icon slot="start" name="camera"></ion-icon>
                  Camara
                 </ion-button>
             </ion-col>
             <ion-col size="6">
               <ion-button 
-               (click)="galeria()" type="submit" expand="full" shape="round">
+               (click)="galeria()" expand="full" shape="round">
                <ion-icon slot="start" name="images"></ion-icon>
                Galeria
               </ion-button>
              </ion-col>
           </ion-row>
         </ion-card> 
+      </form>   
     </ion-content>
     </ng-template>
   </ion-modal>

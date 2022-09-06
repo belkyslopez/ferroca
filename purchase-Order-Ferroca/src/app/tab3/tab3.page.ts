@@ -18,4 +18,8 @@ export class Tab3Page {
     this.navCtrlr.navigateRoot('/user-register', { animated: true });
   }
 
+  gotToStep2(){
+    this.navCtrlr.navigateForward('/order-step2');
+  }
+
 }

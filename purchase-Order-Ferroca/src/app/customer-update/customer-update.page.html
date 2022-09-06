@@ -30,15 +30,16 @@
         <ion-label position="stacked">Teléfono <ion-text color="danger">*</ion-text></ion-label>
         <ion-input type="number" placeholder="Ingrese el telefono" name="phone" [(ngModel)]="customer.phone" required></ion-input>
       </ion-item> 
+      <div class="ion-text-center top">
+        <ion-label position="floating">
+            <ion-text color="danger">*</ion-text> campos obligatorios
+        </ion-label>
+      </div>
       <div class="ion-padding">   
       <ion-button  type="submit" expand="block" [disabled]="!fUpdateC.valid">Modificar</ion-button>
       <ion-button  type="button" expand="block" (click)="deleteClient()">Eliminar</ion-button>
     </div>
     </ion-list>
   </form> 
- <div class="ion-text-center">
-  <ion-label position="floating">
-      <ion-text color="danger">*</ion-text> campos obligatorios
-  </ion-label>
-</div>
+
 </ion-content>

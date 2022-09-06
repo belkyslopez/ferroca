@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar>
+    <div>
+      <ion-title> Paso 2</ion-title>
+    </div> 
+    <ion-buttons slot="end">
+      <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  class="ion-padding">
+ 
+  <ion-label position="stacked">Seleccione el cliente</ion-label>
+  <ion-list>
+    <ion-item>
+      <ion-select placeholder="Seleccione el cliente">
+        <ion-select-option value="apples">Ferreteria ñuñoa</ion-select-option>
+        <ion-select-option value="oranges">Ferreteria santa isabel</ion-select-option>
+        <ion-select-option value="bananas">Ferreteria baquedano</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-label position="stacked">Seleccione el vendedor</ion-label>
+  <ion-list>
+    <ion-item>
+      <ion-select placeholder="Seleccione el vendedor">
+        <ion-select-option value="apples">J. A.</ion-select-option>
+        <ion-select-option value="oranges">L. B.</ion-select-option>
+        <ion-select-option value="bananas">S. F.</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <ion-label position="stacked">Seleccione la direccion del cliente</ion-label>
+  <ion-list>
+    <ion-item>
+      <ion-select placeholder="Usar direccion del cliente">
+        <ion-select-option value="apples">Padre orellana 1656</ion-select-option>
+        <ion-select-option value="oranges">Quinta normal</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <!-- [(ngModel)]="registerUser.address"-->
+  <ion-item>
+    <ion-label position="stacked">Agrega nueva dirección</ion-label>
+    <ion-input type="text" placeholder="Ingrese la direccion" name="direccion"  required></ion-input>
+  </ion-item>   
+
+  <ion-label position="stacked">Seleccione el producto</ion-label>
+  <ion-list id="modal-findProduct">
+    <ion-item>
+      <ion-select placeholder="seleccione el producto">
+        <ion-select-option value="apples">Martillo</ion-select-option>
+        <ion-select-option value="oranges">Tornillo 3/4</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-button  type="submit" expand="block">Agregar producto</ion-button>
+
+  <ion-modal trigger="modal-findProduct">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title>Seleccione producto</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content  class="ion-padding">
+        <ion-searchbar [showCancelButton]="'focus'" [cancelButtonText]="'Cancelar'" inputmode="text" [disabled]="loading"
+            placeholder="Buscar Producto">
+        </ion-searchbar>
+          <ion-item>
+            <ion-label position="stacked">Nombre</ion-label>
+            <ion-input type="text" placeholder="Ingrese el nombre" name="nombre" required></ion-input>
+          </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+
+</ion-content>

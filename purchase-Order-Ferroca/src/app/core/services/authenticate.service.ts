@@ -12,6 +12,7 @@ import { NavController } from '@ionic/angular';
 export class AuthenticateService {
 
   token: string = null;
+  user: any;
 
   constructor(    
      private http: HttpClient,
@@ -46,7 +47,7 @@ export class AuthenticateService {
   }
 
   async saveUser(resp){
-    await this.storage.set('resp', resp);
+    this.user =  await this.storage.set('resp', resp); 
     console.log("saveUser ====>>>>", resp._id);
   }
 

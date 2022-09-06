@@ -55,4 +55,8 @@ export class UserUpdatePage implements OnInit {
     this.navCtrlr.navigateBack('/user-register', { animated: true });
   }
 
+  deleteProduct(){
+    
+  }
+
 }

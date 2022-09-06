@@ -43,4 +43,35 @@ export class AlertService {
       }); 
     await alert.present();
   }
+
+/*  async deleteConfirm(header: string, message: string, route = '', actionButton = 'ok', cancelButton = '') {
+    const buttons: [
+        {
+          text: actionButton,
+          role: 'confirm',
+          handler: () => {
+            this.deleteProduct(id);
+            //console.log('Confirm Okay');
+          },
+        }
+      ];
+        if (cancelButton) {
+          buttons.unshift({
+            text: cancelButton,
+            role: 'cancel',
+            handler: () => {
+              console.log('confirm cancel');
+            }
+          })
+        }
+
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header,
+      message,
+      buttons
+    }); 
+    await alert.present();
+  }*/
+
 }

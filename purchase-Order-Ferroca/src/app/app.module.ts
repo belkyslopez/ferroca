@@ -7,8 +7,10 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import { Camera } from '@awesome-cordova-plugins/camera/ngx';
+import { File } from '@awesome-cordova-plugins/file/ngx';
 import { FormBuilder } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PhotoLibrary } from "@awesome-cordova-plugins/photo-library/ngx";
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +24,9 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   providers: [
     Camera,
+    File,
     FormBuilder,
+    PhotoLibrary,
     {  provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent],

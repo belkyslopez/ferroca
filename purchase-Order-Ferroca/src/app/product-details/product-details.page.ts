@@ -58,8 +58,7 @@ export class ProductDetailsPage implements OnInit {
   }
 
   async add(productId: string) {
-    console.log("####################INICIO ADD#########################");
-    
+    console.log("####################INICIO ADD#########################");   
     //get user id
     console.log("user id:", this.userId);
     
@@ -67,7 +66,6 @@ export class ProductDetailsPage implements OnInit {
     const valido = await this.orderService.getOrderByUser(this.userId);
     if (valido) {
       this.orders = await this.orderService.allOrders;
-
       //get order active
       for (let order of this.orders) {
         if (!order.active) {
@@ -78,19 +76,15 @@ export class ProductDetailsPage implements OnInit {
     } else {
       this.navCtrlr.navigateRoot('/tabs/tab3');
     }
-
     //create request 
     const productOrder = {
       'orderId': this.orderActive._id,
       'productId': productId,
       'quantity': 1
     }
-
     console.log("product Order:", productOrder);
-
     //save product
     const guardar = await this.orderService.addProduct(productOrder);
-
     if (guardar) {
       this.getCountItemsToOrderActive();
     } else {
@@ -129,7 +123,8 @@ export class ProductDetailsPage implements OnInit {
   }
 
   goToOrder(id: string){
-    this.navCtrlr.navigateRoot('/order-details/'+id);
+    this.navCtrlr.navigateForward('/order-step2/'+id);
+   // this.navCtrlr.navigateRoot('/order-step2/'+id);
   }
 
   regresar() {
