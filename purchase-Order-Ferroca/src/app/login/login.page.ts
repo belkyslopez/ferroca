@@ -14,7 +14,10 @@ import { rutIsValid } from '../shared/validators/rut-validator';
 })
 export class LoginPage implements OnInit {
 
-loginUser: any = {};
+loginUser: any = {
+  email: 'belkiscarolina1@hotmail.com',
+  password: '1234'
+};
 loginForm: FormGroup;
 changeColorEyeOutLine = false;
 loading: false;
