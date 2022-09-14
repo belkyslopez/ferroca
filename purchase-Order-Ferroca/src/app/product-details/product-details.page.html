@@ -24,7 +24,7 @@
       </ion-card-subtitle>
 
       <ion-card-title style="font-size: 18px;">
-        <b>$ {{ product?.price }}</b>
+        <b>$ {{ product?.price | number : '1.0-2'}}</b>
       </ion-card-title>
     </ion-card-header>
 
