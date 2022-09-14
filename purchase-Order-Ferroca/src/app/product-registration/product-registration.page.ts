@@ -13,8 +13,6 @@ import { AlertService } from '../core/services/alert.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { File, FileEntry } from '@awesome-cordova-plugins/file/ngx';
 import { PhotoLibrary } from "@awesome-cordova-plugins/photo-library/ngx";
-//import { fileURLToPath } from 'url';
-//import { Foto } from '../core/interfaces/foto.interface';
 
 declare var window: any;
 
@@ -30,13 +28,12 @@ export class ProductRegistrationPage implements OnInit {
   registerProducto:any = {};
   products: any;
   product: any;
-  tempImages: string[] =[];
   componentes: Observable<Component[]>;
   productForm: FormGroup;
   imageData: any;
   nameFile: any;
+  image: any;
   formData;
-  foto: [];
 
   constructor(private productService: ProductService,
     private navCtrlr: NavController,
@@ -75,28 +72,22 @@ export class ProductRegistrationPage implements OnInit {
       }
   }
 
-  camara(){
+  camara(isCamera){
     const options: CameraOptions = {
       quality: 60,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       correctOrientation: true,
-      sourceType: this.camera.PictureSourceType.CAMERA
+      sourceType: isCamera ? this.camera.PictureSourceType.CAMERA : this.camera.PictureSourceType.PHOTOLIBRARY
     };
     this.camera.getPicture(options).then(async (imageData) => {
-     const base64 = await fetch(`data:image/jpeg;base64,${imageData}`);
-     const blob = await base64.blob();
-     this.formData = new FormData();
-     this.formData.append('image', blob, 'temp.jpg');
-     console.log('formData2', this.formData.getAll('image'));
-    /*this.foto.unshift(({
-      filepath: "foto_",
-      webviewPath: fotoCapturada.webpath
-    }));*/
-   //  const img = window.Ionic.WebView.convertFileSrc(imageData);
-    // console.log(img);
-     //this.tempImages.push(img);
+      this.image = `data:image/jpeg;base64,${imageData}`
+      const base64 = await fetch(this.image);
+      const blob = await base64.blob();
+      this.formData = new FormData();
+      this.formData.append('image', blob, 'temp.jpg');
+      console.log('formData2', this.formData.getAll('image'));
     });
   }
 
