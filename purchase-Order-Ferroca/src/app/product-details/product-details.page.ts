@@ -7,6 +7,7 @@ import { Storage } from '@ionic/storage';
 import { AuthenticateService } from '../core/services/authenticate.service';
 import jwt_decode from 'jwt-decode';
 import { ActivatedRoute } from '@angular/router';
+import { URL_SERVICIOS } from '../core/config/url.services';
 
 @Component({
   selector: 'app-product-details',
@@ -22,6 +23,7 @@ export class ProductDetailsPage implements OnInit {
   tokenDecode: Token;
   userId: string;
   producto: Producto;
+  url: string;
 
   orderItems: any[];
 
@@ -34,7 +36,9 @@ export class ProductDetailsPage implements OnInit {
     private orderService: OrderService,
     private productService: ProductService,
     private activatedRoute: ActivatedRoute,
-  ) { }
+  ) {
+    this.url = URL_SERVICIOS
+   }
 
   ngOnInit() { }
 

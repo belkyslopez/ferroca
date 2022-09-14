@@ -1,7 +1,7 @@
 <ion-content *ngIf="product">
 
-  <ion-card>
-    <ion-img src="https://picsum.photos/400/400?random=1"></ion-img>
+  <ion-card class="center">
+    <img src="{{ url + '/get-image-product/' + product.image }}" >
   </ion-card>
 
   <ion-card>
@@ -14,7 +14,7 @@
 
       <ion-card-subtitle style="font-size: 10px; margin-top: 2px;">
         <ion-label>
-          Código de producto: {{ product?._id }}
+          Código de producto: {{ product._id }}
         </ion-label>
       </ion-card-subtitle>
       <ion-card-subtitle style="font-size: 10px;">

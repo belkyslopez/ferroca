@@ -28,9 +28,14 @@ export interface Token {
 }
 
 export interface Producto {
+  _id: string;
   name?: string;
+  image?: string;
   description ?: string;
   price? : number;
+  createdAt? : string;
+  updatedAt? : string;
+  stock? : string;
   // cantidad : number;
   }
 

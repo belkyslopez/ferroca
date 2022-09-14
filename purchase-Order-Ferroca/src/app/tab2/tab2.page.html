@@ -26,7 +26,11 @@
       <ion-searchbar placeholder="Buscar..." [(ngModel)]="searchTerm" animated="true"></ion-searchbar>
       <ion-col *ngFor="let product of products | filter:searchTerm; let i = index" size="6" routerLink="/product-details/{{product._id}}">
         <ion-card>
-          <img src="{{ url + '/get-image-product/' + product.image }}">
+
+          <div class="center">
+            <img src="{{ url + '/get-image-product/' + product.image }}">
+          </div>
+
           <ion-card-header>
 
             <ion-card-title style="font-size: 9px;">
