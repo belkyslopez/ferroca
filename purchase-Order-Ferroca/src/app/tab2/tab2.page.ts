@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Producto } from '../core/interfaces/interfaces';
 import { ProductService } from '../core/services/product.service';
+import { URL_SERVICIOS } from '../core/config/url.services';
 
 @Component({
   selector: 'app-tab2',
@@ -12,11 +13,14 @@ export class Tab2Page {
 
   products: [];
   searchTerm: string;
+  url: string;
   
   constructor(
     private productService: ProductService,
     private navCtrlr: NavController,
-  ) {}
+  ) {
+    this.url = URL_SERVICIOS
+  }
 
   ngOnInit(){
     this.getAllProduct();
@@ -26,7 +30,7 @@ export class Tab2Page {
     const valido = await this.productService.getAllProduct();
     if(valido){
       this.products = this.productService.allProducts;
-      console.log("Productos cargados")
+      console.log("Productos cargados", this.products)
     }else{
       console.log("No cargado")
     }

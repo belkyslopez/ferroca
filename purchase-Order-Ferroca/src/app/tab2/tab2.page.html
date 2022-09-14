@@ -23,10 +23,10 @@
 
   <ion-grid fixed>
     <ion-row>
-      <ion-searchbar placeholder="Buscar..." [(ngModel)]="filterTerm" animated="true"></ion-searchbar>
-      <ion-col *ngFor="let product of products | filter:filterTerm; let i = index" size="6" routerLink="/product-details/{{product._id}}">
+      <ion-searchbar placeholder="Buscar..." [(ngModel)]="searchTerm" animated="true"></ion-searchbar>
+      <ion-col *ngFor="let product of products | filter:searchTerm; let i = index" size="6" routerLink="/product-details/{{product._id}}">
         <ion-card>
-          <img src="https://picsum.photos/200/200?random={{i}}">
+          <img src="{{ url + '/get-image-product/' + product.image }}">
           <ion-card-header>
 
             <ion-card-title style="font-size: 9px;">
