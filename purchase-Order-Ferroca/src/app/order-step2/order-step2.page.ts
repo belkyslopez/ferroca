@@ -3,7 +3,6 @@ import { ModalController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { UserService } from '../core/services/user.service';
 import { UiService } from '../core/services/ui.service';
-import { ProductService } from '../core/services/product.service';
 import { Storage } from '@ionic/storage';
 
 @Component({
@@ -21,7 +20,6 @@ export class OrderStep2Page implements OnInit {
     private modalCtrl: ModalController,
     private userService: UserService,
     private uiService: UiService,
-    private productService: ProductService,
     private storage: Storage,) { }
 
   ngOnInit() {
@@ -30,8 +28,7 @@ export class OrderStep2Page implements OnInit {
 
   ionViewWillEnter(){
     this.getAllClient();
-    this.getAllProduct();
-    this.getTokenUser();
+    this.getUser();
   }
     
   cancel() {
@@ -49,17 +46,7 @@ export class OrderStep2Page implements OnInit {
     }
   }
 
-  async getAllProduct(){
-    const valido = await this.productService.getAllProduct();
-    if(valido){
-      this.products = this.productService.allProducts;
-      console.log("products",this.products );
-    }else{
-      this.uiService.presentAlert('No se encuentran productos');
-    }
-  }
-
-  async getTokenUser(){
+  async getUser(){
    this.user =  await this.storage.get('user');
     console.log("getTokenUser",this.user );
   }

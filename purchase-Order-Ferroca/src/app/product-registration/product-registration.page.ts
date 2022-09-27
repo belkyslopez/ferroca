@@ -91,21 +91,6 @@ export class ProductRegistrationPage implements OnInit {
     });
   }
 
-  getGalery(){
-    const options: CameraOptions = {
-      quality: 100,
-      targetHeight: 300,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE,
-      correctOrientation: true,
-      saveToPhotoAlbum: true,
-      allowEdit: true,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
-    }
-
-  }
-
   viewMenu(){
     this.menuCtrl.open();
   }
@@ -113,15 +98,6 @@ export class ProductRegistrationPage implements OnInit {
   getMenuOpt(){
     return this.http.get('/assets/data/menu-opt.json')
   }
-
- /* async getProduct(){
-    const valido = await this.productService.getProduct(this.product._id);
-    if(valido){
-      //this.navCtrlr.navigateRoot('/tabs/tabs2', { animated: true });
-    }else{
-      this.uiService.presentAlert('registro de producto');
-    }
-  }*/
 
   async addImg(){
     console.log('producto', this.productService.producto);
