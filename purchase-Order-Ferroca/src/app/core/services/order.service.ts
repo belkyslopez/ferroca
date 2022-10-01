@@ -12,7 +12,7 @@ export class OrderService {
   token: string = null;
   allOrders: any;
   order: any;
-
+  item: any[];
   constructor(
     private http: HttpClient,
     private autService: AuthenticateService
