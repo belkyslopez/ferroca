@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
-import { Usuario, OrdenCompra, Token, Producto } from '../core/interfaces/interfaces';
-import { OrderService } from '../core/services/order.service';
-import { ProductService } from '../core/services/product.service';
-import { Storage } from '@ionic/storage';
-import { AuthenticateService } from '../core/services/authenticate.service';
+import {Component, OnInit} from '@angular/core';
+import {NavController} from '@ionic/angular';
+import {Producto, Token} from '../core/interfaces/interfaces';
+import {OrderService} from '../core/services/order.service';
+import {ProductService} from '../core/services/product.service';
+import {Storage} from '@ionic/storage';
 import jwt_decode from 'jwt-decode';
-import { ActivatedRoute } from '@angular/router';
-import { URL_SERVICIOS } from '../core/config/url.services';
+import {ActivatedRoute} from '@angular/router';
+import {URL_SERVICIOS} from '../core/config/url.services';
 
 @Component({
   selector: 'app-product-details',
@@ -61,42 +60,10 @@ export class ProductDetailsPage implements OnInit {
     );
   }
 
-  async add(productId: string) {
-    console.log("####################INICIO ADD#########################");   
-    //get user id
-    console.log("user id:", this.userId);
-    
-    //get order by user
-    const valido = await this.orderService.getOrderByUser(this.userId);
-    if (valido) {
-      this.orders = await this.orderService.allOrders;
-      //get order active
-      for (let order of this.orders) {
-        if (!order.active) {
-          this.orderActive = order;
-          break
-        }
-      }
-    } else {
-      this.navCtrlr.navigateRoot('/tabs/tab3');
-    }
-    //create request 
-    const productOrder = {
-      'orderId': this.orderActive._id,
-      'productId': productId,
-      'quantity': 1
-    }
-    console.log("product Order:", productOrder);
-    //save product
-    const guardar = await this.orderService.addProduct(productOrder);
-    if (guardar) {
-      this.getCountItemsToOrderActive();
-    } else {
-      console.log("ERROR");
-    }
-
+  async add(product: Producto) {
+    this.orderService.addProduct(product);
   }
-  
+
 
   async getCountItemsToOrderActive() {
     //get user id
@@ -118,7 +85,7 @@ export class ProductDetailsPage implements OnInit {
           break
         }
       }
-      //get data to item  
+      //get data to item
       this.orderItems = this.orderActive.orderItems;
 
     } else {
@@ -126,9 +93,9 @@ export class ProductDetailsPage implements OnInit {
     }
   }
 
-  goToOrder(id: string){
-    this.navCtrlr.navigateForward('/order-step2/'+id);
-   // this.navCtrlr.navigateRoot('/order-step2/'+id);
+  goToOrder(){
+    // this.navCtrlr.navigateForward('/order-step2/'+id);
+   this.navCtrlr.navigateRoot('/tabs/tab3');
   }
 
   regresar() {

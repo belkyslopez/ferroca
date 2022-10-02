@@ -1,9 +1,9 @@
  export interface Usuario {
   _id: string,
   name?: string;
-  surname?: string; 
+  surname?: string;
   email?: string;
-  password?: string; 
+  password?: string;
   address?: string;
   phone: number;
   rut: number;
@@ -36,6 +36,7 @@ export interface Producto {
   createdAt? : string;
   updatedAt? : string;
   stock? : string;
+  quantity? : number;
   // cantidad : number;
   }
 
@@ -45,7 +46,7 @@ export interface OrdenCompra {
     direccion?: string;
     numeroOrdenCompra : number;
     fecha : Date;
-    estado?: string; 
+    estado?: string;
   }
 
 export interface ListadoOrdenes {
@@ -63,5 +64,5 @@ export interface inventario {
 export interface Componente{
   icon : string;
   name : string;
-  redirecTo: string; 
+  redirecTo: string;
 }
