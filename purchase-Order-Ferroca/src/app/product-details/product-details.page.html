@@ -1,3 +1,17 @@
+<ion-header>
+  <ion-toolbar class="toolbar-header">
+    <!-- <ion-buttons slot="start">
+      <ion-back-button text="Volver"></ion-back-button>
+    </ion-buttons> -->
+    <div>
+      <ion-title> Detalle del producto </ion-title>
+    </div> 
+        <ion-buttons slot="end">
+      <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content *ngIf="product">
 
   <ion-card class="center">
@@ -41,32 +55,17 @@
 
 
 <!--#############################################################-->
-
+<!-- 
 <ion-content *ngIf="!product" fullscreen={true}>
   <div class="spin">
     <ion-spinner name="bubbles"></ion-spinner>
   </div>
-</ion-content>
+</ion-content> -->
 
 <!--#############################################################-->
 
-<ion-footer>
+<ion-footer class="ion-no-border ion-padding">
   <ion-toolbar>
-
-    <ion-tab-bar>
-      <ion-tab-button (click)="regresar()">
-        <ion-icon name="arrow-back-circle-outline"></ion-icon>
-      </ion-tab-button>
-
-      <ion-tab-button (click)="add(product)">
-        <ion-icon name="add-circle-sharp"></ion-icon>
-      </ion-tab-button>
-
-      <ion-tab-button (click)="goToOrder()">
-        <ion-icon name="bag-handle-outline"></ion-icon>
-        <ion-badge color="danger">{{ orderItems?.length ? orderItems?.length : 0 }}</ion-badge>
-      </ion-tab-button>
-    </ion-tab-bar>
-
+    <ion-button expand="block" (click)="presentAlertStock()">Agregar stock</ion-button>
   </ion-toolbar>
 </ion-footer>

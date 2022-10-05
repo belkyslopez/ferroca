@@ -1,12 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {NavController} from '@ionic/angular';
 import {Producto, Token} from '../core/interfaces/interfaces';
-import {OrderService} from '../core/services/order.service';
 import {ProductService} from '../core/services/product.service';
-import {Storage} from '@ionic/storage';
-import jwt_decode from 'jwt-decode';
 import {ActivatedRoute} from '@angular/router';
 import {URL_SERVICIOS} from '../core/config/url.services';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-product-details',
@@ -23,28 +21,20 @@ export class ProductDetailsPage implements OnInit {
   userId: string;
   producto: Producto;
   url: string;
-
-  orderItems: any[];
-
-  //test
-  vegetables: any[];
+  handlerMessage = '';
 
   constructor(
     private navCtrlr: NavController,
-    private storage: Storage,
-    private orderService: OrderService,
     private productService: ProductService,
     private activatedRoute: ActivatedRoute,
+    private alertController: AlertController,
   ) {
     this.url = URL_SERVICIOS
    }
 
-  ngOnInit() { }
-
-  ionViewWillEnter() {
-    setTimeout(() => this.getDetailsProduct(), 800);
-    this.getCountItemsToOrderActive();
-  }
+  ngOnInit() {
+   this. getDetailsProduct();
+   }
 
   getDetailsProduct(): void {
     const id = this.activatedRoute.snapshot.params.id;
@@ -60,47 +50,49 @@ export class ProductDetailsPage implements OnInit {
     );
   }
 
-  async add(product: Producto) {
-    this.orderService.addProduct(product);
-  }
-
-
-  async getCountItemsToOrderActive() {
-    //get user id
-    let result: string = await this.storage.get('token');
-    this.tokenDecode = jwt_decode(result);
-    this.userId = this.tokenDecode.sub;
-    console.log("GetUserId: ", this.userId);
-
-    //get order by user
-    const valido = await this.orderService.getOrderByUser(this.userId);
-    if (valido) {
-      this.orders = await this.orderService.allOrders;
-
-      //get order active
-      for (let order of this.orders) {
-        if (order.active) {
-          this.orderActive = order;
-          console.log("Order:", this.orderActive);
-          break
-        }
-      }
-      //get data to item
-      this.orderItems = this.orderActive.orderItems;
-
-    } else {
-      this.navCtrlr.navigateRoot('/tabs/tab3');
+  async addStock(quantityProduct: number ){
+    this.product.stock = this.product.stock + quantityProduct;    
+    const valido = await this.productService.updateProduct(this.product);
+    if(valido){
+      console.log("Guardado");
+    }else{
+      console.log("Error");
     }
   }
 
-  goToOrder(){
-    // this.navCtrlr.navigateForward('/order-step2/'+id);
-   this.navCtrlr.navigateRoot('/tabs/tab3');
-  }
 
-  regresar() {
-    //this.navCtrlr.navigateRoot('/tabs/tab2');
-    this.navCtrlr.back();
+  async presentAlertStock() {
+    const alert = await this.alertController.create({
+      subHeader: 'Modificar Stock',
+      cssClass: 'myCustomCSS',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'alert-button-cancel',
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+          cssClass: 'alert-button-confirm',
+          handler: (value: any) => {
+            this.addStock(parseInt(value[0]));
+          },
+        },
+      ],
+      inputs: [
+        {
+          type: 'number',
+          placeholder: 'Número de Productos',
+          min: 1,
+          max: 100,
+          attributes: {
+            maxlength: 5,
+          }
+        },
+      ],
+    });
+    await alert.present();
   }
 
 }
