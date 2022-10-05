@@ -1,190 +1,117 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
+    <!-- <ion-buttons slot="start">
       <ion-back-button text="Volver"></ion-back-button>
-    </ion-buttons>
+    </ion-buttons> -->
     <div>
-      <ion-title> Registro de Productos </ion-title>
+      <ion-title>Productos </ion-title>
     </div>
+    <ion-buttons slot="end">
+      <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content  class="ion-padding">
-  <ion-button id="modal-product" expand="block">Registrar</ion-button>
-  <ion-card  *ngFor="let product of products; let i = index"   (click)="goToUpdate(product)" >
-    <ion-list>
-      <ion-item>
-        <ion-row>
-          <ion-col>
-            <ion-label>{{product.name}}</ion-label>
-          </ion-col>
-        </ion-row>
-      </ion-item>
-    </ion-list>
+<ion-content class="ion-padding">
+
+  <ion-card *ngFor="let product of products; let i = index" (click)="goToUpdate(product)">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="3">
+          <img src="{{ url + '/get-image-product/' + product.image }}" width="80">
+        </ion-col>
+        <ion-col size="9">
+            <p>{{product.name}}</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-card>
 
-  <ion-modal trigger="modal-product" >
+
+  <ion-modal trigger="modal-product">
     <ng-template>
       <ion-header>
         <ion-toolbar>
-          <ion-buttons slot="start">
-            <ion-button (click)="cancel()">Cancel</ion-button>
-          </ion-buttons>
-          <ion-title>Registro de productos</ion-title>
+          <div>
+            <ion-title>Registro de productos</ion-title>
+          </div>
         </ion-toolbar>
       </ion-header>
 
       <ion-content class="ion-padding">
         <form [formGroup]="productForm" (ngSubmit)="registerProduct()" #fRegisterP="ngForm">
           <ion-list lines="full" class="ion-no-margin ion-no-padding">
-            <ion-item>
-              <ion-label position="stacked">Nombre Producto <ion-text color="danger">*</ion-text></ion-label>
-              <ion-input formControlName="nombre" type="text" placeholder="Ingrese el nombre" name="nombre" [(ngModel)]="registerProducto.name" required></ion-input>
+            <ion-item class="roundedInput">
+              <ion-label position="floating">Nombre Producto <ion-text color="danger">*</ion-text>
+              </ion-label>
+              <ion-input formControlName="nombre" type="text" placeholder="Ingrese el nombre" name="nombre"
+                [(ngModel)]="registerProducto.name" required></ion-input>
             </ion-item>
-            <ion-item>
-              <ion-label position="stacked">Descripción <ion-text color="danger">*</ion-text> </ion-label>
-              <ion-input formControlName="descripcion" type="text" placeholder="Ingrese la descripcion" name="descripcion" [(ngModel)]="registerProducto.description" required></ion-input>
+            <ion-item class="roundedInput">
+              <ion-label position="floating">Descripción <ion-text color="danger">*</ion-text>
+              </ion-label>
+              <ion-input formControlName="descripcion" type="text" placeholder="Ingrese la descripcion"
+                name="descripcion" [(ngModel)]="registerProducto.description" required></ion-input>
             </ion-item>
-            <ion-item>
-              <ion-label position="stacked">Precio <ion-text color="danger">*</ion-text></ion-label>
-              <ion-input formControlName="precio" type="number" placeholder="Ingrese el precio" name="precio" [(ngModel)]="registerProducto.price" required></ion-input>
+            <ion-item class="roundedInput">
+              <ion-label position="floating">Precio <ion-text color="danger">*</ion-text>
+              </ion-label>
+              <ion-input formControlName="precio" type="number" placeholder="Ingrese el precio" name="precio"
+                [(ngModel)]="registerProducto.price" required></ion-input>
             </ion-item>
-            <div class="ion-padding">
-              <ion-button  type="submit" expand="block" [disabled]="!fRegisterP.valid">Registrar</ion-button>
-            </div>
           </ion-list>
 
-        <div class="ion-text-center">
-          <ion-label position="floating">
-              <ion-text color="danger">*</ion-text> campos obligatorios
-          </ion-label>
-        </div>
-
-        <ion-row>
-          <ion-col>
-            <ion-card>
-              <img width="80" height="80" [src]="image">
-            </ion-card>
-          </ion-col>
-        </ion-row>
-        <ion-card>
-
-          <ion-label>Imagen del producto </ion-label>
           <ion-row>
-            <ion-col  size="6" >
-                <ion-button
-                 (click)="camara(true)" expand="full" shape="round" >
-                 <ion-icon slot="start" name="camera"></ion-icon>
-                 Camara
-                </ion-button>
+
+            <ion-col size="8">
+              <ion-card class="aling-center">
+                <img  [src]="image" class="img-product">
+              </ion-card>
             </ion-col>
-            <ion-col size="6">
-              <ion-button
-               (click)="camara(false)" expand="full" shape="round">
-               <ion-icon slot="start" name="images"></ion-icon>
-               Galeria
-              </ion-button>
-             </ion-col>
+            <ion-col size="4" class="mt-15">
+              <ion-row>
+                <div class="aling-center">
+                  <ion-button (click)="camara(true)" expand="full" shape="round" class="color-camara">
+                    <ion-icon name="camera"></ion-icon>
+                  </ion-button>
+              </div>
+              </ion-row>
+              <ion-row>
+                <div class="aling-center">
+                  <ion-button (click)="camara(false)" expand="full" shape="round" class="color-camara">
+                    <ion-icon name="images"></ion-icon>
+                  </ion-button>
+                </div>
+              </ion-row>
+             </ion-col> 
           </ion-row>
-        </ion-card>
-      </form>
-    </ion-content>
+
+          <div class="ion-text-center">
+            <ion-label position="floating">
+              <ion-text color="danger">*</ion-text> campos obligatorios
+            </ion-label>
+          </div>
+
+          <ion-grid>
+            <ion-row>
+              <ion-col>
+                <ion-button type="submit" expand="block" class="ion-no-margin" [disabled]="!fRegisterP.valid">Registrar</ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button expand="block" class="ion-no-margin" (click)="cancel()">Cancelar</ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid> 
+
+        </form>
+      </ion-content>
     </ng-template>
   </ion-modal>
 
 </ion-content>
 
-<!--<ion-content>
-    <ng-container>
-      <form (ngSubmit)="registerProduct( fRegisterP )" #fRegister="ngForm">
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-              <ion-label>Nombre Producto</ion-label>
-            </ion-col>
-            <ion-col>
-              <ion-input
-                  name="nombre" type="text"
-                  [(ngModel)]="registerProducto.name"
-                  placeholder="Ingrese el nombre"
-                  required >
-              </ion-input>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-label>Descripción </ion-label>
-            </ion-col>
-            <ion-col>
-              <ion-input
-                  name="descripcion" type="text"
-                  [(ngModel)]="registerProducto.description"
-                  placeholder="Ingrese la descripcion del producto"
-                  required >
-              </ion-input>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-label>Cantidad </ion-label>
-            </ion-col>
-            <ion-col>
-              <ion-input
-                  name="cantidad" type="password"
-                  [(ngModel)]="registerProducto.cantidad"
-                  placeholder="Ingrese la cantidad"
-                  required >
-              </ion-input>
-            </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col>
-              <ion-label>Precio </ion-label>
-            </ion-col>
-            <ion-col>
-              <ion-input
-                  name="precio" type="number"
-                  [(ngModel)]="registerProducto.price"
-                  placeholder="Ingrese el precio"
-                  required >
-              </ion-input>
-            </ion-col>
-          </ion-row>
-
-          <ion-row class="ion-justify-content-center">
-            <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
-                <ion-button  type="submit" expand="block">Registrar Producto</ion-button>
-            </ion-col>
-          </ion-row>
-          <ion-row class="ion-justify-content-center">
-            <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
-                <ion-button
-                 (click)="getProduct(id)"  expand="block">getProduct
-                </ion-button>
-            </ion-col>
-          </ion-row>
-          <ion-row class="ion-justify-content-center">
-            <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
-                <ion-button
-                 (click)="getAllProduct()"  expand="block">getAllProduct
-                </ion-button>
-            </ion-col>
-          </ion-row>
-          <ion-row class="ion-justify-content-center">
-            <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
-                <ion-button
-                 (click)="updateProduct(id)"  expand="block">updateProduct
-                </ion-button>
-            </ion-col>
-          </ion-row>
-          <ion-row class="ion-justify-content-center">
-            <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
-                <ion-button
-                 (click)="deleteProduct(id)"  expand="block">deleteProduct
-                </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </form>
-    </ng-container>
-  </ion-content>-->
+<ion-footer class="ion-no-border ion-padding">
+  <ion-toolbar>
+    <ion-button id="modal-product" expand="block">Registrar</ion-button>
+  </ion-toolbar>
+</ion-footer>

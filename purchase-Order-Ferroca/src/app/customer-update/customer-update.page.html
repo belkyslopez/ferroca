@@ -1,33 +1,35 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar class="toolbar-header">
     <ion-buttons slot="start">
-      <ion-back-button text="Volver"></ion-back-button>
+      <ion-back-button defaultHref="customer-register"></ion-back-button>
     </ion-buttons>
-    <ion-title> Actualizar clientes</ion-title>
+    <div>
+      <ion-title> Actualizar clientes</ion-title>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <form (ngSubmit)="updateClient( fUpdateC )" #fUpdateC="ngForm">   
     <ion-list lines="full" class="ion-no-margin ion-no-padding">  
-      <ion-item>
-        <ion-label position="stacked">Razon Social <ion-text color="danger">*</ion-text></ion-label>
+      <ion-item  class="roundedInput">
+        <ion-label position="floating">Razon Social <ion-text color="danger">*</ion-text></ion-label>
         <ion-input type="text" placeholder="Ingrese el nombre de la empresa" name="rs" [(ngModel)]="customer.rs" required></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Rut <ion-text color="danger">*</ion-text></ion-label>
+      <ion-item  class="roundedInput">
+        <ion-label position="floating">Rut <ion-text color="danger">*</ion-text></ion-label>
         <ion-input type="number" placeholder="Ingrese el rut" name="rut" [(ngModel)]="customer.rut" required></ion-input>
       </ion-item>  
-      <ion-item>
-        <ion-label position="stacked">Correo <ion-text color="danger">*</ion-text></ion-label>
+      <ion-item  class="roundedInput">
+        <ion-label position="floating">Correo <ion-text color="danger">*</ion-text></ion-label>
         <ion-input type="email" placeholder="Ingrese el correo" name="email" [(ngModel)]="customer.email" required></ion-input>
       </ion-item>    
-      <ion-item>
-        <ion-label position="stacked">Dirección <ion-text color="danger">*</ion-text></ion-label>
+      <ion-item  class="roundedInput">
+        <ion-label position="floating">Dirección <ion-text color="danger">*</ion-text></ion-label>
         <ion-input type="text" placeholder="Ingrese la direccion" name="address" [(ngModel)]="customer.address" required></ion-input>
       </ion-item>    
-      <ion-item>
-        <ion-label position="stacked">Teléfono <ion-text color="danger">*</ion-text></ion-label>
+      <ion-item  class="roundedInput">
+        <ion-label position="floating">Teléfono <ion-text color="danger">*</ion-text></ion-label>
         <ion-input type="number" placeholder="Ingrese el telefono" name="phone" [(ngModel)]="customer.phone" required></ion-input>
       </ion-item> 
       <div class="ion-text-center top">
@@ -35,10 +37,18 @@
             <ion-text color="danger">*</ion-text> campos obligatorios
         </ion-label>
       </div>
-      <div class="ion-padding">   
-      <ion-button  type="submit" expand="block" [disabled]="!fUpdateC.valid">Modificar</ion-button>
-      <ion-button  type="button" expand="block" (click)="deleteClient()">Eliminar</ion-button>
-    </div>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button  type="submit" expand="block" class="ion-no-margin" [disabled]="!fUpdateC.valid">Modificar</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button  type="button" expand="block"  class="ion-no-margin" (click)="deleteClient()">Eliminar</ion-button>
+            <!-- <ion-button expand="block" class="ion-no-margin" (click)="cancel()">Cancelar</ion-button> -->
+          </ion-col>
+        </ion-row>
+      </ion-grid> 
     </ion-list>
   </form> 
 

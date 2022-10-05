@@ -1,26 +1,29 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
+  <ion-toolbar class="toolbar-header">
+    <!-- <ion-buttons slot="start">
       <ion-back-button text="Volver"></ion-back-button>
-    </ion-buttons>
+    </ion-buttons> -->
     <div>
       <ion-title> Registro de stock </ion-title>
     </div> 
+    <ion-buttons slot="end">
+      <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content  class="ion-padding">
-  <form (ngSubmit)="register( fRegister )" #fRegister="ngForm">
+  <form [formGroup]="stockForm" (ngSubmit)="registerStock( fRegisterStock )" #fRegisterStock="ngForm">
     <ion-list>
-      <ion-item>
+      <ion-item class="roundedInput">
         <ion-select placeholder="Seleccione el producto">
           <ion-select-option value="apples">Tornillo 3/4</ion-select-option>
           <ion-select-option value="oranges">Martillo</ion-select-option>
         </ion-select>
       </ion-item>
     </ion-list>
-    <ion-item>
-      <ion-label position="stacked">Cantidad</ion-label>
+    <ion-item class="roundedInput">
+      <ion-label position="floating">Cantidad</ion-label>
       <!-- [(ngModel)]="registerUser.name"-->
       <ion-input type="number" placeholder="Ingrese la cantidad" name="cantidad"  required></ion-input>
     </ion-item>
@@ -33,18 +36,12 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-          <ion-button type="submit" expand="block">Guardar
-            <!-- <ion-spinner name="crescent"  class="spinner-aling-end"></ion-spinner>-->
-          </ion-button>
+        <ion-button  type="submit" expand="block" class="ion-no-margin" [disabled]="!fRegisterStock.valid" >Guardar</ion-button>
       </ion-col>
-    </ion-row>
-    <ion-row >
       <ion-col>
-          <ion-button type="submit" expand="block">Cancelar
-            <!-- <ion-spinner name="crescent"  class="spinner-aling-end"></ion-spinner>-->
-          </ion-button>
+        <ion-button  type="button" expand="block" class="ion-no-margin">Cancelar</ion-button>
       </ion-col>
     </ion-row>
-  </ion-grid>  
+  </ion-grid> 
 
 </ion-content>

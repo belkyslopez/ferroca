@@ -13,6 +13,7 @@ import { AlertService } from '../core/services/alert.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { File, FileEntry } from '@awesome-cordova-plugins/file/ngx';
 import { PhotoLibrary } from "@awesome-cordova-plugins/photo-library/ngx";
+import { URL_SERVICIOS } from '../core/config/url.services';
 
 declare var window: any;
 
@@ -34,6 +35,8 @@ export class ProductRegistrationPage implements OnInit {
   nameFile: any;
   image: any;
   formData;
+  url: string;
+
 
   constructor(private productService: ProductService,
     private navCtrlr: NavController,
@@ -45,7 +48,10 @@ export class ProductRegistrationPage implements OnInit {
     private alertService: AlertService,
     public formBuilder: FormBuilder,
     private file: File,
-    private photoLibrary: PhotoLibrary) { }
+    private photoLibrary: PhotoLibrary) 
+    { 
+      this.url = URL_SERVICIOS
+     }
 
   ngOnInit() {
     this.prepareForm();

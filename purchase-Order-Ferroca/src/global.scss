@@ -24,3 +24,46 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.roundedInput {
+  --border-color: var(--ion-color-medium-shade);
+  --border-radius: 20px;
+  --border-width: 1px;
+  --box-shadow: 2px gray;
+  --highlight-height: 0;
+  --background: #f8f9fa;
+  padding-bottom: 5px;
+}
+
+ion-button {
+  --background: black;
+  --border-radius: 20px !important;
+}
+
+
+ion-header >ion-toolbar {
+  --background: black;
+}
+
+ion-header >ion-toolbar >div>ion-title {
+  color: white
+}
+
+ion-header >ion-toolbar >div {
+  text-align: center;
+}
+
+ion-content >ion-modal >ng-template >ion-header >ion-toolbar {
+  --background: black;
+}
+
+ion-content >ion-modal >ng-template >ion-header >ion-toolbar >div>ion-title {
+  color: white
+}
+
+ion-header > ion-toolbar > ion-buttons >ion-back-button{
+  color: #f8f9fa;
+}
+ion-header > ion-toolbar > ion-buttons > ion-menu-button{
+  color: #f8f9fa;
+}
