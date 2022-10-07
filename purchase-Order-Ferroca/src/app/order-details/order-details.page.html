@@ -1,197 +1,95 @@
-<!-- <ion-content *ngIf="order; else templateName"> -->
 <ion-content *ngIf="order">
-
   <ion-header>
-    <ion-toolbar style="text-align: center; color: black;">
-      <ion-title>N° 00000002</ion-title>
-      <span style="font-size: 10px;">Código: {{ order?._id }}</span>
+    <ion-toolbar class="toolbar-header">
+      <ion-buttons slot="start">
+        <ion-back-button defaultHref="tabs/tab1"></ion-back-button>
+      </ion-buttons>
+      <div>
+        <ion-title>N° 00000002</ion-title>
+      </div>
     </ion-toolbar>
   </ion-header>
 
-
-  <!-- test -->
-
   <ion-card>
     <ion-card-content>
-    <ion-grid >
-      <ion-row>
-        <ion-col style="text-align: left; text-transform: uppercase; color: darkgreen; padding-left: 0px;">
-          <b>{{ order?.state ? order?.state : 'Ingresado' }}</b>
-        </ion-col>
-        <ion-col style="text-align: right;">
-          {{ order.createdAt | date: 'dd/MM/yyyy, h:mm a' }}
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
-
-    <ion-grid>
-      <ion-row>
-        <b>Información De La Orden</b>
-      </ion-row>
-
-      <ion-row>
-        <ion-col style="text-align: left;">
-          Orden N°:
-        </ion-col>
-        <ion-col style="text-align: right;">
-          {{ order?.number ? order?.number : '0009877' }}
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col style="text-align: left;">
-          Usuario:
-        </ion-col>
-        <ion-col style="text-align: right;">
-          {{ order?.user?.name ? order?.user?.name : 'Jon '}} {{ order?.user?.surname ? order?.user?.surname : ' Doe'}}
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col style="text-align: left;">
-          Total:
-        </ion-col>
-        <ion-col style="text-align: right;">
-          $ {{ order?.total | number : '1.0-1' }}
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <b>Información Despacho</b>
-      </ion-row>
-
-      <ion-row>
-        <ion-col style="text-align: left;">
-          Cliente:
-        </ion-col>
-        <ion-col style="text-align: right;">
-          {{ order?.customer ? order?.customer : 'Javi Doe' }}
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col style="text-align: left;">
-          Correo:
-        </ion-col>
-        <ion-col style="text-align: right;">
-          {{ order?.email ? order?.email : 'jon_dou@gmail.com' }}
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col style="text-align: left;">
-          Dirección:
-        </ion-col>
-        <ion-col style="text-align: right;">
-          {{ order?.customer?.address ? order?.customer?.address : 'Calle 1356' }}
-        </ion-col>
-      </ion-row>
-
-    </ion-grid>
-   </ion-card-content>
-  </ion-card>
-
-
-<!-- 
-  <ion-card>
-    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col style="text-align: left; text-transform: uppercase; color: darkgreen; padding-left: 0px;">
+            <div [ngSwitch]="order?.step">
+              <p *ngSwitchCase="'1'">Ingresado</p>
+              <p *ngSwitchCase="'2'">Preparación </p>
+              <p *ngSwitchCase="'3'">Despachado</p>
+              <p *ngSwitchCase="'4'">Entregado</p>
+            </div>
+          </ion-col>
+          <ion-col style="text-align: right;">
+            {{ order.createdAt | date: 'dd/MM/yyyy, h:mm a' }}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
       <ion-grid>
         <ion-row>
           <b>Información De La Orden</b>
         </ion-row>
         <ion-row>
-          <span> Orden N°: </span>
-          <p> {{ order?.number ? order?.number : '0009877' }} </p>
+          <ion-col style="text-align: left;">
+            Orden N°:
+          </ion-col>
+          <ion-col style="text-align: right;">
+            {{ order?.number ? order?.number : '0009877' }}
+          </ion-col>
         </ion-row>
         <ion-row>
-          <span>Usuario: </span>
-          <p> {{ order?.user.name ? order?.user.name : 'Jon '}} {{ order?.user.surname ? order?.user.surname : ' Doe'}}
-          </p>
+          <ion-col style="text-align: left;">
+            Usuario:
+          </ion-col>
+          <ion-col style="text-align: right;">
+            {{ order.user.name | titlecase}} {{ order.user.surname | titlecase}}
+          </ion-col>
         </ion-row>
         <ion-row>
-          <span>Paso: </span>
-          <p> {{ order?.stape ? order?.stape : 'None' }}</p>
+          <ion-col style="text-align: left;">
+            Total:
+          </ion-col>
+          <ion-col style="text-align: right;">
+            $ {{ order?.totalOrder | number : '1.0-1' }}
+          </ion-col>
         </ion-row>
-        <ion-row>
-          <span>Total: </span>
-          <p>$ {{ order?.total ? order?.total : 0}}</p>
-        </ion-row>
-      </ion-grid>
-
-      <ion-grid>
         <ion-row>
           <b>Información Despacho</b>
         </ion-row>
         <ion-row>
-          <span>Cliente:</span>
-          <p> {{ order?.customer ? order?.customer : 'Javi Doe' }}</p>
+          <ion-col style="text-align: left;">
+            Cliente:
+          </ion-col>
+          <ion-col style="text-align: right;">
+            {{ order.customer.rs}}
+          </ion-col>
         </ion-row>
         <ion-row>
-          <span>Correo:</span>
-          <p> {{ order?.email ? order?.email : 'jon_dou@gmail.com' }}</p>
+          <ion-col style="text-align: left;">
+            Correo:
+          </ion-col>
+          <ion-col style="text-align: right;">
+            {{ order.customer.email }}
+          </ion-col>
         </ion-row>
         <ion-row>
-          <span>Dirección:</span>
-          <p> {{ order?.customer?.address ? order?.customer?.address : 'Calle 1356' }}</p>
+          <ion-col style="text-align: left;">
+            Dirección:
+          </ion-col>
+          <ion-col style="text-align: right;">
+            {{ order?.customer?.address ? order?.customer?.address : 'Calle 1356' }}
+          </ion-col>
         </ion-row>
       </ion-grid>
-
     </ion-card-content>
-
   </ion-card>
-
-  <ion-card>
-    <ion-card-content>
-      <ion-list>
-        <ion-item-sliding *ngFor="let item of order.orderItems; let i = index">
-          <ion-item *ngIf="item.product" routerLink="/product-details/{{item.product._id}}">
-            <ion-avatar slot="start">
-              <img src="https://picsum.photos/400/400?random={{i}}" />
-            </ion-avatar>
-            <ion-label>
-              <h2></h2>
-              <h3 style="text-transform: capitalize">
-                {{ item.product.name ? item.product.name : '-' }}
-              </h3>
-              <p></p>
-              <p>Cantidad: {{ item.quantity}}</p>
-            </ion-label>
-          </ion-item>
-        </ion-item-sliding>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>-->
-
 </ion-content>
 
-<!-- Si no encuentra order -->
-<!-- <ng-template #templateName>
-  <div>
-    <h4>No encontrado</h4>
-  </div>
-</ng-template> -->
-
-<!-- footer -->
-<ion-footer>
+<ion-footer class="ion-no-border ion-padding">
   <ion-toolbar>
-
-    <ion-tab-bar>
-      <ion-tab-button (click)="regresar()">
-        <ion-icon name="arrow-back-circle-outline"></ion-icon>
-      </ion-tab-button>
-
-      <ion-tab-button routerLink='/tabs/tab2'>
-        <ion-icon name="add-circle-sharp"></ion-icon>
-      </ion-tab-button>
-
-      <ion-tab-button (click)="regresar()">
-        <ion-icon name="checkmark-circle-outline"></ion-icon>
-        <!-- <span>Siguiente</span> -->
-      </ion-tab-button>
-    </ion-tab-bar>
-
+    <ion-button expand="block" (click)="presentAlertState()" *ngIf="order?.step < '4'">Siguiente estado</ion-button>
+    <ion-button expand="block" color="success" *ngIf="order?.step == '4'">Pedido Finalizado </ion-button>
   </ion-toolbar>
-
-
 </ion-footer>

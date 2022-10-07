@@ -25,7 +25,8 @@
       <ion-col *ngFor="let product of products | filter:searchTerm; let i = index" size="6" routerLink="/product-details/{{product._id}}">
         <ion-card>
           <div class="center">
-            <img src="{{ url + '/get-image-product/' + product.image }}">
+            <img src="{{ url + '/get-image-product/' + product.image }}" *ngIf="product.image != 'null'">
+            <img src="../../assets/img/product_not.png" *ngIf="product.image == 'null'">
           </div>
           <ion-card-header>
             <ion-card-title style="font-size: 9px;">

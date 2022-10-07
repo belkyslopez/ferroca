@@ -1,8 +1,5 @@
 <ion-header>
   <ion-toolbar>
-    <!-- <ion-buttons slot="start">
-      <ion-back-button text="Volver"></ion-back-button>
-    </ion-buttons> -->
     <div>
       <ion-title>Productos </ion-title>
     </div>
@@ -18,7 +15,8 @@
     <ion-grid>
       <ion-row>
         <ion-col size="3">
-          <img src="{{ url + '/get-image-product/' + product.image }}" width="80">
+          <img src="{{ url + '/get-image-product/' + product.image }}" width="80" *ngIf="product.image != 'null'">
+          <img src="../../assets/img/product_not.png" *ngIf="product.image == 'null'">
         </ion-col>
         <ion-col size="9">
             <p>{{product.name}}</p>
@@ -26,6 +24,14 @@
       </ion-row>
     </ion-grid>
   </ion-card>
+
+<ion-card *ngIf="products == 0">
+  <ion-grid>
+    <p>Sin productos</p>
+  </ion-grid>
+</ion-card>
+
+
 
 
   <ion-modal trigger="modal-product">
@@ -59,13 +65,19 @@
               <ion-input formControlName="precio" type="number" placeholder="Ingrese el precio" name="precio"
                 [(ngModel)]="registerProducto.price" required></ion-input>
             </ion-item>
+            <ion-item class="roundedInput">
+              <ion-label position="floating">Stock <ion-text color="danger">*</ion-text>
+              </ion-label>
+              <ion-input formControlName="stock" type="number" placeholder="Ingrese el Stock" name="stock"
+                [(ngModel)]="registerProducto.stock" required></ion-input>
+            </ion-item>
           </ion-list>
 
           <ion-row>
 
             <ion-col size="8">
               <ion-card class="aling-center">
-                <img  [src]="image" class="img-product">
+                <img [src]="image" class="img-product" *ngIf="registerProducto?.image">
               </ion-card>
             </ion-col>
             <ion-col size="4" class="mt-15">

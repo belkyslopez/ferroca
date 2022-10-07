@@ -10,57 +10,39 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!--
-  <ion-datetime-button datetime="datetime"></ion-datetime-button>
-  <ion-modal [keepContentsMounted]="true">
-    <ng-template>
-      <ion-datetime id="datetime"></ion-datetime>
-    </ng-template>
-  </ion-modal>
--->
+  <ion-card *ngFor="let order of orders; let i = index" style="padding: 0px ;">
+    <ion-grid [routerLink]="(order.active ? '/order-details/' + order._id : null)">
+      <ion-row>
+        <ion-col style="text-align: left;">
+          <p>Order N° {{i + 1}}</p>
+        </ion-col>
+        <ion-col style="text-align: right; ">
+          <p> {{order.createdAt | date: 'dd/MM/yyyy, h:mm a'}}</p>
+        </ion-col>
+      </ion-row>
 
+      <ion-row>
+        <ion-col style="text-align: left;">
+          <p> {{order.customer.rs}}</p>
+        </ion-col>
+        <ion-col style="text-align: right;">
+          <p> {{order.user.name }} {{order.user.surname }}</p>
+        </ion-col>
+      </ion-row>
 
-  <ion-list *ngFor="let order of orders; let i = index" style="padding: 0px ;">
-    <ion-item>
-      <ion-label [routerLink]="(order.active ? '/order-details/' + order._id : null)">
-        <!-- <h4>
-          <b>N° {{i + 1}}</b>
-        </h4>
+      <ion-row>
+        <ion-col style="text-align: left;" [ngSwitch]="order?.step" style="color: rgb(0, 156, 0);">
+          <p *ngSwitchCase="'1'">Ingresado</p>
+          <p *ngSwitchCase="'2'">Preparación </p>
+          <p *ngSwitchCase="'3'">Despachado</p>
+          <p *ngSwitchCase="'4'">Entregado</p>
+        </ion-col>
+        <ion-col style="text-align: right;">
+          <p color="dark" style="font-weight: bold;">$ {{order.totalOrder | number : '1.0-1'}}</p>
+        </ion-col>
+      </ion-row>
 
-        <h5 *ngIf="order.user; else templateName">
-          {{ order.user.name }} {{ order.user.surname }}
-        </h5>
-
-        <ng-template #templateName>
-          -
-        </ng-template>
-
-        <h5>
-          Dirección: {{order.address}}
-        </h5>
-        <p>
-          Total: {{order.total}} | Paso: {{order.step ? order.step : '-'}} | Creado: {{order.createdAt ? order.createdAt : '-'}}
-        </p> -->
-        <ion-row>
-          <ion-col style="text-align: left;">
-            <b>Order N° {{i + 1}}</b>
-          </ion-col>
-          <ion-col style="text-align: right; color: dimgray;">
-            {{order.createdAt | date: 'dd/MM/yyyy, h:mm a'}}
-          </ion-col>
-        </ion-row>
-
-        <ion-row>
-          <ion-col style="text-align: left;">
-            <b style="color: rgb(0, 156, 0);">Ingresado</b>
-          </ion-col>
-          <ion-col style="text-align: right;">
-            <b>$ {{order.total | number : '1.0-1'}}</b>
-          </ion-col>
-        </ion-row>
-
-      </ion-label>
-    </ion-item>
-  </ion-list>
+    </ion-grid>
+  </ion-card>
 
 </ion-content>

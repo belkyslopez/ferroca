@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { AuthenticateService } from './core/services/authenticate.service';
 import { Storage } from '@ionic/storage';
+import { TokenService } from './core/services/token.service';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +11,23 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+
+  userName = '';
+
   constructor(private menu: MenuController,
-              private storage: Storage,
-              private navCtrl: NavController,
-              private autService: AuthenticateService ) {}
+    private storage: Storage,
+    private navCtrl: NavController,
+    private autService: AuthenticateService,
+    private tokenService: TokenService) { }
+
+  ngOnInit() {
+    this.getUserLogged();
+  }
+
+  async getUserLogged() {
+    let userLogged = await this.tokenService.loadTokenDecode();
+    this.userName = userLogged.email;
+  }
 
   openFirst() {
     this.menu.enable(true, 'first');
@@ -29,15 +43,15 @@ export class AppComponent {
     this.menu.open('custom');
   }
 
-  closeMenu(){
+  closeMenu() {
     this.menu.close();
   }
-  
-  logout(){
+
+  logout() {
     this.closeMenu();
     this.storage.clear();
     this.autService.logout();
-    this.navCtrl.navigateRoot('/login', { replaceUrl: true});
+    this.navCtrl.navigateRoot('/login', { replaceUrl: true });
   }
 
 }

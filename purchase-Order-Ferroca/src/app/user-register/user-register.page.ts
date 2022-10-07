@@ -7,6 +7,7 @@ import { UiService } from '../core/services/ui.service';
 import { ModalController } from '@ionic/angular';
 import { AlertService } from '../core/services/alert.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { URL_SERVICIOS } from '../core/config/url.services';
 
 @Component({
   selector: 'app-user-register',
@@ -23,6 +24,7 @@ export class UserRegisterPage implements OnInit {
   IDUser: any;
   registerForm: FormGroup;
   loading: false;
+  url: string = URL_SERVICIOS;
 
   constructor( private userService: UserService,
                private navCtrlr: NavController,

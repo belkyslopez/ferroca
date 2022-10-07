@@ -15,7 +15,8 @@
 <ion-content *ngIf="product">
 
   <ion-card class="center">
-    <img src="{{ url + '/get-image-product/' + product.image }}" >
+    <img src="{{ url + '/get-image-product/' + product.image }}" *ngIf="product.image != 'null'">
+    <img src="../../assets/img/product_not.png" *ngIf="product.image == 'null'">
   </ion-card>
 
   <ion-card>
@@ -49,20 +50,8 @@
         </p>
       </ion-card-header>
     </ion-card-content>
-
   </ion-card>
 </ion-content>
-
-
-<!--#############################################################-->
-<!-- 
-<ion-content *ngIf="!product" fullscreen={true}>
-  <div class="spin">
-    <ion-spinner name="bubbles"></ion-spinner>
-  </div>
-</ion-content> -->
-
-<!--#############################################################-->
 
 <ion-footer class="ion-no-border ion-padding">
   <ion-toolbar>

@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {NavController} from '@ionic/angular';
-import {Producto, Token} from '../core/interfaces/interfaces';
-import {ProductService} from '../core/services/product.service';
-import {ActivatedRoute} from '@angular/router';
-import {URL_SERVICIOS} from '../core/config/url.services';
+import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { Producto, Token } from '../core/interfaces/interfaces';
+import { ProductService } from '../core/services/product.service';
+import { ActivatedRoute } from '@angular/router';
+import { URL_SERVICIOS } from '../core/config/url.services';
 import { AlertController } from '@ionic/angular';
 
 @Component({
@@ -30,11 +30,11 @@ export class ProductDetailsPage implements OnInit {
     private alertController: AlertController,
   ) {
     this.url = URL_SERVICIOS
-   }
+  }
 
   ngOnInit() {
-   this. getDetailsProduct();
-   }
+    this.getDetailsProduct();
+  }
 
   getDetailsProduct(): void {
     const id = this.activatedRoute.snapshot.params.id;
@@ -50,12 +50,12 @@ export class ProductDetailsPage implements OnInit {
     );
   }
 
-  async addStock(quantityProduct: number ){
-    this.product.stock = this.product.stock + quantityProduct;    
+  async addStock(quantityProduct: number) {
+    this.product.stock = this.product.stock + quantityProduct;
     const valido = await this.productService.updateProduct(this.product);
-    if(valido){
+    if (valido) {
       console.log("Guardado");
-    }else{
+    } else {
       console.log("Error");
     }
   }

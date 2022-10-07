@@ -149,6 +149,7 @@ export class ProductRegistrationPage implements OnInit {
   get nombre() { return this.productForm.get('nombre'); }
   get descripcion() { return this.productForm.get('descripcion'); }
   get precio() { return this.productForm.get('precio'); }
+  get stock() { return this.productForm.get('stock'); }
 
   prepareForm(): void {
     console.log(" prepareForm ====>>> ");
@@ -156,6 +157,7 @@ export class ProductRegistrationPage implements OnInit {
       nombre: ['', { validators: [Validators.required], updateOn: 'blur' }],
       descripcion: ['', { validators: [Validators.required], updateOn: 'blur' }],
       precio: ['', { validators: [Validators.required], updateOn: 'blur' }],
+      stock: ['', { validators: [Validators.required], updateOn: 'blur' }],
       //registerForm: [ true ]
     });
   }

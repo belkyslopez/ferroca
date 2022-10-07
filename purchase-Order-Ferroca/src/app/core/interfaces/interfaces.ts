@@ -21,8 +21,8 @@ export interface Token {
   sub?: string;
   name?: string;
   surname?: string;
-  email: number;
-  rolName: number;
+  email: string;
+  rolName: string;
   image: string;
   iat:string;
 }
