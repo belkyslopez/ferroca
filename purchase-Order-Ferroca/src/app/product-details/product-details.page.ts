@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Producto, Token } from '../core/interfaces/interfaces';
 import { ProductService } from '../core/services/product.service';
+import { OrderService } from '../core/services/order.service';
 import { ActivatedRoute } from '@angular/router';
 import { URL_SERVICIOS } from '../core/config/url.services';
 import { AlertController } from '@ionic/angular';
+import {UiService} from "../core/services/ui.service";
 
 @Component({
   selector: 'app-product-details',
@@ -26,8 +28,10 @@ export class ProductDetailsPage implements OnInit {
   constructor(
     private navCtrlr: NavController,
     private productService: ProductService,
+    private orderService: OrderService,
     private activatedRoute: ActivatedRoute,
     private alertController: AlertController,
+    private uiService: UiService,
   ) {
     this.url = URL_SERVICIOS
   }
@@ -86,6 +90,42 @@ export class ProductDetailsPage implements OnInit {
           placeholder: 'Número de Productos',
           min: 1,
           max: 100,
+          attributes: {
+            maxlength: 5,
+          }
+        },
+      ],
+    });
+    await alert.present();
+  }
+
+  async presentAlertOrder() {
+    const alert = await this.alertController.create({
+      subHeader: 'Agregar producto a la orden',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+          handler: (value: any) => {
+            const quantity = parseInt(value[0]);
+            if(quantity > this.product.stock) {
+
+              this.uiService.presentToast('Stock insuficiente', 'top');
+              this.presentAlertOrder();
+            } else {
+              this.orderService.addProduct(this.product, parseInt(value[0]));
+            }
+          },
+        },
+      ],
+      inputs: [
+        {
+          type: 'number',
+          placeholder: 'Número de Productos',
           attributes: {
             maxlength: 5,
           }

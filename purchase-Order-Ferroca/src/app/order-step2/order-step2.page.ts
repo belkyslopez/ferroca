@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
+import { Cliente, Producto } from '../core/interfaces/interfaces';
 import { UserService } from '../core/services/user.service';
+import {OrderService} from '../core/services/order.service';
 import { UiService } from '../core/services/ui.service';
 import { Storage } from '@ionic/storage';
 
@@ -12,13 +14,16 @@ import { Storage } from '@ionic/storage';
 })
 export class OrderStep2Page implements OnInit {
 
-  customers: any;
-  products: any;
+  customers: Cliente[];
+  selectedCustomer: Cliente = {} as Cliente;
+  otherDirection: string;
+  products: Producto[];
   user:any;
 
   constructor(private navCtrlr: NavController,
     private modalCtrl: ModalController,
     private userService: UserService,
+    private orderService: OrderService,
     private uiService: UiService,
     private storage: Storage,) { }
 
@@ -27,10 +32,11 @@ export class OrderStep2Page implements OnInit {
   }
 
   ionViewWillEnter(){
+    this.products = Object.values(this.orderService.items);
     this.getAllClient();
     this.getUser();
   }
-    
+
   cancel() {
     this.modalCtrl.dismiss(null, 'cancel');
     this.navCtrlr.navigateRoot('/user-register', { animated: true });
@@ -47,8 +53,30 @@ export class OrderStep2Page implements OnInit {
   }
 
   async getUser(){
-   this.user =  await this.storage.get('user');
+   this.user =  await this.storage.get('resp');
     console.log("getTokenUser",this.user );
+  }
+
+  async saveOrder(){
+    await this.getUser();
+    const {orderItems, total} = this.products.reduce((acc, item) => {
+      acc.total += item.price * item.quantity;
+      acc.orderItems.push({ product: item._id, quantity: item.quantity});
+      return acc;
+    }, {orderItems: [],  total: 0});
+    const order = {
+      user: this.user._id,
+      customer: this.selectedCustomer._id,
+      total,
+      address: this.otherDirection?.trim() ? this.otherDirection : this.selectedCustomer.address,
+      orderItems
+    }
+    const valido = await this.orderService.saveOrder(order);
+    if(valido){
+      this.orderService.clearProducts();
+    }else{
+      this.uiService.presentAlert('Error al registrar la orden');
+    }
   }
 
 }

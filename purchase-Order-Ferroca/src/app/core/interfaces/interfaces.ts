@@ -10,6 +10,7 @@
   }
 
 export interface Cliente {
+    _id: string,
     email?: string;
     address?: string;
     rs?: string;
@@ -35,7 +36,7 @@ export interface Producto {
   price? : number;
   createdAt? : string;
   updatedAt? : string;
-  stock? : string;
+  stock? : number;
   quantity? : number;
   // cantidad : number;
   }

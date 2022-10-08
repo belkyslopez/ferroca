@@ -62,13 +62,8 @@ export class OrderService {
   }
 
 
-  addProduct(product: Producto) {
-    if (this.items[product._id]) {
-      this.items[product._id].quantity += 1;
-    } else {
-      this.items[product._id] = { ...product, quantity: 1 };
-    }
-    console.log('this.items', this.items);
+  addProduct(product: Producto, quantity) {
+    this.items[product._id] = { ...product, quantity};
   }
 
   editProduct(productId, quantity) {
@@ -105,6 +100,27 @@ export class OrderService {
           }
         });
     });
+  }
+
+  async saveOrder(order) {
+    await this.autService.loadToken();
+    const headers = new HttpHeaders({
+      'Authorization': this.autService.token
+    });
+    return new Promise(resolve => {
+      this.http.post(`${URL_SERVICIOS}/order`, order, { headers })
+        .subscribe(resp => {
+          if (resp) {
+            resolve(true);
+          } else {
+            resolve(false);
+          }
+        });
+    });
+  }
+
+  clearProducts(){
+    this.items = [];
   }
 
 }

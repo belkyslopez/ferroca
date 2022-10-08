@@ -5,7 +5,7 @@
     </ion-buttons> -->
     <div>
       <ion-title> Detalle del producto </ion-title>
-    </div> 
+    </div>
         <ion-buttons slot="end">
       <ion-menu-button menu="first"></ion-menu-button>
     </ion-buttons>
@@ -55,6 +55,7 @@
 
 <ion-footer class="ion-no-border ion-padding">
   <ion-toolbar>
+    <ion-button expand="block" (click)="presentAlertOrder()">Agregar a la orden</ion-button>
     <ion-button expand="block" (click)="presentAlertStock()">Agregar stock</ion-button>
   </ion-toolbar>
 </ion-footer>

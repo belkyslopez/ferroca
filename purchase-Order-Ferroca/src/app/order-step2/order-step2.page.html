@@ -2,7 +2,7 @@
   <ion-toolbar>
     <div>
       <ion-title> Paso 2</ion-title>
-    </div> 
+    </div>
     <ion-buttons slot="end">
       <ion-menu-button menu="first"></ion-menu-button>
     </ion-buttons>
@@ -10,31 +10,29 @@
 </ion-header>
 
 <ion-content  class="ion-padding">
- 
+
   <ion-label position="stacked">Seleccione el cliente</ion-label>
   <ion-list>
     <ion-item>
-      <ion-select placeholder="Seleccione el cliente">
-        <ion-select-option value="customer.email" *ngFor="let customer of customers" >{{customer.rs}}</ion-select-option>
+      <ion-select placeholder="Seleccione el cliente" [(ngModel)]="selectedCustomer">
+        <ion-select-option *ngFor="let customer of customers" [value]="customer">{{customer.rs}}</ion-select-option>
       </ion-select>
     </ion-item>
   </ion-list>
 
-  <ion-label position="stacked">Seleccione la direccion del cliente</ion-label>
+  <ion-label position="stacked">Dirección</ion-label>
   <ion-list>
     <ion-item>
-      <ion-select placeholder="Usar direccion del cliente">
-        <ion-select-option value="customer.address" *ngFor="let customer of customers">{{customer.address}}</ion-select-option>
-      </ion-select>
+      <ion-input type="text" readonly [(ngModel)]="selectedCustomer.address"></ion-input>
     </ion-item>
   </ion-list>
   <!-- [(ngModel)]="registerUser.address"-->
+  <ion-label position="stacked">Agrega nueva dirección (opcional)</ion-label>
   <ion-item>
-    <ion-label position="stacked">Agrega nueva dirección (*opcional)</ion-label>
-    <ion-input type="text" placeholder="Ingrese la direccion" name="direccion"  required></ion-input>
-  </ion-item>   
+    <ion-input type="text" placeholder="Ingrese la direccion" [(ngModel)]="otherDirection"></ion-input>
+  </ion-item>
 
-  <ion-button  expand="block">Registrar Orden</ion-button>
+  <ion-button  expand="block" (click)="saveOrder()">Registrar Orden</ion-button>
 
 
 </ion-content>

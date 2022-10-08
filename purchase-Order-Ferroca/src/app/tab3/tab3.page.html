@@ -50,7 +50,7 @@
   </ion-list>
 
   <div class="ion-padding">
-    <ion-button  expand="block" class="ion-no-margin" (click)="gotToStep2()" >Continuar</ion-button>
+    <ion-button  expand="block" class="ion-no-margin" [disabled]="products.length <= 0" (click)="gotToStep2()" >Continuar</ion-button>
   </div>
 
   <ion-modal [isOpen]="isEditModalOpen">

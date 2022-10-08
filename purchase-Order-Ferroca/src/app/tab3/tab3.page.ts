@@ -33,7 +33,6 @@ export class Tab3Page {
 
   ionViewWillEnter(){
     this.products = Object.values(this.orderService.items);
-    console.log('products', this.products)
   }
 
   deleteProduct(productId){
@@ -43,7 +42,7 @@ export class Tab3Page {
   openEditModal(product: Producto){
     this.selectedProduct = product;
     this.quantity = product.quantity;
-    this.maxControl = new FormControl(this.quantity, [Validators.max(parseInt(product.stock))])
+    this.maxControl = new FormControl(this.quantity, [Validators.max(product.stock)])
     this.isEditModalOpen = true;
   }
 
