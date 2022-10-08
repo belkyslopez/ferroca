@@ -22,9 +22,15 @@ export class Tab2Page {
     this.url = URL_SERVICIOS
   }
 
-  ngOnInit(){
+  // ngOnInit(){
+  //   this.getAllProduct();
+  // }
+
+  
+  ionViewWillEnter(){
     this.getAllProduct();
   }
+
 
   async getAllProduct(){
     const valido = await this.productService.getAllProduct();

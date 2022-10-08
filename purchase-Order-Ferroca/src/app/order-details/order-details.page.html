@@ -16,10 +16,10 @@
         <ion-row>
           <ion-col style="text-align: left; text-transform: uppercase; color: darkgreen; padding-left: 0px;">
             <div [ngSwitch]="order?.step">
-              <p *ngSwitchCase="'1'">Ingresado</p>
-              <p *ngSwitchCase="'2'">Preparación </p>
-              <p *ngSwitchCase="'3'">Despachado</p>
-              <p *ngSwitchCase="'4'">Entregado</p>
+              <ion-badge *ngSwitchCase="'1'" color="warning">Ingresado</ion-badge>
+              <ion-badge *ngSwitchCase="'2'" color="primary">Preparación</ion-badge>
+              <ion-badge *ngSwitchCase="'3'" color="danger">Despachado</ion-badge>
+              <ion-badge *ngSwitchCase="'4'" color="secondary">Entregado</ion-badge>
             </div>
           </ion-col>
           <ion-col style="text-align: right;">
