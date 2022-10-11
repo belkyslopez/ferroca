@@ -91,10 +91,10 @@ export class UserRegisterPage implements OnInit {
         name: ['', { validators: [Validators.required]}],
         surname: ['', { validators: [Validators.required],  }],
         email: ['', { validators: [Validators.required],  }],
-        password: ['', [Validators.required,Validators.minLength(4), Validators.maxLength(32)]],
+        password: ['', [Validators.required,Validators.minLength(4), Validators.maxLength(12)]],
         address: ['', { validators: [Validators.required], }],
-        phone: ['', { validators: [Validators.required], }],
-        rut: ['', { validators: [Validators.required],}],
+        phone: ['',  [Validators.required, Validators.minLength(12),  Validators.maxLength(13)]],
+        rut: ['',  [Validators.required,Validators.minLength(9),  Validators.maxLength(10)]],
         //registerForm: [ true ]
       });
     }
@@ -109,5 +109,10 @@ export class UserRegisterPage implements OnInit {
       this.registerForm.controls['address'].setValue('');
       this.registerForm.controls['phone'].setValue('');
       this.registerForm.controls['rut'].setValue('');
+    }
+
+    goToDetail(user: Usuario){
+      this.navCtrlr.navigateForward('/user-detail', { state: user});
+      console.log("user goTogoToDetail ===>  {state: user}", user );
     }
 }

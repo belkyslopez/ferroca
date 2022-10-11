@@ -70,7 +70,16 @@ const routes: Routes = [
   {
     path: 'order-list',
     loadChildren: () => import('./order-list/order-list.module').then( m => m.OrderListPageModule)
+  },
+  {
+    path: 'user-detail',
+    loadChildren: () => import('./user-detail/user-detail.module').then( m => m.UserDetailPageModule)
+  },
+  {
+    path: 'customer-detail',
+    loadChildren: () => import('./customer-detail/customer-detail.module').then( m => m.CustomerDetailPageModule)
   }
+
 
 
 

@@ -10,6 +10,9 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)"  pullFactor="0.5" pullMin="100" pullMax="200">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-grid fixed>
     <ion-row>
       <ion-searchbar placeholder="Buscar..." [(ngModel)]="searchTerm" animated="true"></ion-searchbar>

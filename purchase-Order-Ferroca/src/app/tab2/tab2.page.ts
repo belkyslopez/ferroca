@@ -47,4 +47,13 @@ export class Tab2Page {
     this.navCtrlr.navigateRoot('/product-details', { state: product });
    }
 
+   doRefresh(event) {
+    console.log('Begin async operation');
+    setTimeout(() => {
+      this.getAllProduct();
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
+  }
+
 }

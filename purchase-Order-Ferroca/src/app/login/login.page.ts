@@ -5,7 +5,6 @@ import { NavController } from '@ionic/angular';
 import { UiService } from '../core/services/ui.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { rutIsValid } from '../shared/validators/rut-validator';
 
 @Component({
   selector: 'app-login',

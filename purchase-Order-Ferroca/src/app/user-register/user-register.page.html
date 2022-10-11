@@ -14,16 +14,33 @@
 
 <ion-content class="ion-padding">
 
-  <ion-card *ngFor="let user of users; let i = index" (click)="goToUpdate(user)">
+    
+  <ion-card *ngIf=" !users ">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+            <p>Sin usuarios registrados</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <ion-card *ngFor="let user of users; let i = index" >
     <ion-grid>
       <ion-row>
         <ion-col size="4">
           <img src="{{ url + '/get-image-user/' + user.image}}" class="img-user" *ngIf="user.image != 'null'">
           <img src="../../assets/img/user_not.png" *ngIf="user.image == 'null'">
         </ion-col>
-        <ion-col size="8">
+        <ion-col size="6">
           <p>{{user.name | titlecase}} {{user.surname | titlecase}} </p>
           <p>{{user.email}}</p>
+        </ion-col>
+        <ion-col size="1">
+          <ion-icon name="person-circle" (click)="goToUpdate(user)"></ion-icon>
+        </ion-col>
+        <ion-col size="1">
+          <ion-icon name="eye" (click)="goToDetail(user)"></ion-icon>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -81,9 +98,9 @@
                 [(ngModel)]="registerUser.phone" required></ion-input>
             </ion-item>
             <ion-item class="roundedInput">
-              <ion-label position="floating">Rut <ion-text color="danger">*</ion-text>
+              <ion-label position="floating">Rut <ion-text color="danger" appRutFormat >*</ion-text>
               </ion-label>
-              <ion-input formControlName="rut" type="number" placeholder="Ingrese el rut" name="rut"
+              <ion-input formControlName="rut" type="number" placeholder="Ingrese el rut" name="rut" [attr.maxlength]="4" maxlength="8"
                 [(ngModel)]="registerUser.rut" required></ion-input>
             </ion-item>
 

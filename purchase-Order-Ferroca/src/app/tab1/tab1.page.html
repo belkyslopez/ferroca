@@ -11,7 +11,8 @@
 
 <ion-content [fullscreen]="true">
   <ion-card *ngFor="let order of orders; let i = index" style="padding: 0px ;">
-    <ion-grid [routerLink]="(order.active ? '/order-details/' + order._id : null)">
+    <!-- <ion-grid [routerLink]="(order.active ? '/order-details/' + order._id : null)"> -->
+    <ion-grid [routerLink]="'/order-details/' + order._id">
       <ion-row>
         <ion-col style="text-align: left;">
           <p>Order N° {{i + 1}}</p>
@@ -23,7 +24,7 @@
 
       <ion-row>
         <ion-col style="text-align: left;">
-          <p> {{order.customer.rs}}</p>
+          <p> {{order.customer?.rs}}</p>
         </ion-col>
         <ion-col style="text-align: right;">
           <p> {{order.user.name }} {{order.user.surname }}</p>

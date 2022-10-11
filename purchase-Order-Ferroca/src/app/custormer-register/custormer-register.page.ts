@@ -102,4 +102,9 @@ export class CustormerRegisterPage implements OnInit {
     this.clienteForm.controls['phone'].setValue('');
     this.clienteForm.controls['rut'].setValue('');
   }
+
+  goToDetail(customer: Cliente){
+    this.navCtrlr.navigateForward('/customer-detail', { state: customer});
+    console.log("customer goTogoToDetail ===>  {state: customer}", customer );
+  }
 }

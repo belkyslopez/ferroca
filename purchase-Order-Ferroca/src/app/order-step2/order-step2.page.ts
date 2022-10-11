@@ -59,21 +59,26 @@ export class OrderStep2Page implements OnInit {
 
   async saveOrder(){
     await this.getUser();
-    const {orderItems, total} = this.products.reduce((acc, item) => {
-      acc.total += item.price * item.quantity;
+    const {orderItems, totalOrder} = this.products.reduce((acc, item) => {
+      acc.totalOrder += item.price * item.quantity;
       acc.orderItems.push({ product: item._id, quantity: item.quantity});
       return acc;
-    }, {orderItems: [],  total: 0});
+    }, {orderItems: [],  totalOrder: 0});
+    console.log("otherDirection.", this.otherDirection);
+    
     const order = {
+      active:true,
+      step:1,
       user: this.user._id,
       customer: this.selectedCustomer._id,
-      total,
+      totalOrder,
       address: this.otherDirection?.trim() ? this.otherDirection : this.selectedCustomer.address,
       orderItems
     }
     const valido = await this.orderService.saveOrder(order);
     if(valido){
       this.orderService.clearProducts();
+      this.navCtrlr.navigateForward('/tabs/tab1');
     }else{
       this.uiService.presentAlert('Error al registrar la orden');
     }

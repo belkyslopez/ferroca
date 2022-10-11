@@ -13,6 +13,7 @@ import { AlertService } from '../core/services/alert.service';
 export class UserUpdatePage implements OnInit {
 
   user: any;
+  loading: boolean = false;
 
   constructor(private userService: UserService,
               private navCtrlr: NavController,
@@ -32,6 +33,7 @@ export class UserUpdatePage implements OnInit {
   }
 
   async updateUser(){
+    this.loading= true;
     const valido = await this.userService.updateUser(this.user);
     if(valido){
       this.alertService.presentAlertRegistro('Se modificó con exitoso!','', '','ok','');
