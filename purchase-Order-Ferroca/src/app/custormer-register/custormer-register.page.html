@@ -42,7 +42,7 @@
           <ion-list lines="full" class="ion-no-margin ion-no-padding">  
             <ion-item  class="roundedInput">
               <ion-label position="floating">Correo  <ion-text color="danger">*</ion-text> </ion-label>
-              <ion-input formControlName="email" type="email" placeholder="Ingrese el correo" name="email" [(ngModel)]="registerCliente.email" required></ion-input>
+              <ion-input formControlName="email" type="email" placeholder="Ingrese el correo" name="email" email="true" [(ngModel)]="registerCliente.email" required></ion-input>
             </ion-item> 
             <ion-item  class="roundedInput">
               <ion-label position="floating">Dirección  <ion-text color="danger">*</ion-text> </ion-label>

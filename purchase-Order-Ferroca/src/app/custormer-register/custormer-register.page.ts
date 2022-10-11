@@ -84,11 +84,11 @@ export class CustormerRegisterPage implements OnInit {
    prepareForm(): void {
      console.log(" prepareForm ====>>> ");
      this.clienteForm = this.formBuilder.group({
-       email: ['', { validators: [Validators.required], updateOn: 'blur' }],
-       address: ['', { validators: [Validators.required], updateOn: 'blur' }],
-       rs: ['', { validators: [Validators.required], updateOn: 'blur' }],
-       phone: ['', { validators: [Validators.required], updateOn: 'blur' }],
-       rut: ['', { validators: [Validators.required], updateOn: 'blur' }],
+       email: ['', { validators: [Validators.required],}],
+       address: ['', { validators: [Validators.required],}],
+       rs: ['', { validators: [Validators.required], }],
+       phone: ['', { validators: [Validators.required],}],
+       rut: ['', { validators: [Validators.required],}],
        //registerForm: [ true ]
      });
    }

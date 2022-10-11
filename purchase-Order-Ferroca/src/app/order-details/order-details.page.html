@@ -2,10 +2,11 @@
   <ion-header>
     <ion-toolbar class="toolbar-header">
       <ion-buttons slot="start">
-        <ion-back-button defaultHref="tabs/tab1"></ion-back-button>
+        <!-- <a href="/order-list"><ion-icon name="chevron-back" size="large"></ion-icon></a> -->
+        <ion-back-button defaultHref="order-list"></ion-back-button>
       </ion-buttons>
       <div>
-        <ion-title>N° 00000002</ion-title>
+        <ion-title>N° {{order.number}}</ion-title>
       </div>
     </ion-toolbar>
   </ion-header>
@@ -79,7 +80,7 @@
             Dirección:
           </ion-col>
           <ion-col style="text-align: right;">
-            {{ order?.customer?.address ? order?.customer?.address : 'Calle 1356' }}
+            {{ order.customer ? order.customer.address : '-' }}
           </ion-col>
         </ion-row>
       </ion-grid>

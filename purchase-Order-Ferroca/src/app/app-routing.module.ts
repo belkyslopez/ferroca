@@ -18,10 +18,10 @@ const routes: Routes = [
     path: 'user-register',
     loadChildren: () => import('./user-register/user-register.module').then( m => m.UserRegisterPageModule)
   },
-  {
-    path: 'inventory-record',
-    loadChildren: () => import('./inventory-record/inventory-record.module').then( m => m.InventoryRecordPageModule)
-  },
+  // {
+  //   path: 'inventory-record',
+  //   loadChildren: () => import('./inventory-record/inventory-record.module').then( m => m.InventoryRecordPageModule)
+  // },
  {
     path: '',
     redirectTo: 'login',
@@ -31,10 +31,10 @@ const routes: Routes = [
     path: 'customer-register',
     loadChildren: () => import('./custormer-register/custormer-register.module').then( m => m.CustormerRegisterPageModule)
   },
-  {
-    path: 'order-status',
-    loadChildren: () => import('./order-status/order-status.module').then( m => m.OrderStatusPageModule)
-  },
+  // {
+  //   path: 'order-status',
+  //   loadChildren: () => import('./order-status/order-status.module').then( m => m.OrderStatusPageModule)
+  // },
   {
     path: 'user-update',
     loadChildren: () => import('./user-update/user-update.module').then( m => m.UserUpdatePageModule)
@@ -58,7 +58,20 @@ const routes: Routes = [
   {
     path: 'order-step2',
     loadChildren: () => import('./order-step2/order-step2.module').then( m => m.OrderStep2PageModule)
+  },
+  {
+    path: 'catalogue',
+    loadChildren: () => import('./catalogue/catalogue.module').then( m => m.CataloguePageModule)
+  },
+  {
+    path: 'order-register',
+    loadChildren: () => import('./order-register/order-register.module').then( m => m.OrderRegisterPageModule)
+  },
+  {
+    path: 'order-list',
+    loadChildren: () => import('./order-list/order-list.module').then( m => m.OrderListPageModule)
   }
+
 
 
 

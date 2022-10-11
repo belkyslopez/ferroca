@@ -1,46 +1,39 @@
 <ion-content class="ion-padding">
-  
-    <img src="../../assets/img/logo1.jpg" class="logo">
+
+  <img src="../../assets/img/logo1.jpg" class="logo">
 
   <ng-container>
     <form [formGroup]="loginForm" (ngSubmit)="login( fLogin )" #fLogin="ngForm" novalidate class="form">
-      <ng-container >
+      <ng-container>
         <ion-row class="ion-justify-content-center">
           <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
-              <ion-item  class="roundedInput">
-                <!-- <ion-label position="floating">Correo</ion-label> -->
-                <ion-input class="inputLogin"
-                        formControlName="email"
-                        name="email" type="email" 
-                        [(ngModel)]="loginUser.email"
-                        placeholder="Ingrese el correo"
-                        required >
-                </ion-input>
-              </ion-item> 
+            <ion-item class="roundedInput">
+              <!-- <ion-label position="floating">Correo</ion-label> -->
+              <ion-input class="inputLogin" formControlName="email" name="email" type="email" email="true"
+                [(ngModel)]="loginUser.email" placeholder="Ingrese el correo" required>
+              </ion-input>
+            </ion-item>
           </ion-col>
         </ion-row>
         <ion-row class="ion-justify-content-center">
           <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
-              <ion-item   class="roundedInput">
-               <!-- /* <ion-label position="floating">Clave</ion-label> -->
-                <ion-input 
-                        formControlName="password"
-                        name="password" type="password" 
-                        [(ngModel)]="loginUser.password" 
-                        placeholder="Ingresa tu clave" maxlength="30"
-                        required>
-                </ion-input> 
-              </ion-item>    
+            <ion-item class="roundedInput">
+              <!-- /* <ion-label position="floating">Clave</ion-label> -->
+              <ion-input formControlName="password" name="password" type="password" [(ngModel)]="loginUser.password"
+                placeholder="Ingresa tu clave" maxlength="30" required>
+              </ion-input>
+            </ion-item>
           </ion-col>
         </ion-row>
 
         <ion-row class="ion-justify-content-center">
           <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
-            <!-- [disable]="loginForm.valid && !loading"        [disabled]="(!selectedAddress || selectedAddress === '')"  -->          
-            <ion-button [disabled]="!loginForm.valid" class="button-login"
-               (click)="login" type="submit" expand="block">Iniciar
-              </ion-button>
-              <ion-spiner name="crescent" *ngIf="!loading" class="spinner-aling-end"></ion-spiner>
+            <ion-button [disabled]="!loginForm.valid || loading" class="button-login" (click)="login" type="submit"
+              expand="block">
+              <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+              <ion-label *ngIf="!loading">Iniciar</ion-label>
+            </ion-button>
+
           </ion-col>
         </ion-row>
       </ng-container>
@@ -54,7 +47,7 @@
     <ion-row>
       <ion-col>
         <a href="https://www.instagram.com/">
-          <img  src="../../assets/img/IIcon.png" alt="" class="iconFooter" >
+          <img src="../../assets/img/IIcon.png" alt="" class="iconFooter">
         </a>
       </ion-col>
       <ion-col>
@@ -62,9 +55,9 @@
           <img src="../../assets/img/GIcon.png" alt="" class="iconFooter">
         </a>
       </ion-col>
-      <ion-col> 
-        <a href="https://wa.me/56957326163">    
-          <img  src="../../assets/img/WIcon.png" alt="" class="iconFooter">
+      <ion-col>
+        <a href="https://wa.me/56957326163">
+          <img src="../../assets/img/WIcon.png" alt="" class="iconFooter">
         </a>
       </ion-col>
     </ion-row>

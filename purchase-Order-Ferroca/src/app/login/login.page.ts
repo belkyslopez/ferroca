@@ -14,13 +14,10 @@ import { rutIsValid } from '../shared/validators/rut-validator';
 })
 export class LoginPage implements OnInit {
 
-loginUser: any = {
-  email: 'belkiscarolina1@hotmail.com',
-  password: '1234'
-};
+loginUser: any = {};
 loginForm: FormGroup;
 changeColorEyeOutLine = false;
-loading: false;
+loading: boolean = false;
 
   constructor( private autService: AuthenticateService,
                private navCtrlr: NavController,
@@ -40,12 +37,15 @@ loading: false;
   }
 
   async login(fLogin: NgForm){
+
+  this.loading = true;
+
   if(this.loginForm.invalid) { return;}
     console.log(fLogin.valid);
     console.log(this.loginUser);
     const valido = await this.autService.login(this.loginUser.email, this.loginUser.password);
     if(valido){
-     this.navCtrlr.navigateRoot('/tabs', { animated: true });
+      this.navCtrlr.navigateRoot('/catalogue', { animated: true });
     }else{
       this.uiService.presentAlert('Usuario y contraseña incorrecto');
     }
@@ -58,7 +58,7 @@ loading: false;
 
   prepareForm(): void {
     this.loginForm = this.formBuilder.group({
-      email: ['', { validators: [Validators.required], updateOn: 'blur' }],
+      email: ['', { validators: [Validators.required], }],
       password: ['', [Validators.required,Validators.minLength(4), Validators.maxLength(32)]],
       userRemember: [ true ]
     });

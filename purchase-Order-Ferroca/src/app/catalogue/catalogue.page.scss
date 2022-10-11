@@ -1,0 +1,24 @@
+img {
+    max-height: 100px;
+    margin-top: 5px;
+    //border: solid 1px rgb(62, 62, 62);
+    max-width: 150px;
+    max-height: 100px;
+  }
+
+.center {
+    text-align: center;
+}
+
+.heade-card-catalogue{
+   padding: 8px 10px 8px 10px;
+}
+
+.heade-card-catalogue > ion-card-title{
+  font-size: 15px;
+  text-transform: capitalize;
+}
+
+ion-title{
+  padding: 0px 0px 0px 57px;
+}

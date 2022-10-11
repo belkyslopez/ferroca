@@ -67,8 +67,8 @@ export class ProductDetailsPage implements OnInit {
 
   async presentAlertStock() {
     const alert = await this.alertController.create({
-      subHeader: 'Modificar Stock',
-      cssClass: 'myCustomCSS',
+      header: 'Modificar Stock',
+      cssClass: 'custom-alert',
       buttons: [
         {
           text: 'Cancel',

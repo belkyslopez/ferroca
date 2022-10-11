@@ -22,7 +22,7 @@
           </ion-item>
           <ion-item  class="roundedInput">
             <ion-label position="floating">Correo  <ion-text color="danger">*</ion-text></ion-label>
-            <ion-input type="email" placeholder="Ingrese el correo" name="email" [(ngModel)]="user.email" required></ion-input>
+            <ion-input type="email" placeholder="Ingrese el correo" name="email" email="true" [(ngModel)]="user.email" required></ion-input>
           </ion-item>   
           <ion-item  class="roundedInput">
             <ion-label position="floating">Rut  <ion-text color="danger">*</ion-text></ion-label>
@@ -45,7 +45,7 @@
             <ion-row>
               <ion-col>
                 <div class="ion-padding">
-                  <ion-button  type="button" expand="block" (click)="deleteUser()">Eliminar</ion-button>
+                  <ion-button  type="button" expand="block" (click)="deleteUser()" disabled>Eliminar</ion-button>
             
                 </div>
               </ion-col>

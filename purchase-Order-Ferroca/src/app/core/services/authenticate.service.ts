@@ -14,52 +14,53 @@ export class AuthenticateService {
   token: string = null;
   user: any;
 
-  constructor(    
-     private http: HttpClient,
-     private storage: Storage,
-     private storageService: StorageService,
-     private navCtrl: NavController ) { }
+  constructor(
+    private http: HttpClient,
+    private storage: Storage,
+    private storageService: StorageService,
+    private navCtrl: NavController) { }
 
-  login(email: string, password: string){
+  login(email: string, password: string) {
     const data = { email, password };
-    console.log("data ", data);
-    return new Promise( resolve =>{
+
+    return new Promise(resolve => {
       this.http.post(`${URL_SERVICIOS}/login`, data)
-      .subscribe( async resp =>{
-        console.log("resp login", resp);
-        if (resp) {
-          console.log("ok login")
-         await this.saveToken( resp['token'] );
-         this.saveUser(resp);
-         console.log(" this.save(resp)", resp)
-          resolve(true);
-        }else{
-         this.storage.clear();
-          resolve(false);
-        }
-      });
+        .subscribe(async resp => {
+
+          if (resp) {
+            console.log("ok login")
+            await this.saveToken(resp['token']);
+            this.saveUser(resp);
+
+            resolve(true);
+          } else {
+            this.storage.clear();
+            resolve(false);
+          }
+        });
     });
   }
 
-  async saveToken (token: string){
+  async saveToken(token: string) {
     this.token = token;
     await this.storage.set('token', token);
   }
 
-  async saveUser(resp){
-    this.user =  await this.storage.set('resp', resp); 
-    console.log("saveUser ====>>>>", resp._id);
+  async saveUser(resp) {
+    this.user = await this.storage.set('resp', resp);
+    console.log("user add storage success!");
+    
   }
 
-  async loadToken(){
+  async loadToken() {
     this.token = await this.storage.get('token') || null;
   }
 
-  logout(){
+  logout() {
     this.token = null;
     //this.usuario = null;
     this.storage.clear();
-    this.navCtrl.navigateRoot('/login', { animated: true});
+    this.navCtrl.navigateRoot('/login', { animated: true });
   }
 
 

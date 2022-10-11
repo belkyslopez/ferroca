@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <div>
+      <ion-title> Listado de ordenes </ion-title>
+    </div>
+    <ion-buttons slot="end">
+      <ion-menu-button menu="first"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card *ngFor="let order of orders; let i = index">
+    <ion-grid [routerLink]="(order.active ? '/order-details/' + order._id : null)">
+      <ion-row>
+        <ion-col style="text-align: left;">
+          <p>Order N° {{ order.number }}</p>
+        </ion-col>
+        <ion-col style="text-align: right; ">
+          <p> {{order.createdAt | date: 'dd/MM/yyyy, h:mm a'}}</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col style="text-align: left;">
+          <p> {{order?.customer?.rs}}</p>
+        </ion-col>
+        <ion-col style="text-align: right;">
+          <p> {{order.user.name }} {{order.user.surname }}</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col style="text-align: left;" [ngSwitch]="order?.step" >
+          <ion-badge *ngSwitchCase="'1'" color="warning">Ingresado</ion-badge>
+          <ion-badge *ngSwitchCase="'2'" color="primary">Preparación</ion-badge>
+          <ion-badge *ngSwitchCase="'3'" color="danger">Despachado</ion-badge>
+          <ion-badge *ngSwitchCase="'4'" color="secondary">Entregado</ion-badge>
+        </ion-col>
+        <ion-col style="text-align: right;">
+          <p color="dark" style="font-weight: bold;">$ {{order.totalOrder | number : '1.0-1'}}</p>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </ion-card>
+
+</ion-content>

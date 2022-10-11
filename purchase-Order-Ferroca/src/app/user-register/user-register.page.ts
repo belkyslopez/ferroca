@@ -88,13 +88,13 @@ export class UserRegisterPage implements OnInit {
     prepareForm(): void {
       console.log(" prepareForm ====>>> ");
       this.registerForm = this.formBuilder.group({
-        name: ['', { validators: [Validators.required], updateOn: 'blur' }],
-        surname: ['', { validators: [Validators.required], updateOn: 'blur' }],
-        email: ['', { validators: [Validators.required], updateOn: 'blur' }],
+        name: ['', { validators: [Validators.required]}],
+        surname: ['', { validators: [Validators.required],  }],
+        email: ['', { validators: [Validators.required],  }],
         password: ['', [Validators.required,Validators.minLength(4), Validators.maxLength(32)]],
-        address: ['', { validators: [Validators.required], updateOn: 'blur' }],
-        phone: ['', { validators: [Validators.required], updateOn: 'blur' }],
-        rut: ['', { validators: [Validators.required], updateOn: 'blur' }],
+        address: ['', { validators: [Validators.required], }],
+        phone: ['', { validators: [Validators.required], }],
+        rut: ['', { validators: [Validators.required],}],
         //registerForm: [ true ]
       });
     }

@@ -154,10 +154,10 @@ export class ProductRegistrationPage implements OnInit {
   prepareForm(): void {
     console.log(" prepareForm ====>>> ");
     this.productForm = this.formBuilder.group({
-      nombre: ['', { validators: [Validators.required], updateOn: 'blur' }],
-      descripcion: ['', { validators: [Validators.required], updateOn: 'blur' }],
-      precio: ['', { validators: [Validators.required], updateOn: 'blur' }],
-      stock: ['', { validators: [Validators.required], updateOn: 'blur' }],
+      nombre: ['', { validators: [Validators.required],}],
+      descripcion: ['', { validators: [Validators.required],}],
+      precio: ['', { validators: [Validators.required], }],
+      stock: ['', { validators: [Validators.required], }],
       //registerForm: [ true ]
     });
   }

@@ -28,7 +28,6 @@ export class ProductService {
       this.http.post<any>(`${URL_SERVICIOS}/product`, producto, { headers })
       .subscribe( resp =>{
         this.producto = resp.product;
-        console.log("resp register Producto", resp);
         if (resp) {
           console.log("ok register Producto")
            resolve(true);
@@ -74,9 +73,7 @@ export class ProductService {
         .subscribe( resp =>{
           this.allProducts = resp['products'];
           console.log("allProducts ", this.allProducts);
-          console.log("resp getAllProduct", resp);
           if (resp) {
-            console.log("ok getAllProduct")
              resolve(true);
           }else{
              resolve(false);
@@ -93,7 +90,6 @@ export class ProductService {
     return new Promise( resolve =>{
       this.http.put(`${URL_SERVICIOS}/product/`+ producto._id, {...producto, _id: undefined},  { headers })
       .subscribe( resp =>{
-        console.log("resp updateProduct", resp);
         if (resp) {
           console.log("ok updateProduct")
            resolve(true);

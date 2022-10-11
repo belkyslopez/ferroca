@@ -37,13 +37,13 @@ export class OrderDetailsPage implements OnInit {
       },
       err => {
         console.log("Error");
-        this.navCtrlr.navigateRoot('/tabs/tab3');
+        this.navCtrlr.navigateRoot('/order-list');
       }
     );
   }
 
   regresar() {
-    this.navCtrlr.navigateRoot('/tabs/tab1');
+    this.navCtrlr.navigateRoot('/order-list');
   }
 
   async nextStep() {
