@@ -4,7 +4,7 @@
       <ion-back-button defaultHref="customer-register"></ion-back-button>
     </ion-buttons>
     <div>
-      <ion-title> Actualizar clientes</ion-title>
+      <ion-title class="ion-text-center"> Actualizar clientes</ion-title>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -37,19 +37,17 @@
             <ion-text color="danger">*</ion-text> campos obligatorios
         </ion-label>
       </div>
-
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-button  type="button" expand="block"  class="ion-no-margin" (click)="deleteClient()" disabled>Eliminar</ion-button>
-          </ion-col>
-          <ion-col>
-            <ion-button  type="submit" expand="block" class="ion-no-margin" [disabled]="!fUpdateC.valid">Modificar</ion-button>
-            <!-- <ion-button expand="block" class="ion-no-margin" (click)="cancel()">Cancelar</ion-button> -->
-          </ion-col>
-        </ion-row>
-      </ion-grid> 
     </ion-list>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button  type="submit" expand="block" class="ion-no-margin" [disabled]="!fUpdateC.valid || loadingUpdate">
+            Guardar
+            <ion-spinner name="crescent" *ngIf="loadingUpdate"></ion-spinner>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid> 
   </form> 
 
 </ion-content>

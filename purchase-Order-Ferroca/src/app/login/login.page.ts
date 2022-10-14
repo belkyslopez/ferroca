@@ -36,9 +36,7 @@ loading: boolean = false;
   }
 
   async login(fLogin: NgForm){
-
   this.loading = true;
-
   if(this.loginForm.invalid) { return;}
     console.log(fLogin.valid);
     console.log(this.loginUser);

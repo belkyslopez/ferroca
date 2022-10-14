@@ -59,10 +59,13 @@
       <ion-grid>
         <ion-row>
           <ion-col>
-            <ion-button  type="submit" expand="block" class="ion-no-margin" [disabled]="!fupdaterP.valid">Modificar</ion-button>
+            <ion-button  type="submit" expand="block" class="ion-no-margin" [disabled]="!fupdaterP.valid || loading">
+              Modificar
+              <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+            </ion-button>
           </ion-col>
           <ion-col>
-            <ion-button  type="button" expand="block" class="ion-no-margin" (click)="deleteProduct()">Eliminar</ion-button>
+            <ion-button  type="button" expand="block" class="ion-no-margin" (click)="showAlert()">Eliminar</ion-button>
           </ion-col>
         </ion-row>
       </ion-grid> 

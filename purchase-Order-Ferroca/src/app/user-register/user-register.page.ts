@@ -23,7 +23,7 @@ export class UserRegisterPage implements OnInit {
   roleMessage = '';
   IDUser: any;
   registerForm: FormGroup;
-  loading: false;
+  loading: boolean = false;
   url: string = URL_SERVICIOS;
 
   constructor( private userService: UserService,
@@ -45,6 +45,7 @@ export class UserRegisterPage implements OnInit {
       if(this.registerForm.invalid) {
          return;
       }
+      this.loading = true;
         console.log(this.registerForm.valid);  
         const valido = await this.userService.register (this.registerUser);
         if(valido){
@@ -68,11 +69,6 @@ export class UserRegisterPage implements OnInit {
 
     cancel() {
       this.modalCtrl.dismiss(null, 'cancel');
-    }
-
-    goToUpdate(user: Usuario){
-     this.navCtrlr.navigateForward('/user-update', { state: user });
-     console.log("user goToUpdate ===>  {state: user}", user);
     }
 
     get form() { return this.registerForm.controls; }

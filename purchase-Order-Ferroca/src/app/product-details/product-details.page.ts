@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { URL_SERVICIOS } from '../core/config/url.services';
 import { AlertController } from '@ionic/angular';
 import {UiService} from "../core/services/ui.service";
+import { AlertService } from '../core/services/alert.service';
 
 @Component({
   selector: 'app-product-details',
@@ -32,12 +33,15 @@ export class ProductDetailsPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private alertController: AlertController,
     private uiService: UiService,
+    private alertService: AlertService,
   ) {
     this.url = URL_SERVICIOS
   }
 
   ngOnInit() {
     this.getDetailsProduct();
+    this.product = (history.state);
+    console.log("ngOnInit product", this.product._id );
   }
 
   getDetailsProduct(): void {
@@ -63,7 +67,6 @@ export class ProductDetailsPage implements OnInit {
       console.log("Error");
     }
   }
-
 
   async presentAlertStock() {
     const alert = await this.alertController.create({

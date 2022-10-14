@@ -33,10 +33,10 @@
 
       <ion-row>
         <ion-col style="text-align: left;" [ngSwitch]="order?.step" style="color: rgb(0, 156, 0);">
-          <ion-badge *ngSwitchCase="'1'" color="warning">Ingresado</ion-badge>
-          <ion-badge *ngSwitchCase="'2'" color="primary">Preparación</ion-badge>
+          <ion-badge *ngSwitchCase="'1'" color="primary">Ingresado</ion-badge>
+          <ion-badge *ngSwitchCase="'2'" color="warning">Preparación</ion-badge>
           <ion-badge *ngSwitchCase="'3'" color="danger">Despachado</ion-badge>
-          <ion-badge *ngSwitchCase="'4'" color="secondary">Entregado</ion-badge>
+          <ion-badge *ngSwitchCase="'4'" color="success">Entregado</ion-badge>
         </ion-col>
         <ion-col style="text-align: right;">
           <p color="dark" style="font-weight: bold;">$ {{order.totalOrder | number : '1.0-1'}}</p>

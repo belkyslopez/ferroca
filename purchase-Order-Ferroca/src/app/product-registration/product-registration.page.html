@@ -11,28 +11,25 @@
 
 <ion-content class="ion-padding">
 
-  <ion-card *ngFor="let product of products; let i = index" (click)="goToUpdate(product)">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="3">
-          <img src="{{ url + '/get-image-product/' + product.image }}" width="80" *ngIf="product.image != 'null'">
-          <img src="../../assets/img/product_not.png" *ngIf="product.image == 'null'">
-        </ion-col>
-        <ion-col size="9">
-            <p>{{product.name}}</p>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+  <ion-card *ngIf="!products">
+    <p class="ion-text-center">Sin productos registrados</p>
   </ion-card>
 
-<ion-card *ngIf="products == 0">
-  <ion-grid>
-    <p>Sin productos</p>
-  </ion-grid>
-</ion-card>
-
-
-
+  <ng-template ngFor let-product [ngForOf]="products">
+    <ion-card *ngIf="product.disabled == false">
+      <ion-grid (click)=" goToUpdate(product)">
+        <ion-row>
+          <ion-col size="3">
+            <img src="{{ url + '/get-image-product/' + product.image }}" width="80" *ngIf="product.image != 'null'">
+            <img src="../../assets/img/product_not.png" *ngIf="product.image == 'null'">
+          </ion-col>
+          <ion-col size="9">
+            <p>{{product.name}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ng-template>
 
   <ion-modal trigger="modal-product">
     <ng-template>
@@ -72,9 +69,7 @@
                 [(ngModel)]="registerProducto.stock" required></ion-input>
             </ion-item>
           </ion-list>
-
           <ion-row>
-
             <ion-col size="8">
               <ion-card class="aling-center">
                 <img [src]="image" class="img-product" *ngIf="registerProducto?.image">
@@ -86,7 +81,7 @@
                   <ion-button (click)="camara(true)" expand="full" shape="round" class="color-camara">
                     <ion-icon name="camera"></ion-icon>
                   </ion-button>
-              </div>
+                </div>
               </ion-row>
               <ion-row>
                 <div class="aling-center">
@@ -95,31 +90,30 @@
                   </ion-button>
                 </div>
               </ion-row>
-             </ion-col> 
+            </ion-col>
           </ion-row>
-
           <div class="ion-text-center">
             <ion-label position="floating">
               <ion-text color="danger">*</ion-text> campos obligatorios
             </ion-label>
           </div>
-
           <ion-grid>
             <ion-row>
               <ion-col>
-                <ion-button type="submit" expand="block" class="ion-no-margin" [disabled]="!fRegisterP.valid">Registrar</ion-button>
+                <ion-button type="submit" expand="block" class="ion-no-margin" [disabled]="!fRegisterP.valid || loading">
+                  Registrar
+                  <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+                </ion-button>
               </ion-col>
               <ion-col>
                 <ion-button expand="block" class="ion-no-margin" (click)="cancel()">Cancelar</ion-button>
               </ion-col>
             </ion-row>
-          </ion-grid> 
-
+          </ion-grid>
         </form>
       </ion-content>
     </ng-template>
   </ion-modal>
-
 </ion-content>
 
 <ion-footer class="ion-no-border ion-padding">

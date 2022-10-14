@@ -32,7 +32,10 @@
     <ion-input type="text" placeholder="Ingrese la direccion" [(ngModel)]="otherDirection"></ion-input>
   </ion-item>
 
-  <ion-button  expand="block" (click)="saveOrder()">Registrar Orden</ion-button>
+  <ion-button  expand="block" (click)="saveOrder()" [disabled]="loading">
+    Registrar Orden
+    <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+  </ion-button>
 
 
 </ion-content>

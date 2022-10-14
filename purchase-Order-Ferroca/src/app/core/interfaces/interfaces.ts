@@ -7,6 +7,7 @@
   address?: string;
   phone: number;
   rut: number;
+  disabled: boolean;
   }
 
 export interface Cliente {
@@ -16,6 +17,7 @@ export interface Cliente {
     rs?: string;
     phone: number;
     rut: number;
+    disabled: boolean;
   }
 
 export interface Token {
@@ -38,7 +40,7 @@ export interface Producto {
   updatedAt? : string;
   stock? : number;
   quantity? : number;
-  // cantidad : number;
+  disabled: boolean;
   }
 
 export interface OrdenCompra {

@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar class="ion-text-center">
     <!-- <ion-buttons slot="start">
       <ion-back-button defaultHref="/customer-register"></ion-back-button>
     </ion-buttons> -->
@@ -14,32 +14,22 @@
 
 <ion-content class="ion-padding">
   
-  <ion-card *ngIf=" !customers ">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="8">
-            <p>Sin clientes registrados</p>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+  <ion-card *ngIf="!customers" >
+    <p class="ion-text-center">Sin clientes registrados</p>
   </ion-card>
 
-  <ion-card *ngFor="let customer of customers; let i = index">
-    <ion-grid>
-      <ion-row>
-        <ion-col size="8">
-            <p>{{customer.rs | titlecase}}</p>
-            <p>{{customer.email}}</p>
-        </ion-col>
-        <ion-col size="1">
-          <ion-icon name="person-circle" (click)="goToUpdate(customer)"></ion-icon>
-        </ion-col>
-        <ion-col size="1">
-          <ion-icon name="eye" (click)="goToDetail(customer)"></ion-icon>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-card>
+  <ng-template ngFor let-customer [ngForOf]="customers" >
+    <ion-card  *ngIf="customer.disabled == false">
+      <ion-grid (click)="goToDetail(customer)">
+        <ion-row>
+          <ion-col size="8">
+              <p>{{customer.rs | titlecase}}</p>
+              <p>{{customer.email}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ng-template>
 
   <ion-modal trigger="modal-customer" >
     <ng-template>
@@ -77,7 +67,10 @@
             <ion-grid>
               <ion-row>
                 <ion-col>
-                    <ion-button type="submit" class="ion-no-margin" expand="block" [disabled]="!fRegisterC.valid">Registrar</ion-button> 
+                    <ion-button type="submit" class="ion-no-margin" expand="block" [disabled]="!fRegisterC.valid || loading">
+                      Registrar
+                      <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
+                    </ion-button> 
                 </ion-col>
                 <ion-col>
                     <ion-button expand="block" class="ion-no-margin" (click)="cancel()">Cancelar</ion-button>

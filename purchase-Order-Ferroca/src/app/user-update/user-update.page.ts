@@ -4,6 +4,7 @@ import { NavController } from '@ionic/angular';
 import { UiService } from '../core/services/ui.service';
 import { ModalController } from '@ionic/angular';
 import { AlertService } from '../core/services/alert.service';
+import { Usuario } from '../core/interfaces/interfaces';
 
 @Component({
   selector: 'app-user-update',
@@ -12,8 +13,8 @@ import { AlertService } from '../core/services/alert.service';
 })
 export class UserUpdatePage implements OnInit {
 
-  user: any;
-  loading: boolean = false;
+  user: Usuario;
+  loadingUpdate : boolean = false;
 
   constructor(private userService: UserService,
               private navCtrlr: NavController,
@@ -32,8 +33,9 @@ export class UserUpdatePage implements OnInit {
   ionViewWillEnter(){
   }
 
+
   async updateUser(){
-    this.loading= true;
+    this.loadingUpdate= true;
     const valido = await this.userService.updateUser(this.user);
     if(valido){
       this.alertService.presentAlertRegistro('Se modificó con exitoso!','', '','ok','');
@@ -43,18 +45,9 @@ export class UserUpdatePage implements OnInit {
     }
   }
 
-  async deleteUser(){
-    const valido = await this.userService.deleteUser(this.user._id);
-    if(valido){
-      this.alertService.presentAlertRegistro('Se eliminó con exitoso!','', '','ok','');
-      this.cancel();
-    }else{
-      this.uiService.presentAlert('No se elimino el usuario');
-    }
-  }
-  
   cancel() {
     this.navCtrlr.navigateBack('/user-register', { animated: true });
   }
+
 
 }

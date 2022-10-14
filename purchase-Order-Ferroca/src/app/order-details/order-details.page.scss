@@ -1,16 +1,16 @@
-ion-card>ion-card-content>ion-grid>ion-row>p {
+ion-card >ion-card-content >ion-grid >ion-row >p {
     color: rgb(27, 27, 27);
     font-weight: bold;
     font-size: 12px;
 }
 
-ion-card>ion-card-content>ion-grid>ion-row>span {
+ion-card >ion-card-content >ion-grid >ion-row >span {
     color: rgb(27, 27, 27);
     font-size: 12px;
     margin-right: 5px;
 }
 
-ion-card>ion-card-content {
+ion-card >ion-card-content {
     color: rgb(27, 27, 27);
     font-size: 12px;
 }
@@ -21,4 +21,12 @@ ion-icon {
 
 ion-title {
     padding: 0px 50px 0px 0px;
+}
+
+ion-badge{
+    border-radius: 20px;
+    padding-left: 6px;
+    padding-top: 5px;
+    padding-right: 6px;
+    padding-bottom: 5px;
 }

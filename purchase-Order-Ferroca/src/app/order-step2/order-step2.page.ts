@@ -19,6 +19,7 @@ export class OrderStep2Page implements OnInit {
   otherDirection: string;
   products: Producto[];
   user:any;
+  loading: boolean = false;
 
   constructor(private navCtrlr: NavController,
     private modalCtrl: ModalController,
@@ -58,6 +59,7 @@ export class OrderStep2Page implements OnInit {
   }
 
   async saveOrder(){
+    this.loading = true;
     await this.getUser();
     const {orderItems, totalOrder} = this.products.reduce((acc, item) => {
       acc.totalOrder += item.price * item.quantity;

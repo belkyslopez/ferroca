@@ -28,7 +28,7 @@ export class ProductRegistrationPage implements OnInit {
 
   registerProducto:any = {};
   products: any;
-  product: any;
+  product: Producto;
   componentes: Observable<Component[]>;
   productForm: FormGroup;
   imageData: any;
@@ -36,6 +36,7 @@ export class ProductRegistrationPage implements OnInit {
   image: any;
   formData;
   url: string;
+  loading: boolean = false;
 
 
   constructor(private productService: ProductService,
@@ -65,6 +66,7 @@ export class ProductRegistrationPage implements OnInit {
     if(this.productForm.invalid) { 
       return;
     }
+    this.loading = true;
       console.log(this.productForm.valid);
       const valido = await this.productService.registerProduct(this.registerProducto);
       if(valido){
@@ -109,7 +111,7 @@ export class ProductRegistrationPage implements OnInit {
     console.log('producto', this.productService.producto);
     const valido = await this.productService.addImg(this.formData, this.productService.producto._id);
     if(valido){
-      this.alertService.presentAlertRegistro('Se agregó la imagen con exitoso!','', '','ok','');
+      //this.alertService.presentAlertRegistro('Se agregó la imagen con exitoso!','', '','ok','');
       this.cancel();
     }else{
       this.uiService.presentAlert('No se guardó la imagen');
@@ -119,7 +121,6 @@ export class ProductRegistrationPage implements OnInit {
   async getImg(){
     const valido = await this.productService.getImg(this.nameFile);
     if(valido){
-      //this.alertService.presentAlertRegistro('Se agregó la imagen con exitoso!','', '','ok','');
       this.cancel();
     }else{
       this.uiService.presentAlert('No se cargó la imagen correctamente');
@@ -158,7 +159,6 @@ export class ProductRegistrationPage implements OnInit {
       descripcion: ['', { validators: [Validators.required],}],
       precio: ['', { validators: [Validators.required], }],
       stock: ['', { validators: [Validators.required], }],
-      //registerForm: [ true ]
     });
   }
 
@@ -169,5 +169,10 @@ export class ProductRegistrationPage implements OnInit {
    this.productForm.controls['descripcion'].setValue('');
    this.productForm.controls['precio'].setValue('');
  }
+
+ goToDetail(product: Producto){
+  this.navCtrlr.navigateForward('/product-details', { state: product});
+  console.log("product goTogoToDetail ===>  {state: product}", product );
+}
 
 }

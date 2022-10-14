@@ -23,6 +23,7 @@ export class CustormerRegisterPage implements OnInit {
   customers: any;
   customer: any;
   clienteForm: FormGroup;
+  loading: boolean = false;
 
   constructor( private userService: UserService,
                private navCtrlr: NavController,
@@ -43,6 +44,7 @@ export class CustormerRegisterPage implements OnInit {
     if(this.clienteForm.invalid) {
        return;
       }
+      this.loading = true;
       console.log(this.clienteForm.valid);
       const valido = await this.userService.registerCliente(this.registerCliente);
       if(valido){
@@ -67,11 +69,6 @@ export class CustormerRegisterPage implements OnInit {
   cancel() {
     this.modal.dismiss(null, 'cancel');
   }
-
-  goToUpdate(customer: Cliente){
-    this.navCtrlr.navigateForward('/customer-update', { state: customer });
-    console.log("user goToUpdate ===>  {state: customer}", customer);
-   }
 
    get form() { return this.clienteForm.controls; }  
    get errorControl() { return this.clienteForm.controls; }
@@ -105,6 +102,6 @@ export class CustormerRegisterPage implements OnInit {
 
   goToDetail(customer: Cliente){
     this.navCtrlr.navigateForward('/customer-detail', { state: customer});
-    console.log("customer goTogoToDetail ===>  {state: customer}", customer );
+    console.log("objeto enviado custormer-detail", customer );
   }
 }

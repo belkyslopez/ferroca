@@ -6,6 +6,7 @@ import { Camera , CameraOptions } from '@awesome-cordova-plugins/camera/ngx';
 import { HttpClient } from '@angular/common/http';
 import { ModalController } from '@ionic/angular';
 import { AlertService } from '../core/services/alert.service';
+import { Producto } from '../core/interfaces/interfaces';
 
 @Component({
   selector: 'app-product-update',
@@ -14,7 +15,10 @@ import { AlertService } from '../core/services/alert.service';
 })
 export class ProductUpdatePage implements OnInit {
 
-  product: any;
+  product: Producto;
+  loadingDelete: boolean = false;
+  loadingUpdate : boolean = false;
+  loading: boolean = false;
 
   constructor(
       private productService: ProductService,
@@ -35,23 +39,13 @@ export class ProductUpdatePage implements OnInit {
   }
 
   async updateProduct(){
+    this.loading = true;
     const valido = await this.productService.updateProduct(this.product);
     if(valido){
-     // this.goToReturn();
       this.alertService.presentAlertRegistro('Se modificó con exitoso!','', '','ok','');
       this.cancel();
     }else{
       this.uiService.presentAlert('No se modifico el producto');
-    }
-  }
-
-  async deleteProduct(){
-    const valido = await this.productService.deleteProduct(this.product._id);
-    if(valido){
-      this.alertService.presentAlertRegistro('Se eliminó con exitoso!','', '','ok','');
-      this.cancel();
-    }else{
-      this.uiService.presentAlert('No se elimino el producto');
     }
   }
 
@@ -61,6 +55,28 @@ export class ProductUpdatePage implements OnInit {
 
   cancel() {
     this.navCtrlr.navigateBack('/product-registration', { animated: true });
+  }
+
+  showAlert(): void {
+    this.alertService.presentAlertDelete(
+      'Eliminar Producto',
+      '¿Está seguro que desea eliminar el producto?',
+      this.deleteProduct.bind(this),
+      'Continuar');
+  }
+
+  async deleteProduct(){
+    this.loadingDelete= true;
+    this.product.disabled =  true
+    console.log("product delete", this.product)
+    const valido = await this.productService.updateProduct(this.product);
+    if(valido){
+      this.alertService.presentAlertRegistro('Se eliminó con exitoso!','', '','ok','');
+     this.cancel();
+     this.navCtrlr.navigateBack('/product-registration',);
+    }else{
+      this.uiService.presentAlert('No se elimino el usuario');
+    }
   }
 
 }

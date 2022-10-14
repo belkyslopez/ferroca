@@ -43,6 +43,26 @@ export class AlertService {
       }); 
     await alert.present();
   }
+
+  async presentAlertDelete(header: string, message: string, handler, actionButton = 'Eliminar', cancelButton = 'Cancelar') {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: [
+        {
+          text: cancelButton,
+          role: 'cancel',
+        },
+        {
+          text: actionButton,
+          role: 'confirm',
+          handler
+        }
+      ]
+    });
+
+    await alert.present();
+  }
   
 
 /*  async deleteConfirm(header: string, message: string, route = '', actionButton = 'ok', cancelButton = '') {

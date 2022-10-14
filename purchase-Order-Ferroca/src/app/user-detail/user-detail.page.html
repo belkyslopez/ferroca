@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <!-- <ion-buttons slot="start">
-      <ion-back-button  text="Volver"></ion-back-button>
+      <ion-back-button defaultHref="user-register"></ion-back-button>
     </ion-buttons> -->
     <div>
       <ion-title class="title-color"> Usuarios</ion-title>
@@ -34,3 +34,18 @@
   </ion-card>
 
 </ion-content>
+
+<ion-footer class="ion-no-border ion-padding">
+  <ion-toolbar>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button  type="button" expand="block"  class="ion-no-margin" [disabled]="loadingDelete" (click)="showAlert()" >Eliminar</ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button  type="submit" expand="block" class="ion-no-margin" [disabled]="loadingUpdate" (click)="goToUpdate(user)">Modificar</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid> 
+  </ion-toolbar>
+</ion-footer>
