@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { UserUpdatePageRoutingModule } from './user-update-routing.module';
 import { UserUpdatePage } from './user-update.page';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SimpleMaskModule } from 'ngx-ion-simple-mask';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     IonicModule,
     UserUpdatePageRoutingModule,
     ReactiveFormsModule,
+    SimpleMaskModule
   ],
   declarations: [UserUpdatePage]
 })

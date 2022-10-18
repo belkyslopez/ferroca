@@ -24,6 +24,8 @@ export class CustormerRegisterPage implements OnInit {
   customer: any;
   clienteForm: FormGroup;
   loading: boolean = false;
+  loadingcustomers: boolean = false;
+
 
   constructor( private userService: UserService,
                private navCtrlr: NavController,
@@ -50,7 +52,7 @@ export class CustormerRegisterPage implements OnInit {
       if(valido){
         this.alertService.presentAlertRegistro('Registro exitoso!','', '','ok','');
         this.getAllClient();
-        this.clearLoginForm();
+        this.clearForm();
         this.cancel();
       }else{
         this.uiService.presentAlert('complete el formulario');
@@ -58,12 +60,14 @@ export class CustormerRegisterPage implements OnInit {
   }
 
   async getAllClient(){
+    this.loadingcustomers = true;
     const valido = await this.userService.getAllClient();
     if(valido){
       this.customers = this.userService.allClient;
     }else{
       this.uiService.presentAlert('No se encuentran registros');
     }
+    this.loadingcustomers = false;
   }
 
   cancel() {
@@ -85,13 +89,12 @@ export class CustormerRegisterPage implements OnInit {
        address: ['', { validators: [Validators.required],}],
        rs: ['', { validators: [Validators.required], }],
        phone: ['', { validators: [Validators.required],}],
-       rut: ['', { validators: [Validators.required],}],
-       //registerForm: [ true ]
+       rut: ['',  [Validators.required,Validators.minLength(12),  Validators.maxLength(12)]],
      });
    }
 
-   clearLoginForm() {
-    console.log("clearLoginForm");
+   clearForm() {
+    console.log("clearForm");
     this.clienteForm.reset();
     this.clienteForm.controls['email'].setValue('');
     this.clienteForm.controls['address'].setValue('');

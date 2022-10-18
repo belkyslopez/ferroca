@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar  class="ion-text-center">
     <div>
-      <ion-title> Catálogo</ion-title>
+      <ion-title  class="main-title"> Catálogo</ion-title>
     </div> 
     <ion-buttons slot="end">
       <ion-menu-button menu="first"></ion-menu-button>
@@ -10,10 +10,13 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-grid fixed>
     <ion-row>
       <ion-searchbar placeholder="Buscar..." [(ngModel)]="searchTerm" animated="true"></ion-searchbar>
-      <ion-col *ngFor="let product of products | filter:searchTerm; let i = index" size="6" routerLink="/product-details/{{product._id}}">
+      <ion-col *ngFor="let product of products | filter:searchTerm; let i = index" size="6" (click)="getProduct(product)">
         <ion-card>
           <div class="center">
             <img src="{{ url + '/get-image-product/' + product.image }}" *ngIf="product.image != 'null'">

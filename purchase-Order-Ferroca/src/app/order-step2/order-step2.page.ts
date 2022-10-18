@@ -6,6 +6,7 @@ import { UserService } from '../core/services/user.service';
 import {OrderService} from '../core/services/order.service';
 import { UiService } from '../core/services/ui.service';
 import { Storage } from '@ionic/storage';
+import { AlertService } from '../core/services/alert.service';
 
 @Component({
   selector: 'app-order-step2',
@@ -26,10 +27,10 @@ export class OrderStep2Page implements OnInit {
     private userService: UserService,
     private orderService: OrderService,
     private uiService: UiService,
-    private storage: Storage,) { }
+    private storage: Storage,
+    private alertService: AlertService,) { }
 
   ngOnInit() {
-
   }
 
   ionViewWillEnter(){
@@ -66,8 +67,7 @@ export class OrderStep2Page implements OnInit {
       acc.orderItems.push({ product: item._id, quantity: item.quantity});
       return acc;
     }, {orderItems: [],  totalOrder: 0});
-    console.log("otherDirection.", this.otherDirection);
-    
+    console.log("otherDirection.", this.otherDirection);  
     const order = {
       active:true,
       step:1,
@@ -79,6 +79,7 @@ export class OrderStep2Page implements OnInit {
     }
     const valido = await this.orderService.saveOrder(order);
     if(valido){
+      this.alertService.presentAlertRegistro('Se registró la orden con éxito!','', '','ok','');
       this.orderService.clearProducts();
       this.navCtrlr.navigateForward('/tabs/tab1');
     }else{

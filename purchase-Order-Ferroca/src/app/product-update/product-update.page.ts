@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { ModalController } from '@ionic/angular';
 import { AlertService } from '../core/services/alert.service';
 import { Producto } from '../core/interfaces/interfaces';
+import { URL_SERVICIOS } from '../core/config/url.services';
 
 @Component({
   selector: 'app-product-update',
@@ -16,9 +17,12 @@ import { Producto } from '../core/interfaces/interfaces';
 export class ProductUpdatePage implements OnInit {
 
   product: Producto;
+  image: any;
+  formData;
   loadingDelete: boolean = false;
   loadingUpdate : boolean = false;
   loading: boolean = false;
+  url: string = URL_SERVICIOS;
 
   constructor(
       private productService: ProductService,
@@ -43,14 +47,40 @@ export class ProductUpdatePage implements OnInit {
     const valido = await this.productService.updateProduct(this.product);
     if(valido){
       this.alertService.presentAlertRegistro('Se modificó con exitoso!','', '','ok','');
+      if(this.image){
+        await this.addImg();
+      }
       this.cancel();
     }else{
       this.uiService.presentAlert('No se modifico el producto');
     }
   }
 
-  goToReturn(){
-    this.navCtrlr.navigateRoot('/product-registration');
+  camara(isCamera){
+    const options: CameraOptions = {
+      quality: 60,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,
+      sourceType: isCamera ? this.camera.PictureSourceType.CAMERA : this.camera.PictureSourceType.PHOTOLIBRARY
+    };
+    this.camera.getPicture(options).then(async (imageData) => {
+      this.image = `data:image/jpeg;base64,${imageData}`
+      const base64 = await fetch(this.image);
+      const blob = await base64.blob();
+      this.formData = new FormData();
+      this.formData.append('image', blob, 'temp.jpg');
+      console.log('formData2', this.formData.getAll('image'));
+    });
+  }
+
+  async addImg(){
+    console.log('producto', this.productService.producto);
+    const valido = await this.productService.addImg(this.formData, this.productService.producto._id);
+    if(!valido){
+      this.uiService.presentAlert('No se guardó la imagen');
+    }
   }
 
   cancel() {
@@ -73,7 +103,6 @@ export class ProductUpdatePage implements OnInit {
     if(valido){
       this.alertService.presentAlertRegistro('Se eliminó con exitoso!','', '','ok','');
      this.cancel();
-     this.navCtrlr.navigateBack('/product-registration',);
     }else{
       this.uiService.presentAlert('No se elimino el usuario');
     }

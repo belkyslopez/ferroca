@@ -11,6 +11,7 @@ import { File } from '@awesome-cordova-plugins/file/ngx';
 import { FormBuilder } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PhotoLibrary } from "@awesome-cordova-plugins/photo-library/ngx";
+import { SimpleMaskModule } from 'ngx-ion-simple-mask';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,7 +21,8 @@ import { PhotoLibrary } from "@awesome-cordova-plugins/photo-library/ngx";
     HttpClientModule,
     AppRoutingModule,
     IonicStorageModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SimpleMaskModule
   ],
   providers: [
     Camera,

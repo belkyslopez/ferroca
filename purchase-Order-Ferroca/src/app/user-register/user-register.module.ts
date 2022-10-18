@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { UserRegisterPageRoutingModule } from './user-register-routing.module';
 import { UserRegisterPage } from './user-register.page';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SimpleMaskModule } from 'ngx-ion-simple-mask';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     IonicModule,
     UserRegisterPageRoutingModule,
     ReactiveFormsModule,
+    SimpleMaskModule
   ],
   declarations: [UserRegisterPage]
 })

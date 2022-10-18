@@ -20,13 +20,11 @@ export class OrderService {
     private autService: AuthenticateService
   ) { }
 
-
   async getOrderByUser(userId: string) {
     await this.autService.loadToken();
     const headers = new HttpHeaders({
       'Authorization': this.autService.token
     });
-
     return new Promise(resolve => {
       this.http.get(`${URL_SERVICIOS}/order/by-user/` + userId, { headers })
         .subscribe(resp => {
@@ -38,7 +36,6 @@ export class OrderService {
           }
         });
     });
-
   }
 
   async getAllOrders() {
@@ -46,7 +43,6 @@ export class OrderService {
     const headers = new HttpHeaders({
       'Authorization': this.autService.token
     });
-
     return new Promise(resolve => {
       this.http.get(`${URL_SERVICIOS}/orders`, { headers })
         .subscribe(resp => {
@@ -58,9 +54,7 @@ export class OrderService {
           }
         });
     });
-
   }
-
 
   addProduct(product: Producto, quantity) {
     this.items[product._id] = { ...product, quantity};
@@ -75,7 +69,6 @@ export class OrderService {
     delete this.items[productId];
     return Object.values(this.items);
   }
-
 
   getOrder(id: string): Observable<any> {
     const headers = new HttpHeaders({
@@ -118,7 +111,6 @@ export class OrderService {
         });
     });
   }
-
   clearProducts(){
     this.items = [];
   }

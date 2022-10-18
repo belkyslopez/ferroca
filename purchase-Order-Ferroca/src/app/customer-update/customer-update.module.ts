@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { CustomerUpdatePageRoutingModule } from './customer-update-routing.module';
 import { CustomerUpdatePage } from './customer-update.page';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SimpleMaskModule } from 'ngx-ion-simple-mask';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     IonicModule,
     CustomerUpdatePageRoutingModule,
     ReactiveFormsModule,
+    SimpleMaskModule
   ],
   declarations: [CustomerUpdatePage]
 })

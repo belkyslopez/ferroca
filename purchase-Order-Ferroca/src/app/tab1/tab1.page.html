@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar class="ion-text-center">
     <div>
-      <ion-title> Listado de ordenes </ion-title>
+      <ion-title  class="main-title"> Listado de ordenes </ion-title>
     </div>
     <ion-buttons slot="end">
       <ion-menu-button menu="first"></ion-menu-button>
@@ -21,7 +21,6 @@
           <p> {{order.createdAt | date: 'dd/MM/yyyy, h:mm a'}}</p>
         </ion-col>
       </ion-row>
-
       <ion-row>
         <ion-col style="text-align: left;">
           <p> {{order.customer?.rs}}</p>
@@ -30,7 +29,6 @@
           <p> {{order.user.name }} {{order.user.surname }}</p>
         </ion-col>
       </ion-row>
-
       <ion-row>
         <ion-col style="text-align: left;" [ngSwitch]="order?.step" style="color: rgb(0, 156, 0);">
           <ion-badge *ngSwitchCase="'1'" color="primary">Ingresado</ion-badge>
@@ -42,8 +40,6 @@
           <p color="dark" style="font-weight: bold;">$ {{order.totalOrder | number : '1.0-1'}}</p>
         </ion-col>
       </ion-row>
-
     </ion-grid>
   </ion-card>
-
 </ion-content>

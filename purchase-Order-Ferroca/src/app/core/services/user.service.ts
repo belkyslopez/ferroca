@@ -5,7 +5,6 @@ import { URL_SERVICIOS } from '../config/url.services';
 import { NavController } from '@ionic/angular';
 import { AuthenticateService } from './authenticate.service';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +20,6 @@ export class UserService {
   constructor( private http: HttpClient,
     private navCtrl: NavController,
     private autService: AuthenticateService) { }
-
 
   async register( usuario: Usuario){
     await this.autService.loadToken();
@@ -42,7 +40,6 @@ export class UserService {
       });
     });
   }
-
 
   async getUser( id ){
     await this.autService.loadToken();
@@ -223,36 +220,5 @@ export class UserService {
       });
     });
   }
-
-    
-  /*async validToken(): Promise<boolean>{
-    await this.loadToken();
-    if ( !this.token ){
-      this.navCtrl.navigateRoot('/login')
-      return Promise.resolve(false);
-    }
-    return new Promise<boolean>( resolve =>{
-      const headers = new HttpHeaders({
-        'Authorization': this.token
-      });
-      this.http.post(`${URL_SERVICIOS}/register`, { headers })
-      .subscribe( resp =>{
-        if (resp) {
-          console.log('usuario' , resp );
-          resolve(true);
-        }else{
-          this.navCtrl.navigateRoot('/login');
-           resolve(false);
-        }
-      });
-    });
-  }*/
-
-  /*getUser(){
-    if ( !this.usuario.id){
-      this.validToken();
-    }
-      return {...this.usuario };
-    }*/
 
 }

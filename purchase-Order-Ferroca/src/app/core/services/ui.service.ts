@@ -22,7 +22,6 @@ export class UiService {
       duration: 1500,
       position
     });
-
     await toast.present();
   }
 }

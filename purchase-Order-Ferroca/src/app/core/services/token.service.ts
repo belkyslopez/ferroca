@@ -14,7 +14,6 @@ export class TokenService {
     private storage: Storage
   ) { }
 
-
   async loadTokenDecode(){
     this.token = await this.storage.get('token') || null;
     const decoded = jwtDecode<Token>(this.token);

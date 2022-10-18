@@ -35,16 +35,13 @@ export class CataloguePage implements OnInit {
     if(valido){
       this.products = this.productService.allProducts;
     }else{
-      console.log("No cargado")
     }
   }
 
   
   doRefresh(event) {
-    console.log('Begin async operation');
     setTimeout(() => {
       this.getAllProduct();
-      console.log('Async operation has ended');
       event.target.complete();
     }, 2000);
   }

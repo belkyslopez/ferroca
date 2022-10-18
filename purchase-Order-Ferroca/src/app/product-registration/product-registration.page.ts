@@ -27,7 +27,7 @@ export class ProductRegistrationPage implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
 
   registerProducto:any = {};
-  products: any;
+  products: any[];
   product: Producto;
   componentes: Observable<Component[]>;
   productForm: FormGroup;
@@ -37,7 +37,7 @@ export class ProductRegistrationPage implements OnInit {
   formData;
   url: string;
   loading: boolean = false;
-
+  loadingProducto: boolean  = false;
 
   constructor(private productService: ProductService,
     private navCtrlr: NavController,
@@ -71,9 +71,11 @@ export class ProductRegistrationPage implements OnInit {
       const valido = await this.productService.registerProduct(this.registerProducto);
       if(valido){
         this.alertService.presentAlertRegistro('Registro exitoso!','', '','ok','');
+        if(this.image){
+          await this.addImg();
+        }
         this.getAllProduct();
-        this.clearLoginForm();
-        this.addImg();
+        this.clearForm();
         this.cancel();
       }else{
         this.uiService.presentAlert('Ingrese todo los campos');
@@ -110,10 +112,7 @@ export class ProductRegistrationPage implements OnInit {
   async addImg(){
     console.log('producto', this.productService.producto);
     const valido = await this.productService.addImg(this.formData, this.productService.producto._id);
-    if(valido){
-      //this.alertService.presentAlertRegistro('Se agregó la imagen con exitoso!','', '','ok','');
-      this.cancel();
-    }else{
+    if(!valido){
       this.uiService.presentAlert('No se guardó la imagen');
     }
   }
@@ -128,12 +127,14 @@ export class ProductRegistrationPage implements OnInit {
   }
 
   async getAllProduct(){
+    this.loadingProducto = true;
     const valido = await this.productService.getAllProduct();
     if(valido){
       this.products = this.productService.allProducts;
     }else{
       this.uiService.presentAlert('No se encuentran productos');
     }
+    this.loadingProducto = false;
   }
 
   cancel() {
@@ -162,8 +163,8 @@ export class ProductRegistrationPage implements OnInit {
     });
   }
 
-  clearLoginForm() {
-   console.log("clearLoginForm");
+  clearForm() {
+   console.log("clearForm");
    this.productForm.reset();
    this.productForm.controls['nombre'].setValue('');
    this.productForm.controls['descripcion'].setValue('');

@@ -42,7 +42,7 @@ loading: boolean = false;
     console.log(this.loginUser);
     const valido = await this.autService.login(this.loginUser.email, this.loginUser.password);
     if(valido){
-      this.navCtrlr.navigateRoot('/catalogue', { animated: true });
+      this.navCtrlr.navigateRoot('/tabs', { animated: true });
     }else{
       this.uiService.presentAlert('Usuario y contraseña incorrecto');
     }

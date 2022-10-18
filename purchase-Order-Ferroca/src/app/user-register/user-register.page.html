@@ -4,7 +4,7 @@
       <ion-back-button  text="Volver"></ion-back-button>
     </ion-buttons> -->
     <div>
-      <ion-title class="title-color"> Usuarios</ion-title>
+      <ion-title class="title-color main-title"> Usuarios</ion-title>
     </div>
     <ion-buttons slot="end">
       <ion-menu-button menu="first"></ion-menu-button>
@@ -12,10 +12,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-
-    
-  <ion-card *ngIf=" !users ">
+<ion-content class="ion-padding">  
+  <ion-card *ngIf=" !users && !loadingUsers ">
     <ion-grid>
       <ion-row>
         <ion-col size="12">
@@ -24,7 +22,6 @@
       </ion-row>
     </ion-grid>
   </ion-card>
-
   <ng-template ngFor let-user [ngForOf]="users">
     <ion-card  *ngIf="user.disabled == false"   >
       <ion-grid (click)="goToDetail(user)">
@@ -41,7 +38,6 @@
       </ion-grid>
     </ion-card>
   </ng-template>
-
   <ion-modal trigger="modal-user">
     <ng-template>
       <ion-header>
@@ -96,17 +92,16 @@
             <ion-item class="roundedInput">
               <ion-label position="floating">Rut <ion-text color="danger" appRutFormat >*</ion-text>
               </ion-label>
-              <ion-input formControlName="rut" type="number" placeholder="Ingrese el rut" name="rut" [attr.maxlength]="4" maxlength="8"
+              <ion-input simpleMask="99.999.999-9" formControlName="rut" placeholder="Ingrese el rut" name="rut" maxlength="12"
                 [(ngModel)]="registerUser.rut" required></ion-input>
             </ion-item>
-
             <ion-grid>
               <ion-row>
                 <ion-col>
                   <ion-button expand="block" class="ion-no-margin" (click)="cancel()">Cancelar</ion-button>
                 </ion-col>
                 <ion-col>
-                  <ion-button type="submit" expand="block" class="ion-no-margin" [disabled]="!fRegister.valid || loading">
+                  <ion-button type="submit" expand="block" class="ion-no-margin" [disabled]="!registerForm.valid || loading">
                     Registrar
                     <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
                   </ion-button>
@@ -123,7 +118,6 @@
       </ion-content>
     </ng-template>
   </ion-modal>
-
 </ion-content>
 
 <ion-footer class="ion-no-border ion-padding">

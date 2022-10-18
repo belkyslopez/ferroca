@@ -10,15 +10,12 @@
             <ion-icon class="size-icon" name="close" (click)="closeMenu()"></ion-icon>
           </ion-col>
         </ion-row>
-
-
       </ion-toolbar>
     </ion-header> 
-
     <ion-content>
       <ion-list>
         <ion-menu-toggle>
-          <ion-item [routerLink]="['/tabs/tab2']" lines="none">
+          <ion-item [routerLink]="['/tabs/tab2']" [replaceUrl]="true" lines="none">
             <ion-icon name="home" slot="start"   color="dark"></ion-icon>
             Catálogo
           </ion-item>
@@ -34,22 +31,10 @@
             <ion-icon name="construct" slot="start"  color="dark"></ion-icon>
             Productos
           </ion-item>
-          <!-- <ion-item [routerLink]="['/inventory-record']" lines="none"> 
-            <ion-icon name="copy" slot="start"></ion-icon>
-            Registro de Stock 
-          </ion-item> -->
-          <!-- <ion-item [routerLink]="['/order-status']" lines="none">
-            <ion-icon name="stats-chart" slot="start"></ion-icon>
-            Estado de ordenes 
-          </ion-item> -->
           <ion-item [routerLink]="['/tabs/tab1']" lines="none"> 
             <ion-icon name="clipboard" slot="start"  color="dark"></ion-icon>
             Ordenes
           </ion-item> 
-          <!-- <ion-item [routerLink]="['/order-status']" lines="none">
-            <ion-icon name="grid" slot="start"  color="dark"></ion-icon>
-            Catálogo
-          </ion-item> -->
           <ion-item [routerLink]="['/tabs/tab3']" lines="none">
             <ion-icon name="create" slot="start"  color="dark"></ion-icon>
             Registro de Ordenes 

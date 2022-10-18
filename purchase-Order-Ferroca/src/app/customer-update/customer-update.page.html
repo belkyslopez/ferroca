@@ -10,27 +10,27 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form (ngSubmit)="updateClient( fUpdateC )" #fUpdateC="ngForm">   
+  <form  #fUpdateC="ngForm" [formGroup]="clienteUpdateForm" (ngSubmit)="updateClient( fUpdateC )" novalidate>   
     <ion-list lines="full" class="ion-no-margin ion-no-padding">  
       <ion-item  class="roundedInput">
         <ion-label position="floating">Razon Social <ion-text color="danger">*</ion-text></ion-label>
-        <ion-input type="text" placeholder="Ingrese el nombre de la empresa" name="rs" [(ngModel)]="customer.rs" required></ion-input>
+        <ion-input formControlName="rs"  type="text" placeholder="Ingrese el nombre de la empresa" name="rs" [(ngModel)]="customer.rs" required></ion-input>
       </ion-item>
       <ion-item  class="roundedInput">
         <ion-label position="floating">Rut <ion-text color="danger">*</ion-text></ion-label>
-        <ion-input type="number" placeholder="Ingrese el rut" name="rut" [(ngModel)]="customer.rut" required></ion-input>
+        <ion-input formControlName="rut"  placeholder="Ingrese el rut" name="rut" [(ngModel)]="customer.rut" required></ion-input>
       </ion-item>  
       <ion-item  class="roundedInput">
         <ion-label position="floating">Correo <ion-text color="danger">*</ion-text></ion-label>
-        <ion-input type="email" placeholder="Ingrese el correo" name="email"  email="true"[(ngModel)]="customer.email" required></ion-input>
+        <ion-input formControlName="email"  type="email" placeholder="Ingrese el correo" name="email"  email="true"[(ngModel)]="customer.email" required></ion-input>
       </ion-item>    
       <ion-item  class="roundedInput">
         <ion-label position="floating">Dirección <ion-text color="danger">*</ion-text></ion-label>
-        <ion-input type="text" placeholder="Ingrese la direccion" name="address" [(ngModel)]="customer.address" required></ion-input>
+        <ion-input formControlName="address"  type="text" placeholder="Ingrese la direccion" name="address" [(ngModel)]="customer.address" required></ion-input>
       </ion-item>    
       <ion-item  class="roundedInput">
         <ion-label position="floating">Teléfono <ion-text color="danger">*</ion-text></ion-label>
-        <ion-input type="number" placeholder="Ingrese el telefono" name="phone" [(ngModel)]="customer.phone" required></ion-input>
+        <ion-input formControlName="phone"  type="number" placeholder="Ingrese el telefono" name="phone" [(ngModel)]="customer.phone" required></ion-input>
       </ion-item> 
       <div class="ion-text-center top">
         <ion-label position="floating">
@@ -49,5 +49,4 @@
       </ion-row>
     </ion-grid> 
   </form> 
-
 </ion-content>

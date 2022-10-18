@@ -22,10 +22,8 @@ export class Tab2Page {
     this.url = URL_SERVICIOS
   }
 
-  // ngOnInit(){
-  //   this.getAllProduct();
-  // }
-
+  ngOnInit(){
+  }
   
   ionViewWillEnter(){
     this.getAllProduct();
@@ -35,25 +33,22 @@ export class Tab2Page {
   async getAllProduct(){
     const valido = await this.productService.getAllProduct();
     if(valido){
-      this.products = this.productService.allProducts;
+      this.products = this.productService.allProducts.filter((product) => !product.disabled);
       console.log("Productos cargados", this.products)
     }else{
       console.log("No cargado")
     }
+    return valido;
   }
 
-  //sin uso
   getProduct(product: Producto){
-    this.navCtrlr.navigateRoot('/product-details', { state: product });
+    this.navCtrlr.navigateForward('/tabs/tab2/product-details', { state: product });
    }
 
-   doRefresh(event) {
+  async doRefresh(event) {
     console.log('Begin async operation');
-    setTimeout(() => {
-      this.getAllProduct();
-      console.log('Async operation has ended');
-      event.target.complete();
-    }, 2000);
+    await this.getAllProduct();
+    event.target.complete();
   }
 
 }

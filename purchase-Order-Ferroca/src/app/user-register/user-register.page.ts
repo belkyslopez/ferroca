@@ -25,6 +25,7 @@ export class UserRegisterPage implements OnInit {
   registerForm: FormGroup;
   loading: boolean = false;
   url: string = URL_SERVICIOS;
+  loadingUsers: boolean  = false;
 
   constructor( private userService: UserService,
                private navCtrlr: NavController,
@@ -51,7 +52,7 @@ export class UserRegisterPage implements OnInit {
         if(valido){
          this.alertService.presentAlertRegistro('Registro exitoso!','', '','ok','');
          this.getAllUser();
-         this.clearLoginForm();
+         this.clearForm();
          this.cancel();
         }else{
           this.uiService.presentAlert('Usuario y contraseña incorrecto');
@@ -59,12 +60,14 @@ export class UserRegisterPage implements OnInit {
       }
 
     async getAllUser(){
+      this.loadingUsers = true;
       const valido = await this.userService.getAllUser();
       if(valido){
         this.users = this.userService.allUsers;
       }else{
         this.uiService.presentAlert('No se encuentran registros');
       }
+      this.loadingUsers = false;
     }
 
     cancel() {
@@ -89,14 +92,13 @@ export class UserRegisterPage implements OnInit {
         email: ['', { validators: [Validators.required],  }],
         password: ['', [Validators.required,Validators.minLength(4), Validators.maxLength(12)]],
         address: ['', { validators: [Validators.required], }],
-        phone: ['',  [Validators.required, Validators.minLength(12),  Validators.maxLength(13)]],
-        rut: ['',  [Validators.required,Validators.minLength(9),  Validators.maxLength(10)]],
-        //registerForm: [ true ]
+        phone: ['',  [Validators.required, Validators.minLength(9),  Validators.maxLength(12)]],
+        rut: ['',  [Validators.required,Validators.minLength(12),  Validators.maxLength(12)]],
       });
     }
   
-    clearLoginForm() {
-      console.log("clearLoginForm");
+    clearForm() {
+      console.log("clearForm");
       this.registerForm.reset();
       this.registerForm.controls['name'].setValue('');
       this.registerForm.controls['surname'].setValue('');

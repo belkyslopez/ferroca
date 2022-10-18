@@ -19,6 +19,7 @@ export class Tab3Page {
   quantity: number;
   url: string;
   maxControl : FormControl;
+  loadingOrders: boolean = false;
 
   constructor(private navCtrlr: NavController,
               private modalCtrl: ModalController,
@@ -26,13 +27,9 @@ export class Tab3Page {
     this.url = URL_SERVICIOS
   }
 
-  cancel() {
-    this.modalCtrl.dismiss(null, 'cancel');
-    this.navCtrlr.navigateRoot('/user-register', { animated: true });
-  }
-
   ionViewWillEnter(){
     this.products = Object.values(this.orderService.items);
+    this.loadingOrders = true;
   }
 
   deleteProduct(productId){
@@ -57,6 +54,11 @@ export class Tab3Page {
 
   gotToStep2(){
     this.navCtrlr.navigateForward('/order-step2');
+  }
+
+  cancel() {
+    this.modalCtrl.dismiss(null, 'cancel');
+    this.navCtrlr.navigateRoot('/user-register', { animated: true });
   }
 
 }

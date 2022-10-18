@@ -11,8 +11,7 @@ export class OrderListPage implements OnInit {
   orders: any[] = [];
 
   constructor(
-    private orderService: OrderService
-  ) { }
+    private orderService: OrderService) { }
 
   ngOnInit() {
   }
@@ -29,8 +28,6 @@ export class OrderListPage implements OnInit {
     }else{
       console.log("Eror")
     }
-  }
-
-  
+  } 
 
 }

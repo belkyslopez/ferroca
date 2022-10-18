@@ -25,7 +25,6 @@
             </ion-item>
           </ion-col>
         </ion-row>
-
         <ion-row class="ion-justify-content-center">
           <ion-col class="ion-align-items-center" size-md="6" size-lg="5" size-xs="12">
             <ion-button [disabled]="!loginForm.valid || loading" class="button-login" (click)="login" type="submit"
@@ -33,13 +32,11 @@
               <ion-spinner name="crescent" *ngIf="loading"></ion-spinner>
               <ion-label *ngIf="!loading">Iniciar</ion-label>
             </ion-button>
-
           </ion-col>
         </ion-row>
       </ng-container>
     </form>
   </ng-container>
-
 </ion-content>
 
 <ion-footer class="ion-no-border">

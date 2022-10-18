@@ -20,7 +20,6 @@
           <p> {{order.createdAt | date: 'dd/MM/yyyy, h:mm a'}}</p>
         </ion-col>
       </ion-row>
-
       <ion-row>
         <ion-col style="text-align: left;">
           <p> {{order?.customer?.rs}}</p>
@@ -29,7 +28,6 @@
           <p> {{order.user.name }} {{order.user.surname }}</p>
         </ion-col>
       </ion-row>
-
       <ion-row>
         <ion-col style="text-align: left;" [ngSwitch]="order?.step" >
           <ion-badge *ngSwitchCase="'1'" color="primary">Ingresado</ion-badge>
@@ -41,8 +39,6 @@
           <p color="dark" style="font-weight: bold;">$ {{order.totalOrder | number : '1.0-1'}}</p>
         </ion-col>
       </ion-row>
-
     </ion-grid>
   </ion-card>
-
 </ion-content>

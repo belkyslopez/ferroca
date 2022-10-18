@@ -5,7 +5,6 @@ import { OrderService } from '../core/services/order.service';
 import { AlertController } from '@ionic/angular';
 import { TokenService } from '../core/services/token.service';
 
-
 @Component({
   selector: 'app-order-details',
   templateUrl: './order-details.page.html',
@@ -20,9 +19,7 @@ export class OrderDetailsPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private navCtrlr: NavController,
     private alertController: AlertController,
-    private tokenService: TokenService
-
-  ) { }
+    private tokenService: TokenService) { }
 
   ngOnInit() {
     this.getOrder();
@@ -56,7 +53,6 @@ export class OrderDetailsPage implements OnInit {
     }
   }
 
-
   async presentAlertState() {
     const alert = await this.alertController.create({
       subHeader: '¿ Estas segruro de pasar al siguiente estado ? ',
@@ -79,7 +75,5 @@ export class OrderDetailsPage implements OnInit {
     });
     await alert.present();
   }
-
-
 
 }

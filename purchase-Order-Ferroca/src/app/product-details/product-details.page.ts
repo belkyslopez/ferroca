@@ -39,7 +39,6 @@ export class ProductDetailsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.getDetailsProduct();
     this.product = (history.state);
     console.log("ngOnInit product", this.product._id );
   }
@@ -121,6 +120,7 @@ export class ProductDetailsPage implements OnInit {
               this.presentAlertOrder();
             } else {
               this.orderService.addProduct(this.product, parseInt(value[0]));
+              this.alertService.presentAlertRegistro('Se agregó el producto a la orden!','', '','ok','');
             }
           },
         },

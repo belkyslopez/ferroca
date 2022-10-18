@@ -26,7 +26,6 @@ export class AuthenticateService {
     return new Promise(resolve => {
       this.http.post(`${URL_SERVICIOS}/login`, data)
         .subscribe(async resp => {
-
           if (resp) {
             console.log("ok login")
             await this.saveToken(resp['token']);
@@ -58,10 +57,8 @@ export class AuthenticateService {
 
   logout() {
     this.token = null;
-    //this.usuario = null;
     this.storage.clear();
     this.navCtrl.navigateRoot('/login', { animated: true });
   }
-
 
 }

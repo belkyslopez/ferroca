@@ -40,7 +40,6 @@ ion-button {
   --border-radius: 20px !important;
 }
 
-
 ion-header >ion-toolbar {
   --background: black;
 }
@@ -98,4 +97,8 @@ button.alert-button.alert-button-confirm {
 .ios button.alert-button.alert-button-confirm {
   border-bottom-right-radius: 13px;
   border-top-right-radius: 13px;
+}
+
+ion-title.main-title{
+  padding: 0px 0px 0px 40px;
 }

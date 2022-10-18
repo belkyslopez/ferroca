@@ -1,7 +1,7 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar  class="ion-text-center">
     <div>
-      <ion-title>Productos </ion-title>
+      <ion-title  class=" main-title">Productos </ion-title>
     </div>
     <ion-buttons slot="end">
       <ion-menu-button menu="first"></ion-menu-button>
@@ -10,12 +10,10 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-
-  <ion-card *ngIf="!products">
+  <ion-card *ngIf="!products && !loadingProducto">
     <p class="ion-text-center">Sin productos registrados</p>
   </ion-card>
-
-  <ng-template ngFor let-product [ngForOf]="products">
+  <ng-template ngFor let-product [ngForOf]="products  | orderBy : createdAt">
     <ion-card *ngIf="product.disabled == false">
       <ion-grid (click)=" goToUpdate(product)">
         <ion-row>
@@ -30,7 +28,6 @@
       </ion-grid>
     </ion-card>
   </ng-template>
-
   <ion-modal trigger="modal-product">
     <ng-template>
       <ion-header>
@@ -40,7 +37,6 @@
           </div>
         </ion-toolbar>
       </ion-header>
-
       <ion-content class="ion-padding">
         <form [formGroup]="productForm" (ngSubmit)="registerProduct()" #fRegisterP="ngForm">
           <ion-list lines="full" class="ion-no-margin ion-no-padding">
@@ -72,7 +68,7 @@
           <ion-row>
             <ion-col size="8">
               <ion-card class="aling-center">
-                <img [src]="image" class="img-product" *ngIf="registerProducto?.image">
+                <img [src]="image" class="img-product" *ngIf="image">
               </ion-card>
             </ion-col>
             <ion-col size="4" class="mt-15">

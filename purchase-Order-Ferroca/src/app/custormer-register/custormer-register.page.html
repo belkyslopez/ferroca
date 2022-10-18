@@ -4,7 +4,7 @@
       <ion-back-button defaultHref="/customer-register"></ion-back-button>
     </ion-buttons> -->
    <div>
-    <ion-title> Clientes</ion-title>
+    <ion-title class=" main-title"> Clientes</ion-title>
    </div>
     <ion-buttons slot="end">
       <ion-menu-button menu="first"></ion-menu-button>
@@ -14,7 +14,7 @@
 
 <ion-content class="ion-padding">
   
-  <ion-card *ngIf="!customers" >
+  <ion-card *ngIf="!customers  && !loadingcustomers" >
     <p class="ion-text-center">Sin clientes registrados</p>
   </ion-card>
 
@@ -39,8 +39,7 @@
             <ion-title>Registro de cliente</ion-title>
           </div>
         </ion-toolbar>
-      </ion-header>
-    
+      </ion-header>  
       <ion-content class="ion-padding">
         <form  #fRegisterC="ngForm" [formGroup]="clienteForm" (ngSubmit)="registerClient( fRegisterC )" novalidate>   
           <ion-list lines="full" class="ion-no-margin ion-no-padding">  
@@ -62,7 +61,7 @@
             </ion-item>
             <ion-item  class="roundedInput">
               <ion-label position="floating">Rut  <ion-text color="danger">*</ion-text> </ion-label>
-              <ion-input  formControlName="rut" type="number" placeholder="Ingrese el rut" name="rut" [(ngModel)]="registerCliente.rut" required></ion-input>
+              <ion-input simpleMask="99.999.999-9" formControlName="rut" placeholder="Ingrese el rut" name="rut" [(ngModel)]="registerCliente.rut" required></ion-input>
             </ion-item> 
             <ion-grid>
               <ion-row>
