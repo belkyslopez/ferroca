@@ -27,7 +27,7 @@ export class ProductRegistrationPage implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
 
   registerProducto:any = {};
-  products: any[];
+  products: any[] = [] ;
   product: Producto;
   componentes: Observable<Component[]>;
   productForm: FormGroup;
@@ -80,6 +80,7 @@ export class ProductRegistrationPage implements OnInit {
       }else{
         this.uiService.presentAlert('Ingrese todo los campos');
       }
+      this.loading = false;
   }
 
   camara(isCamera){
@@ -131,6 +132,15 @@ export class ProductRegistrationPage implements OnInit {
     const valido = await this.productService.getAllProduct();
     if(valido){
       this.products = this.productService.allProducts;
+      this.products.sort((a,b) => {
+        const aDate = new Date(a.updatedAt).getTime();
+        const bDate = new Date(b.updatedAt).getTime();
+        if(aDate < bDate)
+          return 1;
+        if(aDate > bDate)
+          return -1;
+        return 0;
+      });
     }else{
       this.uiService.presentAlert('No se encuentran productos');
     }
@@ -158,8 +168,8 @@ export class ProductRegistrationPage implements OnInit {
     this.productForm = this.formBuilder.group({
       nombre: ['', { validators: [Validators.required],}],
       descripcion: ['', { validators: [Validators.required],}],
-      precio: ['', { validators: [Validators.required], }],
-      stock: ['', { validators: [Validators.required], }],
+      precio: ['', { validators: [Validators.required],}],
+      stock: ['', { validators: [Validators.required],}],
     });
   }
 

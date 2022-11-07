@@ -14,8 +14,11 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-grid fixed>
+    <ion-searchbar placeholder="Buscar..." [(ngModel)]="searchTerm" animated="true"  *ngIf="products.length >= 0" ></ion-searchbar>
+    <ion-card  class="ion-padding ion-text-center"  *ngIf="products.length <= 0" size="12">
+      <ion-label  class="ion-text-center">Sin productos registrados</ion-label>
+    </ion-card>
     <ion-row>
-      <ion-searchbar placeholder="Buscar..." [(ngModel)]="searchTerm" animated="true"></ion-searchbar>
       <ion-col *ngFor="let product of products | filter:searchTerm; let i = index" size="6" (click)="getProduct(product)">
         <ion-card>
           <div class="center">

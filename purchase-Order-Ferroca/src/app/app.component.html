@@ -19,15 +19,15 @@
             <ion-icon name="home" slot="start"   color="dark"></ion-icon>
             Catálogo
           </ion-item>
-          <ion-item [routerLink]="['/user-register']" lines="none">
+          <ion-item [routerLink]="['/user-register']" lines="none" *ngIf="isAdmin">
             <ion-icon name="person" slot="start"  color="dark"></ion-icon>
-            Usuarios
+            Trabajadores
           </ion-item>
-          <ion-item [routerLink]="['/customer-register']" lines="none"> 
+          <ion-item [routerLink]="['/customer-register']" lines="none" *ngIf="isAdmin"> 
             <ion-icon name="id-card"  slot="start"  color="dark"></ion-icon>
             Clientes
           </ion-item>
-          <ion-item [routerLink]="['/product-registration']" lines="none"> 
+          <ion-item [routerLink]="['/product-registration']" lines="none" *ngIf="isAdmin"> 
             <ion-icon name="construct" slot="start"  color="dark"></ion-icon>
             Productos
           </ion-item>

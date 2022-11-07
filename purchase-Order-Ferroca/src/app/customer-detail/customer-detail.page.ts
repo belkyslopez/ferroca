@@ -52,6 +52,7 @@ export class CustomerDetailPage implements OnInit {
     }else{
       this.uiService.presentAlert('No se eliminó el cliente');
     }
+    this.loadingDelete= false;
   }
   
   cancel() {

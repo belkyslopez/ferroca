@@ -12,7 +12,20 @@ export class Tab1Page {
 
   constructor(
     private orderService: OrderService
-  ) {}
+  ) {
+    this.orderService.updateOrders.subscribe((orders: any) => {
+     this.orders = orders;
+     this.orders.sort((a,b) => {
+       const aDate = new Date(a.updatedAt).getTime();
+       const bDate = new Date(b.updatedAt).getTime();
+       if(aDate < bDate)
+         return 1;
+       if(aDate > bDate)
+         return -1;
+       return 0;
+     });
+    })
+  }
 
   ionViewWillEnter(){
     this.cargar();
@@ -21,7 +34,6 @@ export class Tab1Page {
   async cargar(){
     const valido = await this.orderService.getAllOrders();
     if(valido){
-      this.orders = this.orderService.allOrders;
       console.log("Success get all orders");
     }else{
       console.log("Eror")

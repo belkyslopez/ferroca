@@ -10,10 +10,10 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-card *ngIf="!products && !loadingProducto">
+  <ion-card *ngIf="products.length <= 0 && !loadingProducto">
     <p class="ion-text-center">Sin productos registrados</p>
   </ion-card>
-  <ng-template ngFor let-product [ngForOf]="products  | orderBy : createdAt">
+  <ng-template ngFor let-product [ngForOf]="products">
     <ion-card *ngIf="product.disabled == false">
       <ion-grid (click)=" goToUpdate(product)">
         <ion-row>

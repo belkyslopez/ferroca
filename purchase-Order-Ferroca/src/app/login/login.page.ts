@@ -40,12 +40,14 @@ loading: boolean = false;
   if(this.loginForm.invalid) { return;}
     console.log(fLogin.valid);
     console.log(this.loginUser);
-    const valido = await this.autService.login(this.loginUser.email, this.loginUser.password);
-    if(valido){
+    const response = await this.autService.login(this.loginUser.email, this.loginUser.password);
+    this.loading = false;
+    if(response.valid){
       this.navCtrlr.navigateRoot('/tabs', { animated: true });
     }else{
-      this.uiService.presentAlert('Usuario y contraseña incorrecto');
+      this.uiService.presentAlert(response.message || 'Usuario y contraseña incorrecto');
     }
+    this.loading = false;
   }
 
   get form() { return this.loginForm.controls; }

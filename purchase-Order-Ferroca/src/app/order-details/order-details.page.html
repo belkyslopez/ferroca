@@ -3,10 +3,10 @@
     <ion-toolbar class="toolbar-header">
       <ion-buttons slot="start">
         <!-- <a href="/order-list"><ion-icon name="chevron-back" size="large"></ion-icon></a> -->
-        <ion-back-button defaultHref="order-list"></ion-back-button>
+        <ion-back-button defaultHref="tabs/tab1"></ion-back-button>
       </ion-buttons>
       <div>
-        <ion-title>N° {{order.number}}</ion-title>
+        <!-- <ion-title>N° {{order.number}}</ion-title> -->
       </div>
     </ion-toolbar>
   </ion-header>
@@ -32,14 +32,14 @@
         <ion-row>
           <b>Información De La Orden</b>
         </ion-row>
-        <ion-row>
+        <!-- <ion-row>
           <ion-col style="text-align: left;">
             Orden N°:
           </ion-col>
           <ion-col style="text-align: right;">
             {{ order?.number ? order?.number : '0009877' }}
           </ion-col>
-        </ion-row>
+        </ion-row> -->
         <ion-row>
           <ion-col style="text-align: left;">
             Usuario:

@@ -13,20 +13,19 @@ import { TokenService } from './core/services/token.service';
 export class AppComponent {
 
   userName = '';
+  isAdmin: boolean = undefined;
 
   constructor(private menu: MenuController,
     private storage: Storage,
     private navCtrl: NavController,
-    private autService: AuthenticateService,
-    private tokenService: TokenService) { }
+    private autService: AuthenticateService) { }
 
   ngOnInit() {
-    this.getUserLogged();
-  }
-
-  async getUserLogged() {
-    let userLogged = await this.tokenService.loadTokenDecode();
-    this.userName = userLogged.email;
+    this.autService.updateUser.subscribe((user: any) => {
+      this.userName = user.email;
+      this.isAdmin = user.rolName === 'ROL_ADMIN';
+      console.log({userName: this.userName, isAdmin: this.isAdmin});
+    })
   }
 
   openFirst() {

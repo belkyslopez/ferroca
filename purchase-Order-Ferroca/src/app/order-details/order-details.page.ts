@@ -39,14 +39,11 @@ export class OrderDetailsPage implements OnInit {
     );
   }
 
-  regresar() {
-    this.navCtrlr.navigateRoot('/order-list');
-  }
-
   async nextStep() {
     this.order.step = parseInt(this.order.step) + 1;
     const valido = await this.orderService.updateOrder(this.order);
     if (valido) {
+      await this.orderService.getAllOrders();
       console.log("Guardado");
     } else {
       console.log("Error");

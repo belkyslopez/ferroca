@@ -42,6 +42,7 @@ export class UserDetailPage implements OnInit {
     }else{
       this.uiService.presentAlert('No se modifico el usuario');
     }
+    this.loadingUpdate= false;
   }
 
   showAlert(): void {

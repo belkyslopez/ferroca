@@ -9,13 +9,22 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true"  class="ion-padding">
+  <ion-card  class="ion-padding ion-text-center"   *ngIf="orders.length <= 0">
+    <ion-label class="ion-text-center">No hay ordenes registradas</ion-label>
+  </ion-card>
   <ion-card *ngFor="let order of orders; let i = index" style="padding: 0px ;">
     <!-- <ion-grid [routerLink]="(order.active ? '/order-details/' + order._id : null)"> -->
     <ion-grid [routerLink]="'/order-details/' + order._id">
       <ion-row>
-        <ion-col style="text-align: left;">
+        <!-- <ion-col style="text-align: left;">
           <p>Order N° {{i + 1}}</p>
+        </ion-col> -->
+        <ion-col style="text-align: left;" [ngSwitch]="order?.step" style="color: rgb(0, 156, 0);">
+          <ion-badge *ngSwitchCase="'1'" color="primary">Ingresado</ion-badge>
+          <ion-badge *ngSwitchCase="'2'" color="warning">Preparación</ion-badge>
+          <ion-badge *ngSwitchCase="'3'" color="danger">Despachado</ion-badge>
+          <ion-badge *ngSwitchCase="'4'" color="success">Entregado</ion-badge>
         </ion-col>
         <ion-col style="text-align: right; ">
           <p> {{order.createdAt | date: 'dd/MM/yyyy, h:mm a'}}</p>
@@ -30,14 +39,14 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col style="text-align: left;" [ngSwitch]="order?.step" style="color: rgb(0, 156, 0);">
+        <!-- <ion-col style="text-align: left;" [ngSwitch]="order?.step" style="color: rgb(0, 156, 0);">
           <ion-badge *ngSwitchCase="'1'" color="primary">Ingresado</ion-badge>
           <ion-badge *ngSwitchCase="'2'" color="warning">Preparación</ion-badge>
           <ion-badge *ngSwitchCase="'3'" color="danger">Despachado</ion-badge>
           <ion-badge *ngSwitchCase="'4'" color="success">Entregado</ion-badge>
-        </ion-col>
+        </ion-col> -->
         <ion-col style="text-align: right;">
-          <p color="dark" style="font-weight: bold;">$ {{order.totalOrder | number : '1.0-1'}}</p>
+          <p color="dark" style="font-weight: bold;">$ {{order.totalOrder | currency:'CLP ':'symbol':'1.2-2'}}</p>
         </ion-col>
       </ion-row>
     </ion-grid>

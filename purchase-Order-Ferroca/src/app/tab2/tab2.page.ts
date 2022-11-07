@@ -11,7 +11,7 @@ import { URL_SERVICIOS } from '../core/config/url.services';
 })
 export class Tab2Page {
 
-  products: [];
+  products: Producto[] = [];
   searchTerm: string;
   url: string;
   
@@ -28,7 +28,6 @@ export class Tab2Page {
   ionViewWillEnter(){
     this.getAllProduct();
   }
-
 
   async getAllProduct(){
     const valido = await this.productService.getAllProduct();

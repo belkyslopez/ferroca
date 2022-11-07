@@ -14,7 +14,7 @@
 
 <ion-content class="ion-padding">
   
-  <ion-card *ngIf="!customers  && !loadingcustomers" >
+  <ion-card *ngIf="customers.length <= 0 && !loadingcustomers" >
     <p class="ion-text-center">Sin clientes registrados</p>
   </ion-card>
 

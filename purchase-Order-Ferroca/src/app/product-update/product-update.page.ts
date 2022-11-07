@@ -54,6 +54,7 @@ export class ProductUpdatePage implements OnInit {
     }else{
       this.uiService.presentAlert('No se modifico el producto');
     }
+    this.loading = false;
   }
 
   camara(isCamera){
@@ -106,6 +107,7 @@ export class ProductUpdatePage implements OnInit {
     }else{
       this.uiService.presentAlert('No se elimino el usuario');
     }
+    this.loadingDelete= false;
   }
 
 }

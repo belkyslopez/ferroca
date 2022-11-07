@@ -17,7 +17,7 @@ import { URL_SERVICIOS } from '../core/config/url.services';
 export class UserRegisterPage implements OnInit {
 
   registerUser: any = {};
-  users: any;
+  users: any[] = [];
   user: any;
   handlerMessage = '';
   roleMessage = '';
@@ -57,6 +57,7 @@ export class UserRegisterPage implements OnInit {
         }else{
           this.uiService.presentAlert('Usuario y contraseña incorrecto');
         }
+        this.loading = false;
       }
 
     async getAllUser(){

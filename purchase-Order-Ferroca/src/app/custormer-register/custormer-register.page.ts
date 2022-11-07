@@ -20,7 +20,7 @@ export class CustormerRegisterPage implements OnInit {
   @ViewChild(IonModal) modal: IonModal;
 
   registerCliente: any = {};
-  customers: any;
+  customers: any[] = [];
   customer: any;
   clienteForm: FormGroup;
   loading: boolean = false;

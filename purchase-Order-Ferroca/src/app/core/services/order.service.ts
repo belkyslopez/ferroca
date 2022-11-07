@@ -4,6 +4,7 @@ import { AuthenticateService } from './authenticate.service';
 import { URL_SERVICIOS } from '../config/url.services';
 import { Producto } from '../interfaces/interfaces';
 import { Observable } from 'rxjs';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class OrderService {
   allOrders: any;
   order: any;
   items: any = {};
+  updateOrders = new Subject();
 
   constructor(
     private http: HttpClient,
@@ -47,6 +49,7 @@ export class OrderService {
       this.http.get(`${URL_SERVICIOS}/orders`, { headers })
         .subscribe(resp => {
           this.allOrders = resp['orders'];
+          this.updateOrders.next(this.allOrders);
           if (resp) {
             resolve(true);
           } else {

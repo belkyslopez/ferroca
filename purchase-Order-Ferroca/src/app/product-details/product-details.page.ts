@@ -8,6 +8,7 @@ import { URL_SERVICIOS } from '../core/config/url.services';
 import { AlertController } from '@ionic/angular';
 import {UiService} from "../core/services/ui.service";
 import { AlertService } from '../core/services/alert.service';
+import { TokenService } from '../core/services/token.service';
 
 @Component({
   selector: 'app-product-details',
@@ -25,6 +26,7 @@ export class ProductDetailsPage implements OnInit {
   producto: Producto;
   url: string;
   handlerMessage = '';
+  isAdmin: boolean = undefined;
 
   constructor(
     private navCtrlr: NavController,
@@ -34,12 +36,14 @@ export class ProductDetailsPage implements OnInit {
     private alertController: AlertController,
     private uiService: UiService,
     private alertService: AlertService,
+    private tokenService: TokenService,
   ) {
     this.url = URL_SERVICIOS
   }
 
   ngOnInit() {
     this.product = (history.state);
+    this.getUserLogged();
     console.log("ngOnInit product", this.product._id );
   }
 
@@ -55,6 +59,11 @@ export class ProductDetailsPage implements OnInit {
         this.navCtrlr.navigateRoot('/tabs/tab3');
       }
     );
+  }
+
+  async getUserLogged() {
+    let userLogged = await this.tokenService.loadTokenDecode();
+    this.isAdmin = userLogged.rolName === 'ROL_ADMIN';
   }
 
   async addStock(quantityProduct: number) {

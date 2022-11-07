@@ -55,6 +55,7 @@ export class CustomerUpdatePage implements OnInit {
     }else{
       this.uiService.presentAlert('No se modifico el cliente');
     }
+    this.loadingUpdate= false;
   }
 
   cancel() {
