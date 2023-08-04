@@ -1,9 +1,51 @@
 img {
-    max-height: 100px;
-    padding: 5px;
-    margin-top: 5px;
+    // max-height: 100px;
+    // padding: 5px;
+    // margin-top: 5px;
+    min-height: 170px;
+    max-width: none;
   }
 
 .center {
     text-align: center;
 }
+
+.product-container{
+  margin: 5px;
+}
+
+.image-container{
+  display: flex;
+  justify-content: center;
+  height: 230px;
+}
+
+.product-text{
+  padding: 10px 5px 10px 8px;
+    p{
+      font-size: 12px;
+      width: 600;
+      margin: 5px 0px;
+    }
+    h3{
+      margin: 7px 0px;
+      font-weight: bold;
+      font-size: 16px;
+      // line-height: 16px;
+      color: #4A4A4A;
+    }
+    h5{
+      margin: 5px 0px;
+      font-size: 18px;
+    }
+
+}
+
+.truncate-text {
+  white-space: nowrap; /* Evita el ajuste de línea */
+  overflow: hidden; /* Oculta el contenido que desborda */
+  text-overflow: ellipsis; /* Muestra puntos suspensivos al final del texto */
+  /* Puedes ajustar la anchura máxima si lo deseas */
+  max-width: 200px; /* Por ejemplo, ajusta el valor según tus necesidades */
+}
+

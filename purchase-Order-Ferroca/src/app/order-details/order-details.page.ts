@@ -4,6 +4,7 @@ import { NavController } from '@ionic/angular';
 import { OrderService } from '../core/services/order.service';
 import { AlertController } from '@ionic/angular';
 import { TokenService } from '../core/services/token.service';
+import { URL_SERVICIOS } from '../core/config/url.services';
 
 @Component({
   selector: 'app-order-details',
@@ -13,13 +14,15 @@ import { TokenService } from '../core/services/token.service';
 export class OrderDetailsPage implements OnInit {
 
   order: any;
+  url: string;
 
   constructor(
     private orderService: OrderService,
     private activatedRoute: ActivatedRoute,
     private navCtrlr: NavController,
     private alertController: AlertController,
-    private tokenService: TokenService) { }
+    private tokenService: TokenService,
+    ) { this.url = URL_SERVICIOS }
 
   ngOnInit() {
     this.getOrder();

@@ -14,6 +14,7 @@ export class Tab2Page {
   products: Producto[] = [];
   searchTerm: string;
   url: string;
+  isLoading: boolean = true;
   
   constructor(
     private productService: ProductService,
@@ -40,6 +41,10 @@ export class Tab2Page {
     return valido;
   }
 
+  imageLoaded() {
+    this.isLoading = false;
+  }
+
   getProduct(product: Producto){
     this.navCtrlr.navigateForward('/tabs/tab2/product-details', { state: product });
    }
@@ -48,6 +53,10 @@ export class Tab2Page {
     console.log('Begin async operation');
     await this.getAllProduct();
     event.target.complete();
+  }
+
+  formatPrice(price: string): string {
+    return price.replace(',', '.');
   }
 
 }

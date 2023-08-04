@@ -12,11 +12,47 @@
  }
 
  img {
-   max-height: 250px;
-   margin-top: 10px;
+   // max-height: 250px;
+   margin: 10px;
    padding: 2px;
+   border-radius: 10px;
  }
 
  .center {
    text-align: center;
+}
+
+.code{
+   margin: 5px 0px;
+   font-size: 11px;
+}
+
+.product-name{
+   font-size: 20px;
+   color: #000;
+}
+
+ion-card-title{
+   b{
+      margin-top: 15px;
+   }
+}
+
+
+.info{
+   font-size: 15px;
+   margin-bottom: 8px;
+}
+
+.capitalize-first-letter {
+   text-transform: lowercase; /* Convierte todo el texto a minúsculas */
+   font-size: 13px;
+}
+
+.capitalize-first-letter::first-letter {
+   text-transform: uppercase; /* Convierte solo la primera letra a mayúscula */
+}
+
+.image-container{
+   max-width: 365px;
 }

@@ -147,4 +147,9 @@ export class ProductDetailsPage implements OnInit {
     await alert.present();
   }
 
+  formatPoint(price: string): string {
+    return price.replace(',', '.');
+  }
+
+
 }

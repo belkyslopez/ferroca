@@ -18,18 +18,41 @@
     <p class="ion-text-center">Sin clientes registrados</p>
   </ion-card>
 
-  <ng-template ngFor let-customer [ngForOf]="customers" >
+
+  <ng-template ngFor let-customer  [ngForOf]="customers" >
     <ion-card  *ngIf="customer.disabled == false">
       <ion-grid (click)="goToDetail(customer)">
-        <ion-row>
+        <div class="column">
+          <!-- <img src="{{ url + '/get-image-user/' + user.image}}" class="img-user" *ngIf="user.image != 'null'">
+          <img src="../../assets/img/user_not.png" *ngIf="user.image == 'null'"> -->
+          <!-- <div class="container-image">
+            <ion-avatar>
+              <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+            </ion-avatar>
+          </div> -->
+          <div class="container-text">
+            <div class="line">
+              <b>Razón social: </b>
+              <p>{{customer.rs | titlecase}}</p>
+            </div>
+            <div class="line">
+              <b>Correo: </b>
+              <p>{{customer.email}}</p>
+            </div>
+          </div>
+
+
+        </div>
+        <!-- <ion-row>
           <ion-col size="8">
               <p>{{customer.rs | titlecase}}</p>
               <p>{{customer.email}}</p>
           </ion-col>
-        </ion-row>
+        </ion-row> -->
       </ion-grid>
     </ion-card>
   </ng-template>
+
 
   <ion-modal trigger="modal-customer" >
     <ng-template>

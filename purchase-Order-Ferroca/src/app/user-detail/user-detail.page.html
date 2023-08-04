@@ -4,7 +4,7 @@
       <ion-back-button defaultHref="user-register"></ion-back-button>
     </ion-buttons> -->
     <div>
-      <ion-title class="title-color main-title"> Usuarios</ion-title>
+      <ion-title class="title-color main-title"> Detalle usuario</ion-title>
     </div>
     <ion-buttons slot="end">
       <ion-menu-button menu="first"></ion-menu-button>
@@ -15,7 +15,46 @@
 <ion-content class="ion-padding">
 
   <ion-card>
-    <ion-grid>
+
+    <div class="column">
+      <div class="container-image">
+        <ion-avatar>
+          <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+        </ion-avatar>
+      </div>
+      <div class="container-text">
+        <div class="line">
+          <!-- <b>Nombre: </b> -->
+          <h2>{{user.name | titlecase}} {{user.surname | titlecase}} </h2>
+        </div>
+        <div class="line">
+          <b>Correo: </b>
+          <p>{{user.email}}</p>
+        </div>
+
+        <div class="line">
+          <b>Dirección: </b>
+          <p>{{user.address}}</p>
+        </div>
+        <div class="line">
+          <b>Contacto: </b>
+          <p>{{user.phone}}</p>
+        </div>
+        <div class="line">
+          <b>Rut: </b>
+          <p>{{user.rut}}</p>
+        </div>
+        <br>
+        <div class="line">
+          <b>Perfil: </b>
+          <p>{{user.rolName === 'ROL_ADMIN' ? 'Adminitrador' : 'Operario'}}</p>
+        </div>
+      </div>
+
+
+    </div>
+
+    <!-- <ion-grid>
       <ion-row>
         <ion-col size="4">
           <img src="{{ url + '/get-image-user/' + user.image}}" class="img-user" *ngIf="user.image != 'null'">
@@ -30,7 +69,7 @@
           <p>{{user.rut}}</p>
         </ion-col>
       </ion-row>
-    </ion-grid>
+    </ion-grid> -->
   </ion-card>
 </ion-content>
 

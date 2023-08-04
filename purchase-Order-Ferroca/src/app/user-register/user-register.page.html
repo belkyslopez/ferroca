@@ -4,7 +4,7 @@
       <ion-back-button  text="Volver"></ion-back-button>
     </ion-buttons> -->
     <div>
-      <ion-title class="title-color main-title"> Trabajadores</ion-title>
+      <ion-title class="title-color main-title">Trabajadores</ion-title>
     </div>
     <ion-buttons slot="end">
       <ion-menu-button menu="first"></ion-menu-button>
@@ -20,16 +20,29 @@
   <ng-template ngFor let-user [ngForOf]="users">
     <ion-card  *ngIf="user.disabled == false"   >
       <ion-grid (click)="goToDetail(user)">
-        <ion-row>
-          <ion-col size="3">
-            <img src="{{ url + '/get-image-user/' + user.image}}" class="img-user" *ngIf="user.image != 'null'">
-            <img src="../../assets/img/user_not.png" *ngIf="user.image == 'null'">
-          </ion-col>
-          <ion-col size="9">
-            <p>{{user.name | titlecase}} {{user.surname | titlecase}} </p>
-            <p>{{user.email}}</p>
-          </ion-col>
-        </ion-row>
+
+          <div class="column">
+            <!-- <img src="{{ url + '/get-image-user/' + user.image}}" class="img-user" *ngIf="user.image != 'null'">
+            <img src="../../assets/img/user_not.png" *ngIf="user.image == 'null'"> -->
+            <div class="container-image">
+              <ion-avatar>
+                <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              </ion-avatar>
+            </div>
+            <div class="container-text">
+              <div class="line">
+                <b>Nombre: </b>
+                <p>{{user.name | titlecase}} {{user.surname | titlecase}} </p>
+              </div>
+              <div class="line">
+                <b>Correo: </b>
+                <p>{{user.email}}</p>
+              </div>
+            </div>
+
+
+          </div>
+
       </ion-grid>
     </ion-card>
   </ng-template>

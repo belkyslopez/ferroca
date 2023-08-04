@@ -40,4 +40,9 @@ export class Tab1Page {
     }
   }
 
+  formatPoint(price: string): string {
+    return price.replace(',', '.');
+  }
+
+
 }

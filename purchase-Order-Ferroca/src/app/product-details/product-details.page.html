@@ -13,34 +13,31 @@
 </ion-header>
 
 <ion-content *ngIf="product">
-  <ion-card class="center">
-    <img src="{{ url + '/get-image-product/' + product.image }}" *ngIf="product.image != 'null'">
-    <img src="../../assets/img/product_not.png" *ngIf="product.image == 'null'">
-  </ion-card>
+  <!-- <ion-card class="center"> -->
+    <div class="image-container">
+      <img src="{{ url + '/get-image-product/' + product.image }}" *ngIf="product.image != 'null'">
+      <img src="../../assets/img/product_not.png" *ngIf="product.image == 'null'">
+    </div>
+
+  <!-- </ion-card> -->
   <ion-card>
     <ion-card-header>
-      <ion-card-title style="font-size: 18px;">
-        <b style="text-transform: capitalize">
-          {{ product?.name}}</b>
-      </ion-card-title>
-      <ion-card-subtitle style="font-size: 10px; margin-top: 2px;">
-        <ion-label>
-          Código de producto: {{ product._id }}
-        </ion-label>
-      </ion-card-subtitle>
-      <ion-card-subtitle style="font-size: 10px;">
-        Stock: {{ product?.stock }}
-      </ion-card-subtitle>
-      <ion-card-title style="font-size: 18px;">
-        <b>$ {{ product?.price | number : '1.0-2'}}</b>
+        <b class="product-name">{{ product?.name | titlecase }}</b>
+        <p class="code">
+          Código : {{ product._id }}
+        </p>
+        <br>
+        <p class="code">Stock: {{ product?.stock }}</p>
+      <ion-card-title>
+        <b>$ {{ formatPoint(product?.price | number : '1.0-2')}}</b>
       </ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-card-header>
-        <p style="font-size: 12px; text-transform: capitalize; text-transform: justify-self;">
+      <p class="info">Información del Producto:</p>
+
+        <p class="capitalize-first-letter">
           {{ product?.description }}
         </p>
-      </ion-card-header>
     </ion-card-content>
   </ion-card>
 </ion-content>

@@ -20,22 +20,34 @@
         <!-- <ion-col style="text-align: left;">
           <p>Order N° {{i + 1}}</p>
         </ion-col> -->
-        <ion-col style="text-align: left;" [ngSwitch]="order?.step" style="color: rgb(0, 156, 0);">
+        <ion-col style="text-align: left;" [ngSwitch]="order?.step" style="color: rgb(10, 168, 10);">
           <ion-badge *ngSwitchCase="'1'" color="primary">Ingresado</ion-badge>
           <ion-badge *ngSwitchCase="'2'" color="warning">Preparación</ion-badge>
           <ion-badge *ngSwitchCase="'3'" color="danger">Despachado</ion-badge>
           <ion-badge *ngSwitchCase="'4'" color="success">Entregado</ion-badge>
         </ion-col>
-        <ion-col style="text-align: right; ">
-          <p> {{order.createdAt | date: 'dd/MM/yyyy, h:mm a'}}</p>
+        <ion-col style="text-align: right;">
+          <p>Cod: {{order._id.slice(4, 8)}}</p>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col style="text-align: left;">
-          <p> {{order.customer?.rs}}</p>
-        </ion-col>
-        <ion-col style="text-align: right;">
-          <p> {{order.user.name }} {{order.user.surname }}</p>
+        <ion-col>
+          <div class="line">
+            <b>Cliente:</b>
+            <p> {{order.customer?.rs | titlecase}}</p>
+          </div>
+          
+          <div class="line">
+            <b>Despachado por:</b>
+            <p> {{order.user.name }} {{order.user.surname }}</p>
+          </div>
+
+          <div class="line">
+            <b>Fecha y Hora:</b>
+            <p>{{order.createdAt | date: 'dd/MM/yyyy, h:mm a'}}</p>
+          </div>
+
+
         </ion-col>
       </ion-row>
       <ion-row>
@@ -46,7 +58,7 @@
           <ion-badge *ngSwitchCase="'4'" color="success">Entregado</ion-badge>
         </ion-col> -->
         <ion-col style="text-align: right;">
-          <p color="dark" style="font-weight: bold;">$ {{order.totalOrder | currency:'CLP ':'symbol':'1.2-2'}}</p>
+          <p class="total">$ {{ formatPoint(order.totalOrder | number) }}</p>
         </ion-col>
       </ion-row>
     </ion-grid>

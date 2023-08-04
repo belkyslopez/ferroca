@@ -12,7 +12,7 @@
   </ion-header>
 
   <ion-card>
-    <ion-card-content>
+    <ion-card-content class="container">
       <ion-grid>
         <ion-row>
           <ion-col style="text-align: left; text-transform: uppercase; color: darkgreen; padding-left: 0px;">
@@ -23,53 +23,27 @@
               <ion-badge *ngSwitchCase="'4'" color="success">Entregado</ion-badge>
             </div>
           </ion-col>
-          <ion-col style="text-align: right;">
+          <ion-col style="text-align: right;" class="date">
             {{ order.createdAt | date: 'dd/MM/yyyy, h:mm a' }}
           </ion-col>
         </ion-row>
       </ion-grid>
       <ion-grid>
+        <br>
         <ion-row>
-          <b>Información De La Orden</b>
+          <h2>Información despacho</h2>
         </ion-row>
-        <!-- <ion-row>
+        <ion-row>
           <ion-col style="text-align: left;">
-            Orden N°:
+            <b>Cliente:</b>
           </ion-col>
           <ion-col style="text-align: right;">
-            {{ order?.number ? order?.number : '0009877' }}
-          </ion-col>
-        </ion-row> -->
-        <ion-row>
-          <ion-col style="text-align: left;">
-            Usuario:
-          </ion-col>
-          <ion-col style="text-align: right;">
-            {{ order.user.name | titlecase}} {{ order.user.surname | titlecase}}
+            {{ order.customer?.rs  | titlecase}}
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col style="text-align: left;">
-            Total:
-          </ion-col>
-          <ion-col style="text-align: right;">
-            $ {{ order?.totalOrder | number }}
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <b>Información Despacho</b>
-        </ion-row>
-        <ion-row>
-          <ion-col style="text-align: left;">
-            Cliente:
-          </ion-col>
-          <ion-col style="text-align: right;">
-            {{ order.customer?.rs}}
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col style="text-align: left;">
-            Correo:
+            <b>Correo:</b>
           </ion-col>
           <ion-col style="text-align: right;">
             {{ order.customer?.email }}
@@ -77,12 +51,69 @@
         </ion-row>
         <ion-row>
           <ion-col style="text-align: left;">
-            Dirección:
+           <b> Dirección:</b>
           </ion-col>
           <ion-col style="text-align: right;">
             {{ order.address }}
           </ion-col>
         </ion-row>
+<br>
+        <ion-row>
+          <h2>Información de la orden</h2>
+        </ion-row>
+        <ion-row>
+          <ion-col style="text-align: left;">
+           <b> Usuario:</b>
+          </ion-col>
+          <ion-col style="text-align: right;">
+            {{ order.user.name | titlecase}} {{ order.user.surname | titlecase}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col style="text-align: left;">
+           <b> Correo:</b>
+          </ion-col>
+          <ion-col style="text-align: right;">
+            {{ order.user.email }}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col style="text-align: left;">
+           <b> Contacto:</b>
+          </ion-col>
+          <ion-col style="text-align: right;">
+            {{ order.user.phone }}
+          </ion-col>
+        </ion-row>
+ <br><br>
+
+ 
+        <ion-row>
+          <ion-col *ngFor="let item of order.orderItems">
+            <ion-item lines="none">
+              <ion-avatar slot="start">
+                <img src="{{ url + '/get-image-product/' + item.product.image }}" />
+              </ion-avatar>
+              <ion-label>
+                <span>
+                  {{ item.product.name ?? '-' | titlecase}}
+                </span>
+                <p class="price">Precio: ${{item.product.price | number}}</p>
+                <h3>Unidades: {{ item.quantity ?? '0' }}</h3>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+<br>
+        <ion-row class="total">
+          <ion-col style="text-align: left;">
+            <b>Total:</b>
+
+           <b> $ {{ order?.totalOrder | number }}</b>
+          </ion-col>
+        </ion-row>
+<br>
+
       </ion-grid>
     </ion-card-content>
   </ion-card>
