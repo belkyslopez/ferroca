@@ -89,7 +89,7 @@ export class OrderService {
       this.http.put(`${URL_SERVICIOS}/order/` + order._id, { ...order, _id: undefined }, { headers })
         .subscribe(resp => {
           if (resp) {
-            console.log("updateOrder success")
+            // console.log("updateOrder success")
             resolve(true);
           } else {
             resolve(false);

@@ -24,9 +24,9 @@ export class OrderListPage implements OnInit {
     const valido = await this.orderService.getAllOrders();
     if(valido){
       this.orders = this.orderService.allOrders;
-      console.log("Success get all orders");
+      // console.log("Success get all orders");
     }else{
-      console.log("Eror")
+      // console.log("Eror")
     }
   } 
 

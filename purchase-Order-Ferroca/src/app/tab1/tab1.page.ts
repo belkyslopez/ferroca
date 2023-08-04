@@ -34,14 +34,14 @@ export class Tab1Page {
   async cargar(){
     const valido = await this.orderService.getAllOrders();
     if(valido){
-      console.log("Success get all orders");
+      // console.log("Success get all orders");
     }else{
-      console.log("Eror")
+      // console.log("Eror")
     }
   }
 
   formatPoint(price: string): string {
-    return price.replace(',', '.');
+    return price.replace(/,/g, '.');
   }
 
 

@@ -28,8 +28,8 @@ export class CustomerUpdatePage implements OnInit {
 
   ngOnInit() {
     this.customer = (history.state);
-    console.log("ngOnInit customer", this.customer._id );
-    console.log("page customer update ", this.customer);
+    // console.log("ngOnInit customer", this.customer._id );
+    // console.log("page customer update ", this.customer);
     this.prepareForm();
   }
 
@@ -45,7 +45,7 @@ export class CustomerUpdatePage implements OnInit {
     if(this.clienteUpdateForm.invalid) {
       return;
      }
-     console.log(this.clienteUpdateForm.valid);
+    //  console.log(this.clienteUpdateForm.valid);
     this.loadingUpdate= true;
     const valido = await this.userService.updateClient(this.customer);
     if(valido){
@@ -71,7 +71,7 @@ export class CustomerUpdatePage implements OnInit {
   get rut() { return this.clienteUpdateForm.get('rut'); }
    
   prepareForm(): void {
-    console.log(" prepareForm ====>>> ");
+    // console.log(" prepareForm ====>>> ");
     this.clienteUpdateForm = this.formBuilder.group({
       email: ['', { validators: [Validators.required],}],
       address: ['', { validators: [Validators.required],}],
@@ -82,7 +82,7 @@ export class CustomerUpdatePage implements OnInit {
   }
 
   clearForm() {
-   console.log("clearForm");
+  //  console.log("clearForm");
    this.clienteUpdateForm.reset();
    this.clienteUpdateForm.controls['email'].setValue('');
    this.clienteUpdateForm.controls['address'].setValue('');

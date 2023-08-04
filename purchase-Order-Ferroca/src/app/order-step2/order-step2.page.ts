@@ -48,7 +48,7 @@ export class OrderStep2Page implements OnInit {
     const valido = await this.userService.getAllClient();
     if(valido){
       this.customers = this.userService.allClient;
-      console.log("customers",this.customers );
+      // console.log("customers",this.customers );
     }else{
       this.uiService.presentAlert('No se encuentran registros');
     }
@@ -56,7 +56,7 @@ export class OrderStep2Page implements OnInit {
 
   async getUser(){
    this.user =  await this.storage.get('resp');
-    console.log("getTokenUser",this.user );
+    // console.log("getTokenUser",this.user );
   }
 
   async saveOrder(){
@@ -67,7 +67,7 @@ export class OrderStep2Page implements OnInit {
       acc.orderItems.push({ product: item._id, quantity: item.quantity});
       return acc;
     }, {orderItems: [],  totalOrder: 0});
-    console.log("otherDirection.", this.otherDirection);  
+    // console.log("otherDirection.", this.otherDirection);  
     const order = {
       active:true,
       step:1,

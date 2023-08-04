@@ -24,7 +24,7 @@ export class AppComponent {
     this.autService.updateUser.subscribe((user: any) => {
       this.userName = user.name +' '+user.surname;
       this.isAdmin = user.rolName === 'ROL_ADMIN';
-      console.log({userName: this.userName, isAdmin: this.isAdmin});
+      // console.log({userName: this.userName, isAdmin: this.isAdmin});
     })
   }
 

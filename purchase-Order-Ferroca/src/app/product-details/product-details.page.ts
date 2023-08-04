@@ -44,7 +44,7 @@ export class ProductDetailsPage implements OnInit {
   ngOnInit() {
     this.product = (history.state);
     this.getUserLogged();
-    console.log("ngOnInit product", this.product._id );
+    // console.log("ngOnInit product", this.product._id );
   }
 
   getDetailsProduct(): void {
@@ -52,10 +52,10 @@ export class ProductDetailsPage implements OnInit {
     this.productService.detailsProduct(id).subscribe(
       data => {
         this.product = data['product'];
-        console.log("product: ", this.product);
+        // console.log("product: ", this.product);
       },
       err => {
-        console.log("Error");
+        // console.log("Error");
         this.navCtrlr.navigateRoot('/tabs/tab3');
       }
     );
@@ -70,9 +70,9 @@ export class ProductDetailsPage implements OnInit {
     this.product.stock = this.product.stock + quantityProduct;
     const valido = await this.productService.updateProduct(this.product);
     if (valido) {
-      console.log("Guardado");
+      // console.log("Guardado");
     } else {
-      console.log("Error");
+      // console.log("Error");
     }
   }
 
@@ -82,12 +82,12 @@ export class ProductDetailsPage implements OnInit {
       cssClass: 'custom-alert',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
           cssClass: 'alert-button-cancel',
         },
         {
-          text: 'OK',
+          text: 'Guardar',
           role: 'confirm',
           cssClass: 'alert-button-confirm',
           handler: (value: any) => {
@@ -101,6 +101,7 @@ export class ProductDetailsPage implements OnInit {
           placeholder: 'Número de Productos',
           min: 1,
           max: 100,
+          value: this.product.stock,
           attributes: {
             maxlength: 5,
           }
@@ -113,14 +114,17 @@ export class ProductDetailsPage implements OnInit {
   async presentAlertOrder() {
     const alert = await this.alertController.create({
       subHeader: 'Agregar producto a la orden',
+      cssClass: 'custom-alert',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
+          cssClass: 'alert-button-cancel',
         },
         {
-          text: 'OK',
+          text: 'Agregar',
           role: 'confirm',
+          cssClass: 'alert-button-confirm',
           handler: (value: any) => {
             const quantity = parseInt(value[0]);
             if(quantity > this.product.stock) {
@@ -138,6 +142,7 @@ export class ProductDetailsPage implements OnInit {
         {
           type: 'number',
           placeholder: 'Número de Productos',
+          value: 1,
           attributes: {
             maxlength: 5,
           }
@@ -148,7 +153,7 @@ export class ProductDetailsPage implements OnInit {
   }
 
   formatPoint(price: string): string {
-    return price.replace(',', '.');
+    return price.replace(/,/g, '.');
   }
 
 

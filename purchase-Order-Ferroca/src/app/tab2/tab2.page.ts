@@ -34,9 +34,9 @@ export class Tab2Page {
     const valido = await this.productService.getAllProduct();
     if(valido){
       this.products = this.productService.allProducts.filter((product) => !product.disabled);
-      console.log("Productos cargados", this.products)
+      // console.log("Productos cargados", this.products)
     }else{
-      console.log("No cargado")
+      // console.log("No cargado")
     }
     return valido;
   }
@@ -50,13 +50,12 @@ export class Tab2Page {
    }
 
   async doRefresh(event) {
-    console.log('Begin async operation');
+    // console.log('Begin async operation');
     await this.getAllProduct();
     event.target.complete();
   }
 
   formatPrice(price: string): string {
-    return price.replace(',', '.');
+    return price.replace(/,/g, '.');
   }
-
 }

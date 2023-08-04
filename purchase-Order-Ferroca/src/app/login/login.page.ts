@@ -38,8 +38,8 @@ loading: boolean = false;
   async login(fLogin: NgForm){
   this.loading = true;
   if(this.loginForm.invalid) { return;}
-    console.log(fLogin.valid);
-    console.log(this.loginUser);
+    // console.log(fLogin.valid);
+    // console.log(this.loginUser);
     const response = await this.autService.login(this.loginUser.email, this.loginUser.password);
     this.loading = false;
     if(response.valid){
@@ -64,7 +64,7 @@ loading: boolean = false;
   }
 
   clearLoginForm() {
-    console.log("clearLoginForm");
+    // console.log("clearLoginForm");
     this.loginForm.reset();
     this.loginForm.controls['email'].setValue('');
     this.loginForm.controls['password'].setValue('');

@@ -29,7 +29,7 @@ export class ProductService {
       .subscribe( resp =>{
         this.producto = resp.product;
         if (resp) {
-          console.log("ok register Producto")
+          // console.log("ok register Producto")
            resolve(true);
         }else{
            resolve(false);
@@ -47,7 +47,7 @@ export class ProductService {
       this.http.get(`${URL_SERVICIOS}/product/`+ id, { headers })
       .subscribe( resp =>{
         if (resp) {
-          console.log("ok getProduct")
+          // console.log("ok getProduct")
            resolve(true);
         }else{
            resolve(false);
@@ -72,7 +72,7 @@ export class ProductService {
         this.http.get(`${URL_SERVICIOS}/product`, { headers })
         .subscribe( resp =>{
           this.allProducts = resp['products'];
-          console.log("allProducts ", this.allProducts);
+          // console.log("allProducts ", this.allProducts);
           if (resp) {
              resolve(true);
           }else{
@@ -91,7 +91,7 @@ export class ProductService {
       this.http.put(`${URL_SERVICIOS}/product/`+ producto._id, {...producto, _id: undefined},  { headers })
       .subscribe( resp =>{
         if (resp) {
-          console.log("ok updateProduct")
+          // console.log("ok updateProduct")
            resolve(true);
         }else{
            resolve(false);
@@ -108,9 +108,9 @@ export class ProductService {
     return new Promise( resolve =>{
       this.http.delete(`${URL_SERVICIOS}/product/`+ id, { headers })
       .subscribe( resp =>{
-        console.log("resp deleteProduct", resp);
+        // console.log("resp deleteProduct", resp);
         if (resp) {
-          console.log("ok deleteProduct")
+          // console.log("ok deleteProduct")
            resolve(true);
         }else{
            resolve(false);
@@ -127,9 +127,9 @@ export class ProductService {
     return new Promise( resolve =>{
       this.http.post(`${URL_SERVICIOS}/upload-image-product/`+ id, formData, { headers })
       .subscribe( resp =>{
-        console.log("upload-image-product", resp);
+        // console.log("upload-image-product", resp);
         if (resp) {
-          console.log("ok upload-image-product")
+          // console.log("ok upload-image-product")
            resolve(true);
         }else{
            resolve(false);
@@ -146,9 +146,9 @@ export class ProductService {
     return new Promise( resolve =>{
       this.http.delete(`${URL_SERVICIOS}/get-image-product/`+ nameFile, { headers })
       .subscribe( resp =>{
-        console.log("get-image-productt", resp);
+        // console.log("get-image-productt", resp);
         if (resp) {
-          console.log("get-image-product")
+          // console.log("get-image-product")
            resolve(true);
         }else{
            resolve(false);

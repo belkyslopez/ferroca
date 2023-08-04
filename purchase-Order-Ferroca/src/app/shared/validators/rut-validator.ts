@@ -86,7 +86,7 @@ export class Formateo{
           // console.log('se agrega 1 0');
           rutFormat = part1+part2;
       }
-      console.log('rutFormat', rutFormat);    
+      // console.log('rutFormat', rutFormat);    
       return rutFormat;    
     }
     // elimina los 0 del rut y el caracter - 

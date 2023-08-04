@@ -67,7 +67,7 @@ export class ProductRegistrationPage implements OnInit {
       return;
     }
     this.loading = true;
-      console.log(this.productForm.valid);
+      // console.log(this.productForm.valid);
       const valido = await this.productService.registerProduct(this.registerProducto);
       if(valido){
         this.alertService.presentAlertRegistro('Registro exitoso!','', '','ok','');
@@ -98,7 +98,7 @@ export class ProductRegistrationPage implements OnInit {
       const blob = await base64.blob();
       this.formData = new FormData();
       this.formData.append('image', blob, 'temp.jpg');
-      console.log('formData2', this.formData.getAll('image'));
+      // console.log('formData2', this.formData.getAll('image'));
     });
   }
 
@@ -111,7 +111,7 @@ export class ProductRegistrationPage implements OnInit {
   }
 
   async addImg(){
-    console.log('producto', this.productService.producto);
+    // console.log('producto', this.productService.producto);
     const valido = await this.productService.addImg(this.formData, this.productService.producto._id);
     if(!valido){
       this.uiService.presentAlert('No se guardó la imagen');
@@ -153,7 +153,7 @@ export class ProductRegistrationPage implements OnInit {
 
   goToUpdate(product: Producto){
     this.navCtrlr.navigateForward('/product-update',  { state: product });
-    console.log("user goToUpdate ===>  {state: user}", product);
+    // console.log("user goToUpdate ===>  {state: user}", product);
   }
 
   get form() { return this.productForm.controls; }  
@@ -164,7 +164,7 @@ export class ProductRegistrationPage implements OnInit {
   get stock() { return this.productForm.get('stock'); }
 
   prepareForm(): void {
-    console.log(" prepareForm ====>>> ");
+    // console.log(" prepareForm ====>>> ");
     this.productForm = this.formBuilder.group({
       nombre: ['', { validators: [Validators.required],}],
       descripcion: ['', { validators: [Validators.required],}],
@@ -174,7 +174,7 @@ export class ProductRegistrationPage implements OnInit {
   }
 
   clearForm() {
-   console.log("clearForm");
+  //  console.log("clearForm");
    this.productForm.reset();
    this.productForm.controls['nombre'].setValue('');
    this.productForm.controls['descripcion'].setValue('');
@@ -183,7 +183,7 @@ export class ProductRegistrationPage implements OnInit {
 
  goToDetail(product: Producto){
   this.navCtrlr.navigateForward('/product-details', { state: product});
-  console.log("product goTogoToDetail ===>  {state: product}", product );
+  // console.log("product goTogoToDetail ===>  {state: product}", product );
 }
 
 }

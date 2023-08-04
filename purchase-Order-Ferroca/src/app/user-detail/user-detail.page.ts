@@ -25,12 +25,12 @@ export class UserDetailPage implements OnInit {
 
   ngOnInit() {
     this.user = (history.state);
-    console.log("ngOnInit user", this.user._id );
+    // console.log("ngOnInit user", this.user._id );
   }
  
   goToUpdate(user: Usuario){
     this.navCtrlr.navigateForward('/user-update', { state: user });
-    console.log("user goToUpdate ===>  {state: user}", user);
+    // console.log("user goToUpdate ===>  {state: user}", user);
    }
 
   async updateUser(){
@@ -56,7 +56,7 @@ export class UserDetailPage implements OnInit {
   async deleteUser(){
     this.loadingDelete= true;
     this.user.disabled =  true
-    console.log("user delete", this.user)
+    // console.log("user delete", this.user)
     const valido = await this.userService.updateUser(this.user);
     if(valido){
       this.alertService.presentAlertRegistro('Se eliminó con exitoso!','', '','ok','');

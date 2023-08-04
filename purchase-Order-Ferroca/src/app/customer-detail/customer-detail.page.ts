@@ -25,12 +25,12 @@ export class CustomerDetailPage implements OnInit {
 
   ngOnInit() {
     this.customer = (history.state);
-    console.log("Inicio customer-detail", this.customer );
+    // console.log("Inicio customer-detail", this.customer );
   }
   
   goToUpdate(customer: Cliente){
     this.navCtrlr.navigateForward('/customer-update', { state: customer });
-    console.log("user goToUpdate ===>  {state: customer}", customer);
+    // console.log("user goToUpdate ===>  {state: customer}", customer);
    }
 
   showAlert(): void {

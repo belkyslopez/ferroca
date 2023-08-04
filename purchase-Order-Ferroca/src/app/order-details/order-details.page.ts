@@ -33,10 +33,10 @@ export class OrderDetailsPage implements OnInit {
     this.orderService.getOrder(id).subscribe(
       data => {
         this.order = data['order'];
-        console.log("getOrder: ", this.order);
+        // console.log("getOrder: ", this.order);
       },
       err => {
-        console.log("Error");
+        // console.log("Error");
         this.navCtrlr.navigateRoot('/order-list');
       }
     );
@@ -47,24 +47,24 @@ export class OrderDetailsPage implements OnInit {
     const valido = await this.orderService.updateOrder(this.order);
     if (valido) {
       await this.orderService.getAllOrders();
-      console.log("Guardado");
+      // console.log("Guardado");
     } else {
-      console.log("Error");
+      // console.log("Error");
     }
   }
 
   async presentAlertState() {
     const alert = await this.alertController.create({
-      subHeader: '¿ Estas segruro de pasar al siguiente estado ? ',
+      subHeader: '¿Estás seguro de pasar al siguiente estado ? ',
       cssClass: 'custom-alert',
       buttons: [
         {
-          text: 'Cancel',
+          text: 'No',
           role: 'cancel',
           cssClass: 'alert-button-cancel',
         },
         {
-          text: 'OK',
+          text: 'Sí',
           role: 'confirm',
           cssClass: 'alert-button-confirm',
           handler: (value: any) => {
@@ -75,5 +75,10 @@ export class OrderDetailsPage implements OnInit {
     });
     await alert.present();
   }
+
+  formatPoint(price: string): string {
+    return price.replace(/,/g, '.');
+  }
+
 
 }

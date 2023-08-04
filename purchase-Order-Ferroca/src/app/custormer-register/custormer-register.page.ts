@@ -47,7 +47,7 @@ export class CustormerRegisterPage implements OnInit {
        return;
       }
       this.loading = true;
-      console.log(this.clienteForm.valid);
+      // console.log(this.clienteForm.valid);
       const valido = await this.userService.registerCliente(this.registerCliente);
       if(valido){
         this.alertService.presentAlertRegistro('Registro exitoso!','', '','ok','');
@@ -83,7 +83,7 @@ export class CustormerRegisterPage implements OnInit {
    get rut() { return this.clienteForm.get('rut'); }
  
    prepareForm(): void {
-     console.log(" prepareForm ====>>> ");
+    //  console.log(" prepareForm ====>>> ");
      this.clienteForm = this.formBuilder.group({
        email: ['', { validators: [Validators.required],}],
        address: ['', { validators: [Validators.required],}],
@@ -94,7 +94,7 @@ export class CustormerRegisterPage implements OnInit {
    }
 
    clearForm() {
-    console.log("clearForm");
+    // console.log("clearForm");
     this.clienteForm.reset();
     this.clienteForm.controls['email'].setValue('');
     this.clienteForm.controls['address'].setValue('');
@@ -105,6 +105,6 @@ export class CustormerRegisterPage implements OnInit {
 
   goToDetail(customer: Cliente){
     this.navCtrlr.navigateForward('/customer-detail', { state: customer});
-    console.log("objeto enviado custormer-detail", customer );
+    // console.log("objeto enviado custormer-detail", customer );
   }
 }

@@ -36,10 +36,10 @@ export class ProductUpdatePage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("carga exitosa 1");
+    // console.log("carga exitosa 1");
     this.product = (history.state);
-    console.log("ngOnInit user", this.product._id );
-    console.log("page update ", this.product);
+    // console.log("ngOnInit user", this.product._id );
+    // console.log("page update ", this.product);
   }
 
   async updateProduct(){
@@ -72,12 +72,12 @@ export class ProductUpdatePage implements OnInit {
       const blob = await base64.blob();
       this.formData = new FormData();
       this.formData.append('image', blob, 'temp.jpg');
-      console.log('formData2', this.formData.getAll('image'));
+      // console.log('formData2', this.formData.getAll('image'));
     });
   }
 
   async addImg(){
-    console.log('producto', this.productService.producto);
+    // console.log('producto', this.productService.producto);
     const valido = await this.productService.addImg(this.formData, this.productService.producto._id);
     if(!valido){
       this.uiService.presentAlert('No se guardó la imagen');
@@ -99,7 +99,7 @@ export class ProductUpdatePage implements OnInit {
   async deleteProduct(){
     this.loadingDelete= true;
     this.product.disabled =  true
-    console.log("product delete", this.product)
+    // console.log("product delete", this.product)
     const valido = await this.productService.updateProduct(this.product);
     if(valido){
       this.alertService.presentAlertRegistro('Se eliminó con exitoso!','', '','ok','');

@@ -29,14 +29,14 @@ export class AuthenticateService {
       this.http.post(`${URL_SERVICIOS}/login`, data)
         .subscribe(async resp => {
           if (resp) {
-            console.log("ok login")
+            // console.log("ok login")
             await this.saveToken(resp['token']);
             this.saveUser(resp);
             this.updateUser.next(resp);
             resolve({valid: true});
           }
         }, (error) => {
-          console.log('login error', error)
+          // console.log('login error', error)
           this.storage.clear();
           resolve({valid: false, message: error.error.message});
         } );
@@ -50,7 +50,7 @@ export class AuthenticateService {
 
   async saveUser(resp) {
     this.user = await this.storage.set('resp', resp);
-    console.log("user add storage success!");
+    // console.log("user add storage success!");
   }
 
   async loadToken() {

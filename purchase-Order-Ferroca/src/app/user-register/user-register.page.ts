@@ -47,7 +47,7 @@ export class UserRegisterPage implements OnInit {
          return;
       }
       this.loading = true;
-        console.log(this.registerForm.valid);  
+        // console.log(this.registerForm.valid);  
         const valido = await this.userService.register (this.registerUser);
         if(valido){
          this.alertService.presentAlertRegistro('Registro exitoso!','', '','ok','');
@@ -86,7 +86,7 @@ export class UserRegisterPage implements OnInit {
     get rut() { return this.registerForm.get('rut'); }
   
     prepareForm(): void {
-      console.log(" prepareForm ====>>> ");
+      // console.log(" prepareForm ====>>> ");
       this.registerForm = this.formBuilder.group({
         name: ['', { validators: [Validators.required]}],
         surname: ['', { validators: [Validators.required],  }],
@@ -99,7 +99,7 @@ export class UserRegisterPage implements OnInit {
     }
   
     clearForm() {
-      console.log("clearForm");
+      // console.log("clearForm");
       this.registerForm.reset();
       this.registerForm.controls['name'].setValue('');
       this.registerForm.controls['surname'].setValue('');
@@ -112,6 +112,6 @@ export class UserRegisterPage implements OnInit {
 
     goToDetail(user: Usuario){
       this.navCtrlr.navigateForward('/user-detail', { state: user});
-      console.log("user goTogoToDetail ===>  {state: user}", user );
+      // console.log("user goTogoToDetail ===>  {state: user}", user );
     }
 }

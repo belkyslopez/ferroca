@@ -22,7 +22,7 @@ export class AlertService {
               this.navCtr.navigateBack([route]);
             }
             else{
-              console.log("confirm cancel");
+              // console.log("confirm cancel");
             }
           }
         }
@@ -32,7 +32,7 @@ export class AlertService {
           text: cancelButton,
           role: 'cancel',
           handler: () => {
-            console.log('confirm cancel');
+            // console.log('confirm cancel');
           }
         })
       }

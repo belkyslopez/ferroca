@@ -27,10 +27,10 @@ export class UserUpdatePage implements OnInit {
                }
 
   ngOnInit() {
-    console.log("carga exitosa 1");
+    // console.log("carga exitosa 1");
     this.user = (history.state);
-    console.log("ngOnInit user", this.user._id );
-    console.log("page update ", this.user);
+    // console.log("ngOnInit user", this.user._id );
+    // console.log("page update ", this.user);
     this.prepareForm();
   }
   
@@ -42,7 +42,7 @@ export class UserUpdatePage implements OnInit {
       return;
    }
     this.loadingUpdate= true;
-    console.log(this.updateUserForm.valid);  
+    // console.log(this.updateUserForm.valid);  
     const valido = await this.userService.updateUser(this.user);
     if(valido){
       this.alertService.presentAlertRegistro('Se modificó con exitoso!','', '','ok','');
@@ -67,7 +67,7 @@ export class UserUpdatePage implements OnInit {
   get rut() { return this.updateUserForm.get('rut'); }
     
   prepareForm(): void {
-    console.log(" prepareForm ====>>> ");
+    // console.log(" prepareForm ====>>> ");
     this.updateUserForm = this.formBuilder.group({
       name: ['', { validators: [Validators.required]}],
       surname: ['', { validators: [Validators.required],  }],
@@ -79,7 +79,7 @@ export class UserUpdatePage implements OnInit {
   }
 
   clearForm() {
-    console.log("clearForm");
+    // console.log("clearForm");
     this.updateUserForm.reset();
     this.updateUserForm.controls['name'].setValue('');
     this.updateUserForm.controls['surname'].setValue('');
